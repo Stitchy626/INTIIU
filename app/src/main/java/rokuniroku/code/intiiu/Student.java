@@ -14,7 +14,6 @@ public class Student {
     private String remark;
     private String venue;
 
-
     public Student(){
     }
 

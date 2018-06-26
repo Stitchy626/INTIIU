@@ -44,7 +44,6 @@ public class MainMenu extends AppCompatActivity
 
         //To move to a specific page for testing
         startActivity(new Intent(MainMenu.this, StudentBooking.class));
-
     }
 
     @Override
