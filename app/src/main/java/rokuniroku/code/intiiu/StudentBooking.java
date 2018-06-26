@@ -170,7 +170,7 @@ public class StudentBooking extends AppCompatActivity {
 
         String id = studentBookRef.push().getKey();
 
-        //Student student = new Student("TestID", "Tester", "26/6/2018", "26/6/2018", "12 pm", "2 pm", "FHEDFDKJJo0o", "In Progress", "Student", "empty", "court");
+        Student student = new Student("TestID", "Tester", "26/6/2018", "26/6/2018", "12 pm", "2 pm", "FHEDFDKJJo0o", "In Progress", "Student", "empty", "court");
 
         //studentBookRef.child(id).setValue(student);
 
