@@ -1,6 +1,5 @@
 package rokuniroku.code.intiiu;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -13,9 +12,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
+import android.widget.ViewFlipper;
 
 public class MainMenu extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    ViewFlipper v_flipper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,8 +45,27 @@ public class MainMenu extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        //To move to a specific page for testing
-        startActivity(new Intent(MainMenu.this, StudentBooking.class));
+        //Main Menu Auto Image Slide
+        int images[] = {R.drawable.intilogo, R.drawable.intilogo, R.drawable.intilogo}; //Getting Image from Database
+        v_flipper = findViewById(R.id.v_flipper);
+
+        for(int image: images){
+            flipperImage(image);
+        }
+
+    }
+
+    public void flipperImage(int images){
+        ImageView imageview = new ImageView(this);
+        imageview.setBackgroundResource(images);
+
+        v_flipper.addView(imageview);
+        v_flipper.setFlipInterval(4000);
+        v_flipper.setAutoStart(true);
+
+        //Animation
+        v_flipper.setInAnimation(this, android.R.anim.slide_in_left);
+        v_flipper.setOutAnimation(this, android.R.anim.slide_out_right);
     }
 
     @Override
