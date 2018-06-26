@@ -1,5 +1,6 @@
 package rokuniroku.code.intiiu;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -40,6 +41,9 @@ public class MainMenu extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        //To move to a specific page for testing
+        startActivity(new Intent(MainMenu.this, StudentBooking.class));
     }
 
     @Override

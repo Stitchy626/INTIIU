@@ -6,4 +6,104 @@
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
+
+    <string-array name="normal_booking_start_time_one_hour">
+        <item>10 am</item>
+        <item>11 am</item>
+        <item>12 pm</item>
+        <item>1 pm</item>
+        <item>2 pm</item>
+        <item>3 pm</item>
+        <item>4 pm</item>
+        <item>5 pm</item>
+        <item>6 pm</item>
+        <item>7 pm</item>
+        <item>8 pm</item>
+        <item>9 pm</item>
+    </string-array>
+
+    <string-array name="normal_booking_start_time_two_hour">
+        <item>10 am</item>
+        <item>11 am</item>
+        <item>12 pm</item>
+        <item>1 pm</item>
+        <item>2 pm</item>
+        <item>3 pm</item>
+        <item>4 pm</item>
+        <item>5 pm</item>
+        <item>6 pm</item>
+        <item>7 pm</item>
+        <item>8 pm</item>
+    </string-array>
+
+    <string-array name="normal_booking_end_time">
+        <item>11 am</item>
+        <item>12 pm</item>
+        <item>1 pm</item>
+        <item>2 pm</item>
+        <item>3 pm</item>
+        <item>4 pm</item>
+        <item>5 pm</item>
+        <item>6 pm</item>
+        <item>7 pm</item>
+        <item>8 pm</item>
+        <item>9 pm</item>
+        <item>10 pm</item>
+    </string-array>
+
+    <string-array name="break_booking_start_time">
+        <item>10 am</item>
+        <item>11 am</item>
+        <item>12 pm</item>
+        <item>1 pm</item>
+        <item>2 pm</item>
+        <item>3 pm</item>
+        <item>4 pm</item>
+        <item>5 pm</item>
+    </string-array>
+
+    <string-array name="break_booking_end_time">
+        <item>11 am</item>
+        <item>12 pm</item>
+        <item>1 pm</item>
+        <item>2 pm</item>
+        <item>3 pm</item>
+        <item>4 pm</item>
+        <item>5 pm</item>
+        <item>6 pm</item>
+    </string-array>
+
+    <string-array name="facility_type">
+        <item>Rooms</item>
+        <item>Sports</item>
+        <item>Equipments</item>
+    </string-array>
+
+    <string-array name="facility_rooms">
+        <item>SC-1-1A</item>
+        <item>SC-1-4</item>
+        <item>Music</item>
+        <item>Dance</item>
+        <item>Rooftop Storeroom</item>
+        <item>Seminar II</item>
+    </string-array>
+
+    <string-array name="facility_sports">
+        <item>Badminton Court</item>
+        <item>Basketball Court</item>
+        <item>Football Field</item>
+        <item>Futsal Court</item>
+        <item>Netball Court</item>
+        <item>Squash Court</item>
+        <item>Table Tennis</item>
+        <item>Tennis Court</item>
+        <item>Volleyball Court</item>
+    </string-array>
+
+    <string-array name="facility_equipments">
+        <item>Rooms</item>
+        <item>Sports</item>
+        <item>Miscellaneous</item>
+        <item>Equipments</item>
+    </string-array>
 </resources>
