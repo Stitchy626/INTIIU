@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:id = "@+id/textViewCategory"
+        android:text="All"
+        android:textColor="#000000"
+        android:textSize="24dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"/>
+
+    <ListView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id = "@+id/listViewAnn"
+        android:layout_below="@+id/textViewCategory"
+        android:layout_marginTop="10dp"
+        android:dividerHeight="5.0sp">
+
+    </ListView>
+
+</RelativeLayout>
