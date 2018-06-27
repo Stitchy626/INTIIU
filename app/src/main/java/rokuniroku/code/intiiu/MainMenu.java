@@ -1,5 +1,6 @@
 package rokuniroku.code.intiiu;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -53,6 +54,7 @@ public class MainMenu extends AppCompatActivity
             flipperImage(image);
         }
 
+        startActivity(new Intent(MainMenu.this, INTIAnnPage.class));
     }
 
     public void flipperImage(int images){

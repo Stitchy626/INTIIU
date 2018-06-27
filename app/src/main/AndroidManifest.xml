@@ -19,7 +19,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".StudentBooking"></activity>
+        <activity android:name=".StudentBooking" />
+        <activity android:name=".INTIAnnPage"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
+        <activity android:name=".INTIAnnItemPage"></activity>
     </application>
 
 </manifest>

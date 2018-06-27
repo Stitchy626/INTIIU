@@ -1,11 +1,13 @@
 package rokuniroku.code.intiiu;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
@@ -37,8 +39,8 @@ public class INTIAnnAdapter extends ArrayAdapter<INTIAnn>{
         INTIAnn ann = annList.get(position);
 
         textViewTitle.setText(ann.getTitle());
-        textViewDate.setText(ann.getDateOccur());
-        textViewTime.setText(ann.getTimeOccur());
+        textViewDate.setText(ann.getDateUpload());
+        textViewTime.setText(ann.getTimeUpload());
 
         return listViewItem;
     }

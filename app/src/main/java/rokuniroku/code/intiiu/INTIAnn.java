@@ -1,6 +1,8 @@
 package rokuniroku.code.intiiu;
 
-public class INTIAnn {
+import java.io.Serializable;
+
+public class INTIAnn implements Serializable{
 
     private String title;
     private String category;

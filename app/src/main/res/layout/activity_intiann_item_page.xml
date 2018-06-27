@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="240dp"
+            android:id = "@+id/imageViewBanner"
+            android:background="@drawable/common_google_signin_btn_icon_dark_focused"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/imageViewBanner">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id = "@+id/textViewTitle"
+                android:text="TITLE"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+                android:layout_margin="10dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id = "@+id/textViewCat"
+                android:text="by Categories"
+                android:layout_below="@+id/textViewTitle"
+                android:layout_marginLeft="10dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id = "@+id/textViewDate"
+                android:text="Date - > "
+                android:textSize="15dp"
+                android:textColor="#000000"
+                android:layout_below="@+id/textViewCat"
+                android:layout_margin="10dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id = "@+id/textViewTime"
+                android:text="Time - > "
+                android:textSize="15dp"
+                android:textColor="#000000"
+                android:layout_below="@+id/textViewDate"
+                android:layout_marginLeft="10dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id = "@+id/textViewContent"
+                android:text="Content GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG"
+                android:textSize="18dp"
+                android:textColor="#000000"
+                android:layout_below="@+id/textViewTime"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="20dp"/>
+
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+</ScrollView>

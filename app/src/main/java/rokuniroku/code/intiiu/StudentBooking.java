@@ -163,16 +163,25 @@ public class StudentBooking extends AppCompatActivity {
     private void CheckAvailability(){
         //check and jump to another page
 
+        String facility = spinnerFacility.getSelectedItem().toString();
+
+        String sChild1, sChild2;
+
+        if(facility.equals("Badminton Court")){
+            sChild1 = "MPH Booking";
+            sChild2 = "Sport Hall Booking";
+        }
+        else if(facility.equals("Basketball Court")){
+            sChild1 = "ACA";
+            //sChi
+        }
+
         Query query1 = studentBookRef.orderByChild("status").equalTo("In Progress");
         Query query2 = studentBookRef.orderByChild("status").equalTo("Approved");
         Query query3 = studentBookRef.orderByChild("status").equalTo("Pending");
 
 
-        String id = studentBookRef.push().getKey();
 
-        Student student = new Student("TestID", "Tester", "26/6/2018", "26/6/2018", "12 pm", "2 pm", "FHEDFDKJJo0o", "In Progress", "Student", "empty", "court");
-
-        //studentBookRef.child(id).setValue(student);
 
 
     }
