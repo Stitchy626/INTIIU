@@ -1,5 +1,7 @@
 package rokuniroku.code.intiiu;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -14,10 +16,11 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
+import android.widget.Toast;
 import android.widget.ViewFlipper;
 
 public class MainMenu extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener, UpdateHelper.OnUpdateCheckListener{
 
     ViewFlipper v_flipper;
 
@@ -55,7 +58,41 @@ public class MainMenu extends AppCompatActivity
         }
 
         startActivity(new Intent(MainMenu.this, INTIAnnPage.class));
+
+
+        //Update Check
+        UpdateHelper.with(this)
+                .onUpdateCheck(this)
+                .check();
     }
+
+
+
+    //Update Class
+    @Override
+    public void onUpdateCheckListener(final String urlApp) {
+
+        AlertDialog alertDialog = new AlertDialog.Builder(this)
+                .setTitle("A New Version of this App is avaiable")
+                .setMessage("Please Update to the lastest version")
+                .setPositiveButton("UPDATE", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        Toast.makeText(MainMenu.this, ""+urlApp, Toast.LENGTH_SHORT).show();
+                    }
+                }).setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                        dialogInterface.dismiss();
+                        finish();
+                    }
+                }).create();
+        alertDialog.show();
+
+    }
+
+
 
     public void flipperImage(int images){
         ImageView imageview = new ImageView(this);
