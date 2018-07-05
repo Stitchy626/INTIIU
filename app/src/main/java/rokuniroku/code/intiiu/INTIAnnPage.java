@@ -12,6 +12,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -19,6 +20,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+
+import org.w3c.dom.Text;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -33,27 +36,32 @@ public class INTIAnnPage extends AppCompatActivity {
     private DatabaseReference rootRef, intiAnnRef;
     private Query query;
 
+    private TextView textViewCategory;
     private ListView listViewAnn;
 
     private ArrayList<INTIAnn> annList;
+
+    private Toolbar myToolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_intiann_page);
-        Toolbar myToolbar = (Toolbar) findViewById(R.id.main_toolbar);
+
+        myToolbar = (Toolbar) findViewById(R.id.main_toolbar);
         myToolbar.setOverflowIcon(ContextCompat.getDrawable(getApplicationContext(),R.drawable.filter_white));
         setSupportActionBar(myToolbar);
 
         rootRef = database.getInstance().getReference();
         intiAnnRef = rootRef.child("Announcement").child("INTIAnn");
 
+        textViewCategory = (TextView) findViewById(R.id.textViewCategory);
         listViewAnn = (ListView) findViewById(R.id.listViewAnn);
 
         annList = new ArrayList<>();
 
 
-        PopulateINTIAnn();
+        PopulateINTIAnn(textViewCategory.getText().toString());
         //PushINTIAnn();
 
         listViewAnn.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -68,6 +76,7 @@ public class INTIAnnPage extends AppCompatActivity {
 
     }
 
+
     //Filter Menu
     public boolean onCreateOptionsMenu(Menu menu){
         getMenuInflater().inflate(R.menu.ann_menu, menu);
@@ -78,12 +87,26 @@ public class INTIAnnPage extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.action_All: {
-                //Enter Filter HERE
 
-
+            case R.id.action_All:
+                textViewCategory.setText(item.getTitle());
+                PopulateINTIAnn(item.getTitle().toString());
                 return true;
-            }
+
+            case R.id.action_FITS:
+                textViewCategory.setText(item.getTitle());
+                PopulateINTIAnn(item.getTitle().toString());
+                return true;
+
+            case R.id.action_FEQS:
+                textViewCategory.setText(item.getTitle());
+                PopulateINTIAnn(item.getTitle().toString());
+                return true;
+
+            case R.id.action_FOBCAL:
+                textViewCategory.setText(item.getTitle());
+                PopulateINTIAnn(item.getTitle().toString());
+                return true;
 
             default:
                 // If we got here, the user's action was not recognized.
@@ -96,7 +119,7 @@ public class INTIAnnPage extends AppCompatActivity {
 
 
 
-    private void PopulateINTIAnn() {
+    private void PopulateINTIAnn(String category) {
 
         Calendar calendar = Calendar.getInstance();
 
@@ -108,11 +131,11 @@ public class INTIAnnPage extends AppCompatActivity {
         final String today = dateFormat.format(calendar.getTime());
 
 
-        query = intiAnnRef.orderByChild("dateUpload").equalTo("");
+        query = intiAnnRef.orderByChild("category").equalTo(category);
 
 
 
-        intiAnnRef.addValueEventListener(new ValueEventListener() {
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 

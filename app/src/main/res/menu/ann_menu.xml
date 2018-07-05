@@ -6,7 +6,7 @@
         app:showAsAction="never"/>
 
     <item android:id="@+id/action_FITS"
-        android:title="FITS"
+        android:title="FITMS"
         app:showAsAction="never"/>
 
     <item android:id="@+id/action_FEQS"
