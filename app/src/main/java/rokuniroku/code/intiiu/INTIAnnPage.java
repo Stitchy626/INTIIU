@@ -218,7 +218,7 @@ public class INTIAnnPage extends AppCompatActivity {
 
         Calendar calendar = Calendar.getInstance();
 
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");//date format
+        final SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");//date format
         SimpleDateFormat timeFormat = new SimpleDateFormat("h:mm a");//time format
 
         dateFormat.setTimeZone(TimeZone.getTimeZone("GMT+08"));
@@ -264,11 +264,25 @@ public class INTIAnnPage extends AppCompatActivity {
                                     INTIAnn temp = annList.get(y);
                                     annList.set(y, annList.get(y + 1));
                                     annList.set(y + 1, temp);
+                                } else if (annList.get(y).getDateUpload().substring(0, 2).compareTo(annList.get(y + 1).getDateUpload().substring(0, 2)) == 0){
+                                    if(annList.get(y).getTimeUpload().substring(0, 2).compareTo(annList.get(y + 1).getTimeUpload().substring(0,2)) < 0){
+                                        INTIAnn temp = annList.get(y);
+                                        annList.set(y, annList.get(y + 1));
+                                        annList.set(y + 1, temp);
+                                    } else if(annList.get(y).getTimeUpload().substring(0, 2).compareTo(annList.get(y + 1).getTimeUpload().substring(0,2)) == 0){
+                                        if(annList.get(y).getTimeUpload().substring(3, 5).compareTo(annList.get(y + 1).getTimeUpload().substring(3,5)) < 0){
+                                            INTIAnn temp = annList.get(y);
+                                            annList.set(y, annList.get(y + 1));
+                                            annList.set(y + 1, temp);
+                                        }
+                                    }
                                 }
                             }
                         }
                     }
                 }
+
+
 
                 //Add to list view
                 INTIAnnAdapter adapter = new INTIAnnAdapter(INTIAnnPage.this, annList);
