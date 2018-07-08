@@ -25,9 +25,6 @@ public class INTIAnnItemPage extends AppCompatActivity {
     private ImageView imageViewBanner;
     private TextView textViewTitle, textViewCat, textViewDate, textViewTime, textViewContent;
 
-    private FirebaseDatabase databaseFire;
-    private DatabaseReference databaseRef;
-
     private FirebaseStorage storageFire;
     private StorageReference storageRef;
 
@@ -38,7 +35,6 @@ public class INTIAnnItemPage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_intiann_item_page);
 
-        databaseRef = databaseFire.getInstance().getReference();
         storageRef = storageFire.getInstance().getReference();
 
         imageViewBanner = (ImageView) findViewById(R.id.imageViewBanner);
@@ -51,7 +47,7 @@ public class INTIAnnItemPage extends AppCompatActivity {
         //get the passing object
         annObj = (INTIAnn)getIntent().getSerializableExtra("INTIAnnouncement");
 
-        //get all the content
+        //get all the fields
         textViewTitle.setText(annObj.getTitle());
         textViewCat.setText(("by " + annObj.getCategory()));
         textViewDate.setText("Date: " + annObj.getDateOccur());

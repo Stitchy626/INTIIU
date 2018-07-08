@@ -93,7 +93,42 @@ public class INTIAnnPage extends AppCompatActivity {
                 PopulateINTIAnn(item.getTitle().toString());
                 return true;
 
-            case R.id.action_FITS:
+            case R.id.action_AccomodationOffice:
+                textViewCategory.setText(item.getTitle());
+                PopulateINTIAnn(item.getTitle().toString());
+                return true;
+
+            case R.id.action_AdmissionsCounselling:
+                textViewCategory.setText(item.getTitle());
+                PopulateINTIAnn(item.getTitle().toString());
+                return true;
+
+            case R.id.action_AFM:
+                textViewCategory.setText(item.getTitle());
+                PopulateINTIAnn(item.getTitle().toString());
+                return true;
+
+            case R.id.action_CAE:
+                textViewCategory.setText(item.getTitle());
+                PopulateINTIAnn(item.getTitle().toString());
+                return true;
+
+            case R.id.action_COLAL:
+                textViewCategory.setText(item.getTitle());
+                PopulateINTIAnn(item.getTitle().toString());
+                return true;
+
+            case R.id.action_CounsellingCentre:
+                textViewCategory.setText(item.getTitle());
+                PopulateINTIAnn(item.getTitle().toString());
+                return true;
+
+            case R.id.action_CS:
+                textViewCategory.setText(item.getTitle());
+                PopulateINTIAnn(item.getTitle().toString());
+                return true;
+
+            case R.id.action_EC:
                 textViewCategory.setText(item.getTitle());
                 PopulateINTIAnn(item.getTitle().toString());
                 return true;
@@ -103,7 +138,67 @@ public class INTIAnnPage extends AppCompatActivity {
                 PopulateINTIAnn(item.getTitle().toString());
                 return true;
 
+            case R.id.action_FHLS:
+                textViewCategory.setText(item.getTitle());
+                PopulateINTIAnn(item.getTitle().toString());
+                return true;
+
+            case R.id.action_FITS:
+                textViewCategory.setText(item.getTitle());
+                PopulateINTIAnn(item.getTitle().toString());
+                return true;
+
             case R.id.action_FOBCAL:
+                textViewCategory.setText(item.getTitle());
+                PopulateINTIAnn(item.getTitle().toString());
+                return true;
+
+            case R.id.action_FinanceScholarship:
+                textViewCategory.setText(item.getTitle());
+                PopulateINTIAnn(item.getTitle().toString());
+                return true;
+
+            case R.id.action_INSO:
+                textViewCategory.setText(item.getTitle());
+                PopulateINTIAnn(item.getTitle().toString());
+                return true;
+
+            case R.id.action_InternationalStudentSupport:
+                textViewCategory.setText(item.getTitle());
+                PopulateINTIAnn(item.getTitle().toString());
+                return true;
+
+            case R.id.action_Library:
+                textViewCategory.setText(item.getTitle());
+                PopulateINTIAnn(item.getTitle().toString());
+                return true;
+
+            case R.id.action_OAR:
+                textViewCategory.setText(item.getTitle());
+                PopulateINTIAnn(item.getTitle().toString());
+                return true;
+
+            case R.id.action_ORDC:
+                textViewCategory.setText(item.getTitle());
+                PopulateINTIAnn(item.getTitle().toString());
+                return true;
+
+            case R.id.action_RO:
+                textViewCategory.setText(item.getTitle());
+                PopulateINTIAnn(item.getTitle().toString());
+                return true;
+
+            case R.id.action_SafetySecurity:
+                textViewCategory.setText(item.getTitle());
+                PopulateINTIAnn(item.getTitle().toString());
+                return true;
+
+            case R.id.action_SAO:
+                textViewCategory.setText(item.getTitle());
+                PopulateINTIAnn(item.getTitle().toString());
+                return true;
+
+            case R.id.action_TL:
                 textViewCategory.setText(item.getTitle());
                 PopulateINTIAnn(item.getTitle().toString());
                 return true;
@@ -187,6 +282,7 @@ public class INTIAnnPage extends AppCompatActivity {
         });
     }
 
+    //Testing purposes
     /*private void PushINTIAnn() {
 
         Calendar calendar = Calendar.getInstance();

@@ -1,19 +1,97 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+
     <item android:id="@+id/action_All"
         android:title="ALL"
         app:showAsAction="never"/>
 
-    <item android:id="@+id/action_FITS"
-        android:title="FITMS"
+    <item android:id="@+id/action_AccomodationOffice"
+        android:title="Accomodation Office"
+        app:showAsAction="never"/>
+
+    <item android:id="@+id/action_AdmissionsCounselling"
+        android:title="Admissions &amp; Counselling"
+        app:showAsAction="never"/>
+
+    <item android:id="@+id/action_AFM"
+        android:title="AFM"
+        app:showAsAction="never"/>
+
+    <item android:id="@+id/action_CAE"
+        android:title="CAE"
+        app:showAsAction="never"/>
+
+    <item android:id="@+id/action_COLAL"
+        android:title="COLAL"
+        app:showAsAction="never"/>
+
+    <item android:id="@+id/action_CounsellingCentre"
+        android:title="Counselling Centre"
+        app:showAsAction="never"/>
+
+    <item android:id="@+id/action_CS"
+        android:title="CS"
+        app:showAsAction="never"/>
+
+    <item android:id="@+id/action_EC"
+        android:title="EC"
         app:showAsAction="never"/>
 
     <item android:id="@+id/action_FEQS"
         android:title="FEQS"
         app:showAsAction="never"/>
 
+    <item android:id="@+id/action_FHLS"
+        android:title="FHLS"
+        app:showAsAction="never"/>
+
+    <item android:id="@+id/action_FITS"
+        android:title="FITS"
+        app:showAsAction="never"/>
+
     <item android:id="@+id/action_FOBCAL"
         android:title="FOBCAL"
         app:showAsAction="never"/>
+
+    <item android:id="@+id/action_FinanceScholarship"
+        android:title="Finance &amp; Scholarship"
+        app:showAsAction="never"/>
+
+    <item android:id="@+id/action_INSO"
+        android:title="INSO"
+        app:showAsAction="never"/>
+
+    <item android:id="@+id/action_InternationalStudentSupport"
+        android:title="International Student Support"
+        app:showAsAction="never"/>
+
+    <item android:id="@+id/action_Library"
+        android:title="Library"
+        app:showAsAction="never"/>
+
+    <item android:id="@+id/action_OAR"
+        android:title="OAR"
+        app:showAsAction="never"/>
+
+    <item android:id="@+id/action_ORDC"
+        android:title="ORDC"
+        app:showAsAction="never"/>
+
+    <item android:id="@+id/action_RO"
+        android:title="RO"
+        app:showAsAction="never"/>
+
+    <item android:id="@+id/action_SafetySecurity"
+        android:title="Safety &amp; Security"
+        app:showAsAction="never"/>
+
+    <item android:id="@+id/action_SAO"
+        android:title="SAO"
+        app:showAsAction="never"/>
+
+    <item android:id="@+id/action_TL"
+        android:title="T&amp;L"
+        app:showAsAction="never"/>
+
 </menu>
