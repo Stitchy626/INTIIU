@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="rokuniroku.code.intiiu">
 
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:name=".App"
@@ -27,7 +27,7 @@
             android:name=".INTIAnnPage"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity android:name=".INTIAnnItemPage" />
-        <activity android:name=".UploadTesting"></activity>
+        <activity android:name=".LNFPage"/>
     </application>
 
 </manifest>
