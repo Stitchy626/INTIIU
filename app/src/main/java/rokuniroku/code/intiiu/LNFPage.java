@@ -23,6 +23,7 @@ public class LNFPage extends AppCompatActivity {
     private DatabaseReference mDatabase;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

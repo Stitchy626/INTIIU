@@ -8,6 +8,7 @@ public class LNF {
 
     public LNF(){
 
+
     }
 
     public LNF(String name, String count, String image) {
