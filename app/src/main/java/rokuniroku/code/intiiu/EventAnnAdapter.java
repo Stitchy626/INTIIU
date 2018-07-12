@@ -1,0 +1,62 @@
+package rokuniroku.code.intiiu;
+
+import android.app.Activity;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import com.bumptech.glide.Glide;
+import com.firebase.ui.storage.images.FirebaseImageLoader;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+
+import java.util.ArrayList;
+
+public class EventAnnAdapter extends ArrayAdapter<EventAnn> {
+
+    private Activity context;
+    private ArrayList<EventAnn> annList;
+
+    private FirebaseStorage dbStorage;
+    private StorageReference rootStorage;
+
+    public EventAnnAdapter(Activity context, ArrayList<EventAnn> annList){
+        super(context, R.layout.listview_event_ann, annList);
+        this.context = context;
+        this.annList = annList;
+    }
+
+    @NonNull
+    @Override
+    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+        LayoutInflater inflater = context.getLayoutInflater();
+
+        View listViewItem = inflater.inflate(R.layout.listview_event_ann, null, true);
+
+        TextView textViewTitle = (TextView) listViewItem.findViewById(R.id.textViewTitle);
+        TextView textViewDateTime = (TextView) listViewItem.findViewById(R.id.textViewDateTime);
+        //ImageView imageViewBanner = (ImageView) listViewItem.findViewById(R.id.imageViewBanner);
+
+        EventAnn ann = annList.get(position);
+
+        String combineDateTime = ann.getDateStart() + "  " + ann.getTimeStart() + " - "
+                + ann.getDateEnd() + "  " + ann.getTimeEnd();
+
+        textViewTitle.setText(ann.getTitle());
+        textViewDateTime.setText(combineDateTime);
+
+        /*rootStorage = dbStorage.getInstance().getReference().child("Announcement").child("EventAnn");
+
+        Glide.with(context)
+                .using(new FirebaseImageLoader())
+                .load(rootStorage)
+                .into(imageViewBanner);*/
+
+        return listViewItem;
+    }
+}

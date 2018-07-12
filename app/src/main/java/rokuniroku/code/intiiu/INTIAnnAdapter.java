@@ -33,14 +33,14 @@ public class INTIAnnAdapter extends ArrayAdapter<INTIAnn>{
         View listViewItem = inflater.inflate(R.layout.listview_inti_ann, null, true);
 
         TextView textViewTitle = (TextView) listViewItem.findViewById(R.id.textViewTitle);
-        TextView textViewDate = (TextView) listViewItem.findViewById(R.id.textViewDate);
-        TextView textViewTime = (TextView) listViewItem.findViewById(R.id.textViewTime);
+        TextView textViewDateUpload = (TextView) listViewItem.findViewById(R.id.textViewDateUpload);
+        TextView textViewTimeUpload = (TextView) listViewItem.findViewById(R.id.textViewTimeUpload);
 
         INTIAnn ann = annList.get(position);
 
         textViewTitle.setText(ann.getTitle());
-        textViewDate.setText(ann.getDateUpload());
-        textViewTime.setText(ann.getTimeUpload());
+        textViewDateUpload.setText(ann.getDateUpload());
+        textViewTimeUpload.setText(ann.getTimeUpload());
 
         return listViewItem;
     }

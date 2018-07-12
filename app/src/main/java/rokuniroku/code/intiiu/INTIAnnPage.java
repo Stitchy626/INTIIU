@@ -32,8 +32,8 @@ import java.util.TimeZone;
 
 public class INTIAnnPage extends AppCompatActivity {
 
-    private FirebaseDatabase database;
-    private DatabaseReference rootRef, intiAnnRef;
+    private FirebaseDatabase dbDatabase;
+    private DatabaseReference rootDatabase, intiAnnRef;
     private Query query;
 
     private TextView textViewCategory;
@@ -49,20 +49,19 @@ public class INTIAnnPage extends AppCompatActivity {
         setContentView(R.layout.activity_intiann_page);
 
         myToolbar = (Toolbar) findViewById(R.id.main_toolbar);
-        myToolbar.setOverflowIcon(ContextCompat.getDrawable(getApplicationContext(),R.drawable.filter_white));
+        myToolbar.setOverflowIcon(ContextCompat.getDrawable(getApplicationContext(), R.drawable.filter_white));
         setSupportActionBar(myToolbar);
 
-        rootRef = database.getInstance().getReference();
-        intiAnnRef = rootRef.child("Announcement").child("INTIAnn");
+        rootDatabase = dbDatabase.getInstance().getReference();
+        intiAnnRef = rootDatabase.child("Announcement").child("INTIAnn");
 
         textViewCategory = (TextView) findViewById(R.id.textViewCategory);
         listViewAnn = (ListView) findViewById(R.id.listViewAnn);
 
         annList = new ArrayList<>();
 
-
         PopulateINTIAnn(textViewCategory.getText().toString());
-        //PushINTIAnn();
+
 
         listViewAnn.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -78,7 +77,7 @@ public class INTIAnnPage extends AppCompatActivity {
 
 
     //Filter Menu
-    public boolean onCreateOptionsMenu(Menu menu){
+    public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.ann_menu, menu);
         return super.onCreateOptionsMenu(menu);
     }
@@ -212,8 +211,6 @@ public class INTIAnnPage extends AppCompatActivity {
     }
 
 
-
-
     private void PopulateINTIAnn(String category) {
 
         Calendar calendar = Calendar.getInstance();
@@ -221,13 +218,12 @@ public class INTIAnnPage extends AppCompatActivity {
         final SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");//date format
         SimpleDateFormat timeFormat = new SimpleDateFormat("h:mm a");//time format
 
-        dateFormat.setTimeZone(TimeZone.getTimeZone("GMT+08"));
+        dateFormat.setTimeZone(TimeZone.getTimeZone("GMT+08")); //set to the correct time zone
 
         final String today = dateFormat.format(calendar.getTime());
 
 
         query = intiAnnRef.orderByChild("category").equalTo(category);
-
 
 
         query.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -240,37 +236,45 @@ public class INTIAnnPage extends AppCompatActivity {
                     INTIAnn announcement = snapshot.getValue(INTIAnn.class);
 
                     //Delete for expired announcement
-                    if(announcement.getCourtDate().equals(today))
+                    if (announcement.getCourtDate().equals(today))
                         intiAnnRef.child(snapshot.getKey()).removeValue();
                     else
                         annList.add(announcement);
                 }
 
                 //Sort the announcement that latest should be on top
-                for(int x = 0; x < annList.size(); x++) {
+                for (int x = 0; x < annList.size(); x++) {
                     for (int y = 0; y < annList.size() - x - 1; y++) {
-                        if(annList.get(y).getDateUpload().substring(6, 10).compareTo(annList.get(y + 1).getDateUpload().substring(6, 10)) < 0){
+                        //YEAR
+                        if (annList.get(y).getDateUpload().substring(6, 10).compareTo(annList.get(y + 1).getDateUpload().substring(6, 10)) < 0) {
                             INTIAnn temp = annList.get(y);
                             annList.set(y, annList.get(y + 1));
                             annList.set(y + 1, temp);
-                        }else if (annList.get(y).getDateUpload().substring(6, 10).compareTo(annList.get(y + 1).getDateUpload().substring(6, 10)) == 0) {
+
+                        } else if (annList.get(y).getDateUpload().substring(6, 10).compareTo(annList.get(y + 1).getDateUpload().substring(6, 10)) == 0) {
+                            //MONTH
                             if (annList.get(y).getDateUpload().substring(3, 5).compareTo(annList.get(y + 1).getDateUpload().substring(3, 5)) < 0) {
                                 INTIAnn temp = annList.get(y);
                                 annList.set(y, annList.get(y + 1));
                                 annList.set(y + 1, temp);
 
                             } else if (annList.get(y).getDateUpload().substring(3, 5).compareTo(annList.get(y + 1).getDateUpload().substring(3, 5)) == 0) {
+                                //DAY
                                 if (annList.get(y).getDateUpload().substring(0, 2).compareTo(annList.get(y + 1).getDateUpload().substring(0, 2)) < 0) {
                                     INTIAnn temp = annList.get(y);
                                     annList.set(y, annList.get(y + 1));
                                     annList.set(y + 1, temp);
-                                } else if (annList.get(y).getDateUpload().substring(0, 2).compareTo(annList.get(y + 1).getDateUpload().substring(0, 2)) == 0){
-                                    if(annList.get(y).getTimeUpload().substring(0, 2).compareTo(annList.get(y + 1).getTimeUpload().substring(0,2)) < 0){
+
+                                } else if (annList.get(y).getDateUpload().substring(0, 2).compareTo(annList.get(y + 1).getDateUpload().substring(0, 2)) == 0) {
+                                    //HOUR
+                                    if (annList.get(y).getTimeUpload().substring(0, 2).compareTo(annList.get(y + 1).getTimeUpload().substring(0, 2)) < 0) {
                                         INTIAnn temp = annList.get(y);
                                         annList.set(y, annList.get(y + 1));
                                         annList.set(y + 1, temp);
-                                    } else if(annList.get(y).getTimeUpload().substring(0, 2).compareTo(annList.get(y + 1).getTimeUpload().substring(0,2)) == 0){
-                                        if(annList.get(y).getTimeUpload().substring(3, 5).compareTo(annList.get(y + 1).getTimeUpload().substring(3,5)) < 0){
+
+                                    } else if (annList.get(y).getTimeUpload().substring(0, 2).compareTo(annList.get(y + 1).getTimeUpload().substring(0, 2)) == 0) {
+                                        //MINUTE
+                                        if (annList.get(y).getTimeUpload().substring(3, 5).compareTo(annList.get(y + 1).getTimeUpload().substring(3, 5)) < 0) {
                                             INTIAnn temp = annList.get(y);
                                             annList.set(y, annList.get(y + 1));
                                             annList.set(y + 1, temp);
@@ -281,7 +285,6 @@ public class INTIAnnPage extends AppCompatActivity {
                         }
                     }
                 }
-
 
 
                 //Add to list view
@@ -295,17 +298,17 @@ public class INTIAnnPage extends AppCompatActivity {
             }
         });
     }
+}
 
-    //Testing purposes
-    /*private void PushINTIAnn() {
+/*private void PushINTIAnn() {
 
         Calendar calendar = Calendar.getInstance();
 
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");//date format
-        SimpleDateFormat timeFormat = new SimpleDateFormat("h:mm a");//time format
+        SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm");//time format
 
         dateFormat.setTimeZone(TimeZone.getTimeZone("GMT+08"));
-
+        timeFormat.setTimeZone(TimeZone.getTimeZone("GMT+08"));
 
         for (int x = 1; x <= 1; x++) {
 
@@ -315,11 +318,13 @@ public class INTIAnnPage extends AppCompatActivity {
 
             String id = intiAnnRef.push().getKey();
 
-            INTIAnn ann = new INTIAnn(id, "FITMS", "26/06/2019", timeFormat.format(today), "28/06/2018", "This should be the content area", "dunno how leh", "28/06/2018 - 28/06/2018", "4:00 PM - 6:00 PM"); //putting getters in object class causes the app to crash if class field doesn't have private access
+            INTIAnn ann = new INTIAnn(id, "FITS", "11/07/2019", "13:52", "bubu", "This should be the content area", "dunno how leh", "28/06/2018 - 28/06/2018", "4:00 PM - 6:00 PM"); //putting getters in object class causes the app to crash if class field doesn't have private access
 
             intiAnnRef.child(id).setValue(ann);
 
 
         }
     }*/
-}
+
+
+

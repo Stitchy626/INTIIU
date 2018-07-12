@@ -27,7 +27,12 @@
             android:name=".INTIAnnPage"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity android:name=".INTIAnnItemPage" />
-        <activity android:name=".LNFPage"/>
+        <activity
+            android:name=".EventAnnPage"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity android:name=".UploadTesting" />
+        <activity android:name=".EventAnnRequestPage"
+            android:windowSoftInputMode="stateAlwaysHidden"/>
     </application>
 
 </manifest>
