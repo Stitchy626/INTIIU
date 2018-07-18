@@ -36,20 +36,20 @@ import java.util.TimeZone;
 public class EventAnnPage extends AppCompatActivity {
 
     private FirebaseDatabase dbDatabase;
-    private DatabaseReference rootDatabase, eventAnnRef;
+    private DatabaseReference rootDatabase;
+    private FirebaseStorage dbStorage;
+    private StorageReference rootStorage;
     private Query query;
 
-    private FirebaseStorage dbStorage;
-    private StorageReference rootStorage, path;
-
+    private Toolbar myToolbar;
     private Button buttonToday, buttonUpcoming;
     private ListView listViewAnn;
 
     private ArrayList<EventAnn> annListToday, annListUpcoming, emptyList;
 
-    private Toolbar myToolbar;
+    private SimpleDateFormat dateFormat,timeFormat, dateFormatGMT08, timeFormatGMT08;
 
-    private SimpleDateFormat dateFormat,timeFormat;
+    private boolean bIsToday;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,12 +57,12 @@ public class EventAnnPage extends AppCompatActivity {
         setContentView(R.layout.activity_event_ann_page);
 
 
-        rootDatabase = dbDatabase.getInstance().getReference();
-        eventAnnRef = rootDatabase.child("Announcement").child("EventAnn");
-        query = eventAnnRef.orderByChild("status").equalTo("approved");
+        rootDatabase = dbDatabase.getInstance().getReference().child("Announcement").child("EventAnn");
+        rootStorage = dbStorage.getInstance().getReference().child("Announcement").child("EventAnn");
+        query = rootDatabase.orderByChild("status").equalTo("approved");
 
-        rootStorage = dbStorage.getInstance().getReference();
-        path = rootStorage.child("Announcement").child("EventAnn");
+        myToolbar = (Toolbar) findViewById(R.id.main_toolbar);
+        setSupportActionBar(myToolbar);
 
         buttonToday = (Button) findViewById(R.id.buttonToday);
         buttonUpcoming = (Button) findViewById(R.id.buttonUpcoming);
@@ -72,30 +72,29 @@ public class EventAnnPage extends AppCompatActivity {
         annListUpcoming = new ArrayList<>();
         emptyList = new ArrayList<>();
 
-        myToolbar = (Toolbar) findViewById(R.id.main_toolbar);
-        setSupportActionBar(myToolbar);
+        dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        timeFormat = new SimpleDateFormat("HH:mm");
 
-        dateFormat = new SimpleDateFormat("dd/MM/yyyy");//date format
-        timeFormat = new SimpleDateFormat("HH:mm");//time format
+        dateFormatGMT08 = new SimpleDateFormat("dd/MM/yyyy");
+        timeFormatGMT08 = new SimpleDateFormat("HH:mm");
 
-        dateFormat.setTimeZone(TimeZone.getTimeZone("GMT+08"));
-        timeFormat.setTimeZone(TimeZone.getTimeZone("GMT+08"));
+        dateFormatGMT08.setTimeZone(TimeZone.getTimeZone("GMT+08"));
+        timeFormatGMT08.setTimeZone(TimeZone.getTimeZone("GMT+08"));
+
+        bIsToday = true;
 
 
-
-        ManageApproveEvent();// load all the events into the array list
+        ManageApproveEvent();
 
         buttonToday.setBackgroundColor(Color.parseColor("#FC8F00"));
-
-        PopulateEventAnn(buttonToday.getText().toString());
-
 
         buttonToday.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 buttonToday.setBackgroundColor(Color.parseColor("#FC8F00"));
                 buttonUpcoming.setBackgroundResource(android.R.drawable.btn_default);
-                PopulateEventAnn(buttonToday.getText().toString());
+                bIsToday = true;
+                PopulateEventAnn(bIsToday);
             }
         });
 
@@ -104,7 +103,8 @@ public class EventAnnPage extends AppCompatActivity {
             public void onClick(View v) {
                 buttonUpcoming.setBackgroundColor(Color.parseColor("#FC8F00"));
                 buttonToday.setBackgroundResource(android.R.drawable.btn_default);
-                PopulateEventAnn(buttonUpcoming.getText().toString());
+                bIsToday = false;
+                PopulateEventAnn(bIsToday);
             }
         });
     }
@@ -129,14 +129,12 @@ public class EventAnnPage extends AppCompatActivity {
         }
     }
 
+    //Loads all the event announcement into the respective list
     private void ManageApproveEvent(){
 
-        Calendar calendar = Calendar.getInstance();
+         Calendar calendar = Calendar.getInstance();
 
-        final Date today = calendar.getTime();
-
-        final ArrayList<Date> date = new ArrayList<>();
-        final ArrayList<Date> time = new ArrayList<>();
+         final Date today = calendar.getTime();
 
 
 
@@ -145,39 +143,63 @@ public class EventAnnPage extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
 
+                annListToday.clear();
+                annListUpcoming.clear();
                 for(DataSnapshot snapshot: dataSnapshot.getChildren()){
                     EventAnn announcement = snapshot.getValue(EventAnn.class);
 
+                    ArrayList<Date> date = new ArrayList<>();
+                    ArrayList<Date> time = new ArrayList<>();
 
                     //convert string date to Date datatype for easy and accurate comparison
                     try {
-                        date.add(dateFormat.parse(dateFormat.format(today)));
+                        date.add(dateFormat.parse(dateFormatGMT08.format(today)));
                         date.add(dateFormat.parse(announcement.getDateStart()));
                         date.add(dateFormat.parse(announcement.getDateEnd()));
 
-                        time.add(timeFormat.parse(timeFormat.format(today)));
+                        time.add(timeFormat.parse(timeFormatGMT08.format(today)));
                         time.add(timeFormat.parse(announcement.getTimeStart()));
                         time.add(timeFormat.parse(announcement.getTimeEnd()));
+
                     } catch (ParseException e) {
-                        Log.d("Exception error =", e.toString());
+                        e.printStackTrace();
                     }
 
 
-
-                    //splitting and managing include deletion
-                    if(date.get(0).equals(date.get(1)) || date.get(0).after(date.get(1)) && date.get(0).before(date.get(2))){
-                        if(time.get(0).equals(time.get(1)) || time.get(0).after(time.get(1)) && time.get(0).before(time.get(2)))
-                            annListToday.add(announcement);
-
-                    }else if(date.get(0).before(date.get(1)) || date.get(0).equals(date.get(1))){
-                         if(time.get(0).before(time.get(1)))
-                            annListUpcoming.add(announcement);
-
-                    }else if(date.get(0).after(date.get(2)) || date.get(0).equals(date.get(1))){
-                         if(time.get(0).after(time.get(2)))
-                             DeleteEvent(snapshot.getKey().toString());
+                    //Managing the announcement
+                    if(date.get(0).before(date.get(1))){ // before start date
+                        annListUpcoming.add(announcement);
+                    }else if(date.get(0).after(date.get(2))) { // after end date
+                        DeleteEvent(snapshot.getKey().toString());
+                    }else{
+                        if(date.get(0).equals(date.get(1)) && date.get(0).equals(date.get(2))){ // detect a one day event
+                            if(time.get(0).before(time.get(1)))
+                                annListUpcoming.add(announcement);
+                            else if(time.get(0).equals(time.get(1)) || time.get(0).after(time.get(1)) && time.get(0).before(time.get(2)))
+                                annListToday.add(announcement);
+                            else if(time.get(0).equals(time.get(2)) || time.get(0).after(time.get(2)))
+                                DeleteEvent(snapshot.getKey().toString());
+                        }else{ // detect a few days event
+                            if(date.get(0).equals(date.get(1))) { // on the start date
+                                if (time.get(0).equals(time.get(1)) || time.get(0).after(time.get(1))) {
+                                    annListToday.add(announcement);
+                                } else
+                                    annListUpcoming.add(announcement);
+                            }else if(date.get(0).after(date.get(1)) && date.get(0).before(date.get(2))){ // In between the start and the end date
+                                annListToday.add(announcement);
+                            }else if(date.get(0).equals(date.get(2))){ // on the end date
+                                if(time.get(0).before(time.get(2)))
+                                    annListToday.add(announcement);
+                                else
+                                    DeleteEvent(snapshot.getKey().toString());
+                            }else
+                                emptyList.add(announcement);
+                        }
                     }
+
                 }
+
+                Log.d("test =", timeFormatGMT08.format(today));
 
 
                 //sorting for the nearest and newest started event to be on top
@@ -221,9 +243,52 @@ public class EventAnnPage extends AppCompatActivity {
                                 }
                             }
                         }
-
                     }
                 }
+
+                for(int x = 0; x < annListUpcoming.size(); x++){
+                    for(int y = 0; y < annListUpcoming.size() - x - 1; y++){
+
+                        if (annListUpcoming.get(y).getDateStart().substring(6, 10).compareTo(annListUpcoming.get(y + 1).getDateStart().substring(6, 10)) < 0) {
+                            EventAnn temp = annListUpcoming.get(y);
+                            annListUpcoming.set(y, annListUpcoming.get(y + 1));
+                            annListUpcoming.set(y + 1, temp);
+
+                        } else if (annListUpcoming.get(y).getDateStart().substring(6, 10).compareTo(annListUpcoming.get(y + 1).getDateStart().substring(6, 10)) == 0) {
+                            //MONTH
+                            if (annListUpcoming.get(y).getDateStart().substring(3, 5).compareTo(annListUpcoming.get(y + 1).getDateStart().substring(3, 5)) < 0) {
+                                EventAnn temp = annListUpcoming.get(y);
+                                annListUpcoming.set(y, annListUpcoming.get(y + 1));
+                                annListUpcoming.set(y + 1, temp);
+
+                            } else if (annListUpcoming.get(y).getDateStart().substring(3, 5).compareTo(annListUpcoming.get(y + 1).getDateStart().substring(3, 5)) == 0) {
+                                //DAY
+                                if (annListUpcoming.get(y).getDateStart().substring(0, 2).compareTo(annListUpcoming.get(y + 1).getDateStart().substring(0, 2)) < 0) {
+                                    EventAnn temp = annListUpcoming.get(y);
+                                    annListUpcoming.set(y, annListUpcoming.get(y + 1));
+                                    annListUpcoming.set(y + 1, temp);
+
+                                } else if (annListUpcoming.get(y).getDateStart().substring(0, 2).compareTo(annListUpcoming.get(y + 1).getDateStart().substring(0, 2)) == 0) {
+                                    //HOUR
+                                    if (annListUpcoming.get(y).getTimeStart().substring(0, 2).compareTo(annListUpcoming.get(y + 1).getTimeStart().substring(0, 2)) < 0) {
+                                        EventAnn temp = annListUpcoming.get(y);
+                                        annListUpcoming.set(y, annListUpcoming.get(y + 1));
+                                        annListUpcoming.set(y + 1, temp);
+
+                                    } else if (annListUpcoming.get(y).getTimeStart().substring(0, 2).compareTo(annListUpcoming.get(y + 1).getTimeStart().substring(0, 2)) == 0) {
+                                        //MINUTE
+                                        if (annListUpcoming.get(y).getTimeStart().substring(3, 5).compareTo(annListUpcoming.get(y + 1).getTimeStart().substring(3, 5)) < 0) {
+                                            EventAnn temp = annListUpcoming.get(y);
+                                            annListUpcoming.set(y, annListUpcoming.get(y + 1));
+                                            annListUpcoming.set(y + 1, temp);
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                PopulateEventAnn(bIsToday);
             }
 
             @Override
@@ -234,12 +299,12 @@ public class EventAnnPage extends AppCompatActivity {
 
     }
 
-    private void PopulateEventAnn(final String category){
+    private void PopulateEventAnn(boolean bIsToday){
         EventAnnAdapter adapter = new EventAnnAdapter(EventAnnPage.this, emptyList);
 
-        if(category.equals(buttonToday.getText().toString()))
+        if(bIsToday == true)
             adapter = new EventAnnAdapter(EventAnnPage.this, annListToday);
-        else if(category.equals(buttonUpcoming.getText().toString()))
+        else if(bIsToday == false)
             adapter = new EventAnnAdapter(EventAnnPage.this, annListUpcoming);
 
         listViewAnn.setAdapter(adapter);
