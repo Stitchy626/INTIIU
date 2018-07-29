@@ -1,8 +1,10 @@
 package rokuniroku.code.intiiu;
 
 import android.app.AlertDialog;
+import android.content.ActivityNotFoundException;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -78,7 +80,17 @@ public class MainMenu extends AppCompatActivity
                 .setPositiveButton("UPDATE", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        Toast.makeText(MainMenu.this, ""+urlApp, Toast.LENGTH_SHORT).show();
+                        //open google playstore to the app
+                        try{
+                            //if user has google playstore in their phone
+                            startActivity( new Intent( Intent.ACTION_VIEW,
+                                    Uri.parse("market://details?id=" + getPackageName())) );
+                        } catch (ActivityNotFoundException e){
+                            //if user dont have playstore in their phone, open website playstore
+                            startActivity( new Intent( Intent.ACTION_VIEW,
+                                    Uri.parse("http://play.google.com/store/apps/details?id=" + getPackageName())) );
+                        }
+
                     }
                 }).setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
                     @Override
