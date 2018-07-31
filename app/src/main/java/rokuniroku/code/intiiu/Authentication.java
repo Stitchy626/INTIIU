@@ -26,7 +26,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 
-public class MainActivity extends AppCompatActivity {
+public class Authenticaiton extends AppCompatActivity {
 
     // TAG is for show some tag logs in LOG screen.
     public static final String TAG = "MainActivity";
