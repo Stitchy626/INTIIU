@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -61,7 +62,7 @@ public class EventAnnPage extends AppCompatActivity {
         rootStorage = dbStorage.getInstance().getReference().child("Announcement").child("EventAnn");
         query = rootDatabase.orderByChild("status").equalTo("approved");
 
-        myToolbar = (Toolbar) findViewById(R.id.main_toolbar);
+        myToolbar = (Toolbar) findViewById(R.id.myToolbar);
         setSupportActionBar(myToolbar);
 
         buttonToday = (Button) findViewById(R.id.buttonToday);
@@ -86,13 +87,13 @@ public class EventAnnPage extends AppCompatActivity {
 
         ManageApproveEvent();
 
-        buttonToday.setBackgroundColor(Color.parseColor("#FC8F00"));
+        buttonToday.setSelected(true);
 
         buttonToday.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                buttonToday.setBackgroundColor(Color.parseColor("#FC8F00"));
-                buttonUpcoming.setBackgroundResource(android.R.drawable.btn_default);
+                buttonToday.setSelected(true);
+                buttonUpcoming.setSelected(false);
                 bIsToday = true;
                 PopulateEventAnn(bIsToday);
             }
@@ -101,10 +102,24 @@ public class EventAnnPage extends AppCompatActivity {
         buttonUpcoming.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                buttonUpcoming.setBackgroundColor(Color.parseColor("#FC8F00"));
-                buttonToday.setBackgroundResource(android.R.drawable.btn_default);
+                buttonToday.setSelected(false);
+                buttonUpcoming.setSelected(true);
                 bIsToday = false;
                 PopulateEventAnn(bIsToday);
+            }
+        });
+
+        listViewAnn.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                Intent intent = new Intent(EventAnnPage.this, EventAnnItemPage.class);
+                if(bIsToday == true){
+                    intent.putExtra("EventAnnouncement", annListToday.get(position));
+                }else if(bIsToday == false){
+                    intent.putExtra("EventAnnouncement", annListUpcoming.get(position));
+                }
+                startActivity(intent);
             }
         });
     }
@@ -136,15 +151,13 @@ public class EventAnnPage extends AppCompatActivity {
 
          final Date today = calendar.getTime();
 
-
-
         query.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-
                 annListToday.clear();
                 annListUpcoming.clear();
+                emptyList.clear();
                 for(DataSnapshot snapshot: dataSnapshot.getChildren()){
                     EventAnn announcement = snapshot.getValue(EventAnn.class);
 
@@ -175,9 +188,9 @@ public class EventAnnPage extends AppCompatActivity {
                         if(date.get(0).equals(date.get(1)) && date.get(0).equals(date.get(2))){ // detect a one day event
                             if(time.get(0).before(time.get(1)))
                                 annListUpcoming.add(announcement);
-                            else if(time.get(0).equals(time.get(1)) || time.get(0).after(time.get(1)) && time.get(0).before(time.get(2)))
+                            else if(time.get(0).equals(time.get(1)) || time.get(0).after(time.get(1)) && time.get(0).before(time.get(2)) || time.get(0).equals(time.get(2)))
                                 annListToday.add(announcement);
-                            else if(time.get(0).equals(time.get(2)) || time.get(0).after(time.get(2)))
+                            else if(time.get(0).after(time.get(2)))
                                 DeleteEvent(snapshot.getKey().toString());
                         }else{ // detect a few days event
                             if(date.get(0).equals(date.get(1))) { // on the start date
@@ -198,9 +211,6 @@ public class EventAnnPage extends AppCompatActivity {
                     }
 
                 }
-
-                Log.d("test =", timeFormatGMT08.format(today));
-
 
                 //sorting for the nearest and newest started event to be on top
                 for(int x = 0; x < annListToday.size(); x++){

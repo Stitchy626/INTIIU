@@ -3,6 +3,7 @@ package rokuniroku.code.intiiu;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.app.ProgressDialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -11,6 +12,8 @@ import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.media.Image;
 import android.net.Uri;
+import android.os.Handler;
+import android.os.Message;
 import android.provider.MediaStore;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
@@ -52,22 +55,21 @@ public class EventAnnRequestPage extends AppCompatActivity implements DatePicker
     private StorageReference rootStorage;
 
 
-    private EditText editTextTitle, editTextContent;
+    private EditText editTextTitle, editTextVenue, editTextContent;
     private TextView textViewStartDate, textViewEndDate, textViewStartTime, textViewEndTime,
             textViewImageTitle, textViewImageDateTime;
 
-    private Button buttonSetTitle, buttonDPStart,buttonDPEnd, buttonTPStart, buttonTPEnd, buttonUploadImage, buttonSubmit;
+    private Button buttonSetTitle, buttonDPStart,buttonDPEnd, buttonTPStart, buttonTPEnd, buttonUploadImage, buttonLight, buttonDark, buttonSubmit;
     private ImageView imageViewBanner;
 
     private Calendar calendar;
     private SimpleDateFormat dateFormat, timeFormat;
-    //private SimpleDateFormat dateFormatGMT08, timeFormatGMT08;
-    //private Date dateStart, dateEnd, dateToday, timeStart, timeEnd;
 
     private Uri uri;
+    private ProgressDialog progressDialog;
 
     private String sDS, sDE, sTS, sTE;
-    private boolean bIsDateStart, bIsTimeStart, bGo;
+    private boolean bIsDateStart, bIsTimeStart, bIsLight, bIsPoint;
     private int iImageCount;
 
     final private int GALLERY_INTENT = 123;
@@ -81,6 +83,7 @@ public class EventAnnRequestPage extends AppCompatActivity implements DatePicker
         rootStorage = dbStorage.getInstance().getReference().child("Announcement").child("EventAnn");
 
         editTextTitle = (EditText) findViewById(R.id.editTextTitle);
+        editTextVenue = (EditText) findViewById(R.id.editTextVenue);
         editTextContent = (EditText) findViewById(R.id.editTextContent);
 
         textViewStartDate = (TextView) findViewById(R.id.textViewStartDate);
@@ -96,6 +99,8 @@ public class EventAnnRequestPage extends AppCompatActivity implements DatePicker
         buttonTPStart = (Button) findViewById(R.id.buttonTPStart);
         buttonTPEnd = (Button) findViewById(R.id.buttonTPEnd);
         buttonUploadImage = (Button) findViewById(R.id.buttonUploadImage);
+        buttonLight = (Button) findViewById(R.id.buttonLight);
+        buttonDark = (Button) findViewById(R.id.buttonDark);
         buttonSubmit = (Button) findViewById(R.id.buttonSubmit);
 
         imageViewBanner = (ImageView) findViewById(R.id.imageViewBanner);
@@ -106,6 +111,7 @@ public class EventAnnRequestPage extends AppCompatActivity implements DatePicker
         timeFormat = new SimpleDateFormat("HH:mm");
 
         uri = null;
+        progressDialog = new ProgressDialog(EventAnnRequestPage.this);
 
         sDS = "27/05/2018";
         sDE = "28/06/2018";
@@ -114,11 +120,14 @@ public class EventAnnRequestPage extends AppCompatActivity implements DatePicker
 
         bIsDateStart = true;
         bIsTimeStart = true;
+        bIsLight = true;
 
-        bGo = false;
+        bIsPoint = false;
 
         iImageCount = 0;
 
+        //Start
+        buttonLight.setSelected(true);
 
         buttonSetTitle.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -127,15 +136,21 @@ public class EventAnnRequestPage extends AppCompatActivity implements DatePicker
                 closeKeyboard();
             }
         });
+
         buttonDPStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                textViewStartDate.setError(null);
+                if(bIsPoint == true){
+                    textViewEndDate.setError(null);
+                    textViewStartDate.setError(null);
+                }else {
+                    textViewStartDate.setError(null);
 
-                textViewEndDate.setText("");
-                textViewStartTime.setText("");
-                textViewEndTime.setText("");
+                    textViewEndDate.setText("");
+                    textViewStartTime.setText("");
+                    textViewEndTime.setText("");
+                }
 
                 DialogFragment datePicker = new DatePickerFragment();
                 datePicker.show(getSupportFragmentManager(), "date picker");
@@ -152,10 +167,15 @@ public class EventAnnRequestPage extends AppCompatActivity implements DatePicker
                     textViewStartDate.setError("Error");
                 }
                 if(textViewStartDate.getText().toString().isEmpty() == false) {
-                    textViewEndDate.setError(null);
+                    if(bIsPoint == true){
+                        textViewEndDate.setError(null);
+                        textViewStartDate.setError(null);
+                    }else {
+                        textViewEndDate.setError(null);
 
-                    textViewStartTime.setText("");
-                    textViewEndTime.setText("");
+                        textViewStartTime.setText("");
+                        textViewEndTime.setText("");
+                    }
 
                     DialogFragment datePicker = new DatePickerFragment();
                     datePicker.show(getSupportFragmentManager(), "date picker");
@@ -176,9 +196,14 @@ public class EventAnnRequestPage extends AppCompatActivity implements DatePicker
                     textViewEndDate.setError("Error");
 
                 if(textViewStartDate.getText().toString().isEmpty() == false && textViewEndDate.getText().toString().isEmpty() == false) {
-                    textViewStartTime.setError(null);
+                    if(bIsPoint == true){
+                        textViewStartTime.setError(null);
+                        textViewEndTime.setError(null);
+                    }else {
+                        textViewStartTime.setError(null);
 
-                    textViewEndTime.setText("");
+                        textViewEndTime.setText("");
+                    }
 
                     DialogFragment timePicker = new TimePickerFragment();
                     timePicker.show(getSupportFragmentManager(), "time picker");
@@ -204,7 +229,12 @@ public class EventAnnRequestPage extends AppCompatActivity implements DatePicker
 
                 if (textViewStartDate.getText().toString().isEmpty() == false && textViewEndDate.getText().toString().isEmpty() == false
                         && textViewStartTime.getText().toString().isEmpty() == false) {
-                    textViewEndTime.setError(null);
+                    if(bIsPoint == true){
+                        textViewStartTime.setError(null);
+                        textViewEndTime.setError(null);
+                    }else {
+                        textViewEndTime.setError(null);
+                    }
 
                     DialogFragment timePicker = new TimePickerFragment();
                     timePicker.show(getSupportFragmentManager(), "time picker");
@@ -225,10 +255,30 @@ public class EventAnnRequestPage extends AppCompatActivity implements DatePicker
             }
         });
 
+        buttonLight.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                buttonLight.setSelected(true);
+                buttonDark.setSelected(false);
+                textViewImageTitle.setTextColor(Color.parseColor("#000000"));
+                bIsLight = true;
+            }
+        });
+
+        buttonDark.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                buttonLight.setSelected(false);
+                buttonDark.setSelected(true);
+                textViewImageTitle.setTextColor(Color.parseColor("#FFFFFF"));
+                bIsLight = false;
+            }
+        });
+
         buttonSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                submitRequest();
+                SubmitRequest();
             }
         });
     }
@@ -294,12 +344,18 @@ public class EventAnnRequestPage extends AppCompatActivity implements DatePicker
         }
     }
 
+    //Validation and erro checking done here
+    private void SubmitRequest(){
 
-    //DONE
-    private void submitRequest(){
+        Boolean bValid = true;
+        String sErrorMessage = null;
+        Date dateStart = null, dateEnd = null, timeStart = null, timeEnd = null;
 
         if(editTextTitle.getText().toString().isEmpty())
-            editTextTitle.setError("An announcement with no title?");
+            editTextTitle.setError("Announcement title has to be included");
+
+        if(editTextVenue.getText().toString().isEmpty())
+            editTextVenue.setError("A venue must be given");
 
         if(textViewStartDate.getText().toString().isEmpty())
             textViewStartDate.setError("Error");
@@ -316,71 +372,136 @@ public class EventAnnRequestPage extends AppCompatActivity implements DatePicker
         if(editTextContent.getText().toString().isEmpty())
             editTextContent.setError("Empty content");
 
-        if(editTextTitle.getText().toString().isEmpty() == false && textViewStartDate.getText().toString().isEmpty() == false
+        if(editTextTitle.getText().toString().isEmpty() == false && editTextVenue.getText().toString().isEmpty() == false && textViewStartDate.getText().toString().isEmpty() == false
                 && textViewEndDate.getText().toString().isEmpty() == false && textViewStartTime.getText().toString().isEmpty() == false
-                 && textViewEndTime.getText().toString().isEmpty() == false && editTextContent.getText().toString().isEmpty() == false){
+                 && textViewEndTime.getText().toString().isEmpty() == false && editTextContent.getText().toString().isEmpty() == false) {
 
-            if(iImageCount == 0){
-                AlertDialog.Builder builder = new AlertDialog.Builder(EventAnnRequestPage.this);
-                builder.setTitle("Image Banner Confirmation");
-                builder.setMessage("Do you want to use the default banner image? If no, please select an image");
-                builder.setPositiveButton("Yes",
+            bIsPoint = true;
+
+            try {
+                dateStart = dateFormat.parse(textViewStartDate.getText().toString());
+                dateEnd = dateFormat.parse(textViewEndDate.getText().toString());
+                timeStart = timeFormat.parse(textViewStartTime.getText().toString());
+                timeEnd = timeFormat.parse(textViewEndTime.getText().toString());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            if (dateStart.after(dateEnd)) {
+                textViewStartDate.setError("Error");
+                textViewEndDate.setError("Error");
+                sErrorMessage = "Invalid Date Selected \n";
+                Toast.makeText(EventAnnRequestPage.this, sErrorMessage, Toast.LENGTH_LONG).show();
+                bValid = false;
+            }
+            if (dateStart.equals(dateEnd)) {
+                if (timeStart.after(timeEnd)) {
+                    textViewStartTime.setError("Error");
+                    textViewEndTime.setError("Error");
+                    sErrorMessage = "Invalid Time Selected";
+                    Toast.makeText(EventAnnRequestPage.this, sErrorMessage, Toast.LENGTH_LONG).show();
+                    bValid = false;
+                }
+            }
+
+            if (bValid == true) {
+                final AlertDialog.Builder builderSubmit = new AlertDialog.Builder(EventAnnRequestPage.this);
+                builderSubmit.setTitle("Submission Comfirmation");
+                builderSubmit.setMessage("Are you sure you want to submit?");
+                builderSubmit.setPositiveButton("Yes",
                         new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                bGo = true;
                                 SubmitReal();
                             }
                         });
-                builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                builderSubmit.setNegativeButton("No", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        bGo = false;
                     }
                 });
 
-                AlertDialog dialog = builder.create();
-                dialog.show();
-            }else
-                SubmitReal();
+
+                if (iImageCount == 0) {
+                    AlertDialog.Builder builderBanner = new AlertDialog.Builder(EventAnnRequestPage.this);
+                    builderBanner.setTitle("Image Banner Confirmation");
+                    builderBanner.setMessage("Do you want to use the default banner image? If no, please select an image");
+                    builderBanner.setPositiveButton("Yes",
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    builderSubmit.create().show();
+                                }
+                            });
+                    builderBanner.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                        }
+                    });
+
+                    builderBanner.create().show();
+                } else
+                    builderSubmit.create().show();
+            }
         }
     }
 
+    //All error checking, validation and comfirmation is done in SubmitRequest function, this function only push data to database.
     private void SubmitReal(){
-        if(bGo == true){
 
-            Calendar c = Calendar.getInstance();
-            Date today = c.getTime();
+        progressDialog.setMessage("Submitting ....");
+        progressDialog.show();
 
-            dateFormat.setTimeZone(TimeZone.getTimeZone("GMT+08"));
-            timeFormat.setTimeZone(TimeZone.getTimeZone("GMT+08"));
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Calendar c = Calendar.getInstance();
+                Date today = c.getTime();
 
-            String id = rootDatabase.push().getKey();
-            String banner = id;
+                dateFormat.setTimeZone(TimeZone.getTimeZone("GMT+08"));
+                timeFormat.setTimeZone(TimeZone.getTimeZone("GMT+08"));
 
-            if(iImageCount == 0)
-                banner = "default";
+                String id = rootDatabase.push().getKey();
+                String banner = id;
+                String background = "light";
 
-            EventAnn ann = new EventAnn(editTextTitle.getText().toString(), "Chicken Club",
-                    dateFormat.format(today), timeFormat.format(today), editTextContent.getText().toString(),
-                    banner, textViewStartDate.getText().toString(), textViewEndDate.getText().toString(),
-                    textViewStartTime.getText().toString(), textViewEndTime.getText().toString(), "approved");
+                if(iImageCount == 0)
+                    banner = "default";
 
-            rootDatabase.child(id).setValue(ann);
+                if(bIsLight == false)
+                    background = "dark";
 
-            if(banner != "default") {
-                rootStorage = rootStorage.child(id);
-                rootStorage.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                    @Override
-                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                        Toast.makeText(EventAnnRequestPage.this, "Uploaded Perfecto", Toast.LENGTH_LONG).show();
-                    }
-                });
-            }else
-                Toast.makeText(EventAnnRequestPage.this, "Submitted", Toast.LENGTH_LONG).show();
+                EventAnn ann = new EventAnn(editTextTitle.getText().toString(), editTextVenue.getText().toString(), "Isaac Club",
+                        dateFormat.format(today), timeFormat.format(today), editTextContent.getText().toString(),
+                        banner, background, textViewStartDate.getText().toString(), textViewEndDate.getText().toString(),
+                        textViewStartTime.getText().toString(), textViewEndTime.getText().toString(), "approved");// status using approve for testing purposes
 
-        }
+                rootDatabase.child(id).setValue(ann);
+
+                if(banner != "default") {
+                    rootStorage = rootStorage.child(id);
+                    rootStorage.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                            handler.sendEmptyMessage(0);
+                        }
+                    });
+                }else {
+                    handler.sendEmptyMessage(0);
+                }
+
+            }
+        }).start();
     }
+
+    //A handler to handle the thread when finish
+    Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            progressDialog.dismiss();
+            Toast.makeText(EventAnnRequestPage.this, "Request submitted", Toast.LENGTH_LONG).show();
+        }
+    };
 
     private void closeKeyboard(){
         View view = this.getCurrentFocus();

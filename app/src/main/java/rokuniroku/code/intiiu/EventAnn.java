@@ -5,11 +5,13 @@ import java.io.Serializable;
 public class EventAnn implements Serializable{
 
     private String title;
+    private String venue;
     private String club;
     private String dateUpload;
     private String timeUpload;
     private String content;
     private String banner;
+    private String bannerBackground;
     private String dateStart;
     private String dateEnd;
     private String timeStart;
@@ -20,13 +22,15 @@ public class EventAnn implements Serializable{
 
     }
 
-    public EventAnn(String title, String club, String dateUpload, String timeUpload, String content, String banner, String dateStart, String dateEnd, String timeStart, String timeEnd, String status) {
+    public EventAnn(String title, String venue, String club, String dateUpload, String timeUpload, String content, String banner, String bannerBackground, String dateStart, String dateEnd, String timeStart, String timeEnd, String status) {
         this.title = title;
+        this.venue = venue;
         this.club = club;
         this.dateUpload = dateUpload;
         this.timeUpload = timeUpload;
         this.content = content;
         this.banner = banner;
+        this.bannerBackground = bannerBackground;
         this.dateStart = dateStart;
         this.dateEnd = dateEnd;
         this.timeStart = timeStart;
@@ -36,6 +40,10 @@ public class EventAnn implements Serializable{
 
     public String getTitle() {
         return title;
+    }
+
+    public String getVenue() {
+        return venue;
     }
 
     public String getClub() {
@@ -56,6 +64,10 @@ public class EventAnn implements Serializable{
 
     public String getBanner() {
         return banner;
+    }
+
+    public String getBannerBackground() {
+        return bannerBackground;
     }
 
     public String getDateStart() {
