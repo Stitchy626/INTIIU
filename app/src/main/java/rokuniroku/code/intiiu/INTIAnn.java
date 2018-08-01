@@ -5,6 +5,7 @@ import java.io.Serializable;
 public class INTIAnn implements Serializable{
 
     private String title;
+    private String venue; // MPH
     private String category; // FITS, OAR
     private String dateUpload; // 09/07/2018
     private String timeUpload; // 11:30, 23:30
@@ -18,8 +19,9 @@ public class INTIAnn implements Serializable{
 
     }
 
-    public INTIAnn(String title, String category, String dateUpload, String timeUpload, String courtDate, String content, String banner, String dateOccur, String timeOccur) {
+    public INTIAnn(String title, String venue, String category, String dateUpload, String timeUpload, String courtDate, String content, String banner, String dateOccur, String timeOccur) {
         this.title = title;
+        this.venue = venue;
         this.category = category;
         this.dateUpload = dateUpload;
         this.timeUpload = timeUpload;
@@ -32,6 +34,10 @@ public class INTIAnn implements Serializable{
 
     public String getTitle() {
         return title;
+    }
+
+    public String getVenue() {
+        return venue;
     }
 
     public String getCategory() {

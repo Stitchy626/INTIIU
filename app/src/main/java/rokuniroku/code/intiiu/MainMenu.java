@@ -59,7 +59,7 @@ public class MainMenu extends AppCompatActivity
             flipperImage(image);
         }
 
-        startActivity(new Intent(MainMenu.this, EventAnnRequestPage.class));
+        startActivity(new Intent(MainMenu.this, LNFPage.class));
 
 
         //Update Check

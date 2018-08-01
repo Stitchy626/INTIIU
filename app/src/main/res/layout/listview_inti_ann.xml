@@ -17,7 +17,7 @@
             android:layout_height="match_parent"
             android:id = "@+id/imageViewIcon"
             android:layout_weight="1"
-            android:background="@android:drawable/btn_default_small"/>
+            android:background="@mipmap/icon_faculty"/>
 
         <LinearLayout
             android:layout_width="0dp"

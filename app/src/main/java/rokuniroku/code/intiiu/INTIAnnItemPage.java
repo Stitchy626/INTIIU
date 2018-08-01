@@ -23,7 +23,7 @@ import java.util.ArrayList;
 public class INTIAnnItemPage extends AppCompatActivity {
 
     private ImageView imageViewBanner;
-    private TextView textViewTitle, textViewCat, textViewDate, textViewTime, textViewContent;
+    private TextView textViewTitle, textViewCat, textViewDate, textViewTime, textViewVenue, textViewContent;
 
     private FirebaseStorage storageFire;
     private StorageReference storageRef;
@@ -42,6 +42,7 @@ public class INTIAnnItemPage extends AppCompatActivity {
         textViewCat = (TextView) findViewById(R.id.textViewCat);
         textViewDate = (TextView) findViewById(R.id.textViewDate);
         textViewTime = (TextView) findViewById(R.id.textViewTime);
+        textViewVenue = (TextView) findViewById(R.id.textViewVenue);
         textViewContent = (TextView) findViewById(R.id.textViewContent);
 
         //get the passing object
@@ -52,6 +53,7 @@ public class INTIAnnItemPage extends AppCompatActivity {
         textViewCat.setText(("by " + annObj.getCategory()));
         textViewDate.setText("Date: " + annObj.getDateOccur());
         textViewTime.setText("Time: " + annObj.getTimeOccur());
+        textViewVenue.setText("Venue: " + annObj.getVenue());
         textViewContent.setText(annObj.getContent());
 
         //get Image

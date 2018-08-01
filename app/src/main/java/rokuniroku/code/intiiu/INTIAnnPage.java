@@ -33,7 +33,7 @@ import java.util.TimeZone;
 public class INTIAnnPage extends AppCompatActivity {
 
     private FirebaseDatabase dbDatabase;
-    private DatabaseReference rootDatabase, intiAnnRef;
+    private DatabaseReference rootDatabase;
     private Query query;
 
     private TextView textViewCategory;
@@ -52,8 +52,7 @@ public class INTIAnnPage extends AppCompatActivity {
         myToolbar.setOverflowIcon(ContextCompat.getDrawable(getApplicationContext(), R.drawable.filter_white));
         setSupportActionBar(myToolbar);
 
-        rootDatabase = dbDatabase.getInstance().getReference();
-        intiAnnRef = rootDatabase.child("Announcement").child("INTIAnn");
+        rootDatabase = dbDatabase.getInstance().getReference().child("Announcement").child("INTIAnn");
 
         textViewCategory = (TextView) findViewById(R.id.textViewCategory);
         listViewAnn = (ListView) findViewById(R.id.listViewAnn);
@@ -61,7 +60,6 @@ public class INTIAnnPage extends AppCompatActivity {
         annList = new ArrayList<>();
 
         PopulateINTIAnn(textViewCategory.getText().toString());
-
 
         listViewAnn.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -206,7 +204,6 @@ public class INTIAnnPage extends AppCompatActivity {
                 // If we got here, the user's action was not recognized.
                 // Invoke the superclass to handle it.
                 return super.onOptionsItemSelected(item);
-
         }
     }
 
@@ -222,8 +219,10 @@ public class INTIAnnPage extends AppCompatActivity {
 
         final String today = dateFormat.format(calendar.getTime());
 
-
-        query = intiAnnRef.orderByChild("category").equalTo(category);
+        if(category.equals("ALL")){
+            query = rootDatabase;
+        }else
+            query = rootDatabase.orderByChild("category").equalTo(category);
 
 
         query.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -237,7 +236,7 @@ public class INTIAnnPage extends AppCompatActivity {
 
                     //Delete for expired announcement
                     if (announcement.getCourtDate().equals(today))
-                        intiAnnRef.child(snapshot.getKey()).removeValue();
+                        rootDatabase.child(snapshot.getKey()).removeValue();
                     else
                         annList.add(announcement);
                 }
@@ -310,17 +309,17 @@ public class INTIAnnPage extends AppCompatActivity {
         dateFormat.setTimeZone(TimeZone.getTimeZone("GMT+08"));
         timeFormat.setTimeZone(TimeZone.getTimeZone("GMT+08"));
 
-        for (int x = 1; x <= 1; x++) {
+        for (int x = 1; x <= 5; x++) {
 
             Date today = calendar.getTime();
+            String id = rootDatabase.push().getKey();
+
 
             calendar.add(Calendar.DAY_OF_YEAR, 1);
 
-            String id = intiAnnRef.push().getKey();
+            INTIAnn ann = new INTIAnn(id, "MPH", "COLAL", dateFormat.format(today), "13:52", "bubu", "This should be the content area", "dunno how leh", "28/06/2018 - 28/06/2018", "4:00 PM - 6:00 PM"); //putting getters in object class causes the app to crash if class field doesn't have private access
 
-            INTIAnn ann = new INTIAnn(id, "FITS", "11/07/2019", "13:52", "bubu", "This should be the content area", "dunno how leh", "28/06/2018 - 28/06/2018", "4:00 PM - 6:00 PM"); //putting getters in object class causes the app to crash if class field doesn't have private access
-
-            intiAnnRef.child(id).setValue(ann);
+            rootDatabase.child(id).setValue(ann);
 
 
         }
