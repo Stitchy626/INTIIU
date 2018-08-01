@@ -20,7 +20,7 @@ import com.google.android.gms.common.api.Status;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.FirebaseAuth;
 
-public class ProfileActivity extends AppCompatActivity {
+public class Profile extends AppCompatActivity {
 
     TextView textViewTest;
     private FirebaseAuth firebaseAuth;
@@ -55,8 +55,8 @@ public class ProfileActivity extends AppCompatActivity {
                 .build();
 
 // Creating and Configuring Google Api Client.
-        googleApiClient = new GoogleApiClient.Builder(ProfileActivity.this)
-                .enableAutoManage(ProfileActivity.this , new GoogleApiClient.OnConnectionFailedListener() {
+        googleApiClient = new GoogleApiClient.Builder(Profile.this)
+                .enableAutoManage(Profile.this , new GoogleApiClient.OnConnectionFailedListener() {
                     @Override
                     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
 
@@ -104,8 +104,8 @@ public class ProfileActivity extends AppCompatActivity {
 // Write down your any code here which you want to execute After Sign Out.
 
 // Printing Logout toast message on screen.
-                        startActivity(new Intent(ProfileActivity.this, MainActivity.class));
-                        Toast.makeText(ProfileActivity.this, "Logout Successfully", Toast.LENGTH_LONG).show();
+                        startActivity(new Intent(Profile.this, auth.class));
+                        Toast.makeText(Profile.this, "Logout Successfully", Toast.LENGTH_LONG).show();
 
                     }
                 });

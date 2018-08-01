@@ -8,50 +8,6 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1036624807863:android:47c5ae70c5c48117",
-        "android_client_info": {
-          "package_name": "i16009882.student.com.intiiu"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "1036624807863-22g4jcuhbko5dp8hahmcglt8qr5ci49d.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "i16009882.student.com.intiiu",
-            "certificate_hash": "36cbe02bd331b8a7a7bf927120b8aa4432bb0b2b"
-          }
-        },
-        {
-          "client_id": "1036624807863-vd01e2fbbm1v65r9e383hsfi5e5r5bi5.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyCbDfUnrzbtspfIvjV9iIqPEetJTuxk-pg"
-        }
-      ],
-      "services": {
-        "analytics_service": {
-          "status": 1
-        },
-        "appinvite_service": {
-          "status": 2,
-          "other_platform_oauth_client": [
-            {
-              "client_id": "1036624807863-vd01e2fbbm1v65r9e383hsfi5e5r5bi5.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
-        },
-        "ads_service": {
-          "status": 2
-        }
-      }
-    },
-    {
-      "client_info": {
         "mobilesdk_app_id": "1:1036624807863:android:d88144e0fc0e861e",
         "android_client_info": {
           "package_name": "rokuniroku.code.intiiu"
@@ -64,6 +20,14 @@
           "android_info": {
             "package_name": "rokuniroku.code.intiiu",
             "certificate_hash": "36cbe02bd331b8a7a7bf927120b8aa4432bb0b2b"
+          }
+        },
+        {
+          "client_id": "1036624807863-llmlnqqlj24hdmo77db9s9e8ntvtujem.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "rokuniroku.code.intiiu",
+            "certificate_hash": "ec4fb9b43541f5b4b38aa40d2a7b7a25f3019988"
           }
         },
         {
