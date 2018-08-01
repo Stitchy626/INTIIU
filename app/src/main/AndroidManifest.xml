@@ -39,7 +39,8 @@
         <activity android:name=".LNFPage" />
         <activity
             android:name=".EventAnnItemPage"
-            android:label="Event Announcement Item"></activity>
+            android:label="Event Announcement Item" />
+        <activity android:name=".LNFItemPage"></activity>
     </application>
 
 </manifest>
