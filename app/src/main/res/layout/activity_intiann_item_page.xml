@@ -44,7 +44,8 @@
                 android:textSize="15dp"
                 android:textColor="#000000"
                 android:layout_below="@+id/textViewCat"
-                android:layout_margin="10dp"/>
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"/>
 
             <TextView
                 android:layout_width="match_parent"
@@ -54,7 +55,19 @@
                 android:textSize="15dp"
                 android:textColor="#000000"
                 android:layout_below="@+id/textViewDate"
-                android:layout_marginLeft="10dp"/>
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id = "@+id/textViewVenue"
+                android:text = "Venue - >"
+                android:textSize="15dp"
+                android:textColor="#000000"
+                android:layout_below="@+id/textViewTime"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"/>
 
             <TextView
                 android:layout_width="match_parent"
@@ -63,7 +76,7 @@
                 android:text="Content GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG"
                 android:textSize="18dp"
                 android:textColor="#000000"
-                android:layout_below="@+id/textViewTime"
+                android:layout_below="@+id/textViewVenue"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="20dp"/>
 

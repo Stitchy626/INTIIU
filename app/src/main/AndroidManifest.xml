@@ -25,7 +25,8 @@
         <activity android:name=".StudentBooking" />
         <activity
             android:name=".INTIAnnPage"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+            android:label="INTI Announcement"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".INTIAnnItemPage" />
         <activity
             android:name=".EventAnnPage"
