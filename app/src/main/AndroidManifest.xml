@@ -22,26 +22,23 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity android:name=".StudentBooking" />
-
         <activity
             android:name=".INTIAnnPage"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
-
         <activity android:name=".INTIAnnItemPage" />
-
         <activity
             android:name=".EventAnnPage"
-            android:theme="@style/AppTheme.NoActionBar"/>
-
-        <activity android:name=".UploadTesting" /> <!-- Activity for testing purposes only -->
-
-        <activity android:name=".EventAnnRequestPage"
+            android:label="Event Announcement"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".EventAnnRequestPage"
             android:label="Event Announcement Request"
             android:windowSoftInputMode="stateAlwaysHidden" />
-
-        <activity android:name=".LNFPage"/>
+        <activity android:name=".LNFPage" />
+        <activity
+            android:name=".EventAnnItemPage"
+            android:label="Event Announcement Item"></activity>
     </application>
 
 </manifest>

@@ -19,7 +19,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/imageViewBanner"
-            android:background="@drawable/common_google_signin_btn_icon_dark_focused"/>
+            android:background="@drawable/default_banner"/>
 
         <TextView
             android:layout_width="match_parent"

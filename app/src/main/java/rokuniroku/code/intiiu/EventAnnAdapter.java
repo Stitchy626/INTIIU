@@ -1,8 +1,10 @@
 package rokuniroku.code.intiiu;
 
 import android.app.Activity;
+import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,7 +42,7 @@ public class EventAnnAdapter extends ArrayAdapter<EventAnn> {
 
         TextView textViewTitle = (TextView) listViewItem.findViewById(R.id.textViewTitle);
         TextView textViewDateTime = (TextView) listViewItem.findViewById(R.id.textViewDateTime);
-        //ImageView imageViewBanner = (ImageView) listViewItem.findViewById(R.id.imageViewBanner);
+        ImageView imageViewBanner = (ImageView) listViewItem.findViewById(R.id.imageViewBanner);
 
         EventAnn ann = annList.get(position);
 
@@ -50,12 +52,21 @@ public class EventAnnAdapter extends ArrayAdapter<EventAnn> {
         textViewTitle.setText(ann.getTitle());
         textViewDateTime.setText(combineDateTime);
 
-        /*rootStorage = dbStorage.getInstance().getReference().child("Announcement").child("EventAnn");
+        if(ann.getBanner().compareTo("default") == 0){
+        }else{
+            rootStorage = dbStorage.getInstance().getReference().child("Announcement").child("EventAnn").child(ann.getBanner());
 
-        Glide.with(context)
-                .using(new FirebaseImageLoader())
-                .load(rootStorage)
-                .into(imageViewBanner);*/
+            Glide.with(context)
+                    .using(new FirebaseImageLoader())
+                    .load(rootStorage)
+                    .into(imageViewBanner);
+        }
+
+        if(ann.getBannerBackground().compareTo("light") == 0) {
+            textViewTitle.setTextColor(Color.parseColor("#000000"));
+        }else {
+            textViewTitle.setTextColor(Color.parseColor("#FFFFFF"));
+        }
 
         return listViewItem;
     }
