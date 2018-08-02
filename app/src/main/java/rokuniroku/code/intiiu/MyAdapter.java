@@ -65,8 +65,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
             itemView.setOnClickListener( new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
-
+                    //when click it will open download link
                     int position = recyclerView.getChildLayoutPosition( v );
                     Intent intent = new Intent( );
                     // Intent intent = new Intent( context, OpenPDF.class );
