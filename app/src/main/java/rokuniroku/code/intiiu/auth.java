@@ -191,24 +191,6 @@ public class auth extends AppCompatActivity {
                                 UserSignOutFunction();
                             }
 
-
-
-// Showing Log out button.
-                            /*SignOutButton.setVisibility(View.VISIBLE);
-
-// Hiding Login in button.
-                            signInButton.setVisibility(View.GONE);
-
-// Showing the TextView.
-                            LoginUserEmail.setVisibility(View.VISIBLE);
-                            LoginUserName.setVisibility(View.VISIBLE);
-
-// Setting up name into TextView.
-                            LoginUserName.setText("NAME = "+ firebaseUser.getDisplayName().toString());
-
-// Setting up Email into TextView.
-                            LoginUserEmail.setText("Email = "+ firebaseUser.getEmail().toString());*/
-
                         }else {
                             Toast.makeText(auth.this,"Something Went Wrong",Toast.LENGTH_LONG).show();
                         }
