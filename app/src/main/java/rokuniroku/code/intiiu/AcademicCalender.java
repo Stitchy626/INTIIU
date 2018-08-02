@@ -23,6 +23,7 @@ public class AcademicCalender extends AppCompatActivity {
         super.onCreate( savedInstanceState );
         setContentView( R.layout.activity_academic_calender );
 
+        //the reference to the database
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child( "Academic Calender" );
         final RecyclerView recyclerView = findViewById( R.id.recyclerView );
 

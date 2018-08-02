@@ -22,6 +22,7 @@ public class BusSchedule extends AppCompatActivity {
         super.onCreate( savedInstanceState );
         setContentView( R.layout.activity_bus_schedule );
 
+        //the references to the database
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child( "BusSchedule" );
         final RecyclerView recyclerView = findViewById( R.id.recyclerView );
 

@@ -16,8 +16,8 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
     RecyclerView recyclerView;
     Context context;
-    ArrayList<String> items = new ArrayList<>(  );
-    ArrayList<String> urls = new ArrayList<>(  );
+    ArrayList<String> items = new ArrayList<>(  ); //array list of item
+    ArrayList<String> urls = new ArrayList<>(  ); //array list of url
 
     public void update(String name, String url)
     {
@@ -61,7 +61,8 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         public ViewHolder(View itemView) {
             // Individual list items......
             super( itemView );
-            nameOfFile  = itemView.findViewById( R.id.nameOfFile );
+            nameOfFile  = itemView.findViewById( R.id.nameOfFile ); //declaration
+            //when an item click whwat will happen
             itemView.setOnClickListener( new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -69,7 +70,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
                     int position = recyclerView.getChildLayoutPosition( v );
                     Intent intent = new Intent( );
                     // Intent intent = new Intent( context, OpenPDF.class );
-                    intent.setType( Intent.ACTION_VIEW );
+                    intent.setType( Intent.ACTION_VIEW ); //intent action view
                     intent.setData( Uri.parse( urls.get(position) ) );
                     //intent.putExtra("URI", urls);
                     context.startActivity( intent );
