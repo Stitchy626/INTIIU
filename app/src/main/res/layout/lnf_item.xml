@@ -8,13 +8,6 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/Venue"
-        android:text="Date                     Venue"
-        android:textSize="20sp"/>
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:id="@+id/Date"
         android:text="Date"
         android:textSize="20sp"/>

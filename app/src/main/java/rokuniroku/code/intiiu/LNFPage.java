@@ -74,7 +74,7 @@ public class LNFPage extends AppCompatActivity {
 
                 final String catKey = getRef(position).getKey().toString();
                 viewHolder.setName(model.getName());
-                viewHolder.setCount(model.getCount());
+                viewHolder.setCount("Total : " + model.getCount());
                 viewHolder.setImage(getApplicationContext(), model.getImage());
 
                 viewHolder.mView.setOnClickListener(new View.OnClickListener() {
