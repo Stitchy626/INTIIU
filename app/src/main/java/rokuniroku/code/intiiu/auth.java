@@ -171,7 +171,8 @@ public class auth extends AppCompatActivity {
                             String value = firebaseUser.getEmail().toString();
                             int startZ = 0;
                             String emailValidation = "@student.newinti.edu.my";
-                            String Validation ="@newinti.edu.my";
+                            String clubValidaton = "@club.newinti.edu.my";
+                            String Validation = "@newinti.edu.my";
 
                             for (int x = 0; x < value.length(); x++) {
                                 if (value.charAt(x) == '@') {
@@ -183,16 +184,14 @@ public class auth extends AppCompatActivity {
                             value = value.substring(startZ, value.length());
 
                             if (value.equals(emailValidation)) {
-                                startActivity(new Intent(auth.this, Profile.class));
-                                Toast.makeText(auth.this,"Login Success",Toast.LENGTH_LONG).show();
-                            }
-                            else
-                            {
+                                startActivity(new Intent(auth.this, MainMenu.class));
+                                Toast.makeText(auth.this, "Login Success", Toast.LENGTH_LONG).show();
+                            } else {
                                 UserSignOutFunction();
                             }
 
                         }else {
-                            Toast.makeText(auth.this,"Something Went Wrong",Toast.LENGTH_LONG).show();
+                            Toast.makeText(auth.this,"Login Error!Please login using student or club email",Toast.LENGTH_LONG).show();
                         }
                     }
                 });

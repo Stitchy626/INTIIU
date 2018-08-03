@@ -10,8 +10,9 @@
         android:id="@+id/sign_in_button"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="68dp" />
 
     <Button
         android:id="@+id/sign_out"
@@ -47,4 +48,16 @@
         android:textSize="20dp"
         android:textColor="#000"
         />
+
+    <TextView
+        android:id="@+id/info"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="128dp"
+        android:text="Sign in using student or club email."
+        android:textSize="24sp" />
+
+
 </RelativeLayout>
