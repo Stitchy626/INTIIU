@@ -16,7 +16,14 @@
         <activity
             android:name=".MainMenu"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+        </activity>
         <activity android:name=".StudentBooking" />
         <activity
             android:name=".INTIAnnPage"
@@ -37,15 +44,11 @@
             android:label="Event Announcement Item" />
         <activity android:name=".LNFItemPage" />
         <activity android:name=".auth">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+
+
         </activity>
-        <activity android:name=".Profile" />
-        <activity android:name=".BusSchedule" />
-        <activity android:name=".AcademicCalender"></activity>
+        <activity android:name=".Profile"></activity>
     </application>
 
 </manifest>

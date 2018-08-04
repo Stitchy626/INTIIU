@@ -6,17 +6,18 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     app:cardCornerRadius="12dp"
-    android:elevation="90dp">
+    android:elevation="90dp"
+    android:layout_margin="10dp">
     
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="248dp"
+        android:layout_height="180dp"
         android:orientation="vertical"
-        android:background="#ffffff">
+        android:background="@color/colorPrimary">
         
         <ImageView
             android:layout_width="match_parent"
-            android:layout_height="180dp"
+            android:layout_height="140dp"
             android:scaleType="centerCrop"
             android:id="@+id/catImage"/>
 
@@ -25,7 +26,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/catName"
             android:text="CAT NAME"
-            android:textSize="20dp"
+            android:textSize="15sp"
             android:textColor="#020202"
             android:textAlignment="center"/>
 
@@ -34,6 +35,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/catCount"
             android:textColor="#060606"
+            android:textSize="13sp"
             android:text="CAT COUNT"
             android:textAlignment="center"/>
 
