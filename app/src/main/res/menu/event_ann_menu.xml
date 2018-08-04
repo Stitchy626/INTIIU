@@ -4,7 +4,7 @@
 
     <item android:id="@+id/action_request"
         android:title="REQUEST"
-        android:icon="@drawable/ic_icon_request"
+        android:icon="@drawable/ic_event_request"
         app:showAsAction="always"/>
 
 </menu>

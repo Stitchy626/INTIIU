@@ -2,6 +2,7 @@ package rokuniroku.code.intiiu;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -13,7 +14,7 @@ import com.google.firebase.storage.StorageReference;
 public class EventAnnItemPage extends AppCompatActivity {
 
     private ImageView imageViewBanner;
-    private TextView textViewTitle, textViewClub, textViewDate, textViewTime, textViewVenue, textViewContent;
+    private TextView textViewTitle, textViewClub, textViewDateTime,textViewDate, textViewTime, textViewVenue, textViewContent, facebookUrl;
 
     private FirebaseStorage dbStorage;
     private StorageReference rootStorage;
@@ -30,10 +31,12 @@ public class EventAnnItemPage extends AppCompatActivity {
         imageViewBanner = (ImageView) findViewById(R.id.imageViewBanner);
         textViewTitle = (TextView) findViewById(R.id.textViewTitle);
         textViewClub = (TextView) findViewById(R.id.textViewClub);
+        textViewDateTime = (TextView) findViewById(R.id.textViewDateTime);
         textViewDate = (TextView) findViewById(R.id.textViewDate);
         textViewTime = (TextView) findViewById(R.id.textViewTime);
         textViewVenue = (TextView) findViewById(R.id.textViewVenue);
         textViewContent = (TextView) findViewById(R.id.textViewContent);
+        facebookUrl = (TextView) findViewById(R.id.facebookUrl);
 
         //get the passing object
         annObj = (EventAnn)getIntent().getSerializableExtra("EventAnnouncement");
@@ -41,10 +44,30 @@ public class EventAnnItemPage extends AppCompatActivity {
         //get all the fields
         textViewTitle.setText(annObj.getTitle());
         textViewClub.setText(("by " + annObj.getClub()));
-        textViewDate.setText("Date: " + annObj.getDateStart() + " - " + annObj.getDateEnd());
-        textViewTime.setText("Time: " + annObj.getTimeStart() + " - " + annObj.getTimeEnd());
+
+        if(annObj.getDateStart().equals(annObj.getDateEnd())){
+            textViewDate.setText("Date: " + annObj.getDateStart());
+            textViewTime.setText("Time: " + annObj.getTimeStart() + " - " + annObj.getTimeEnd());
+            textViewDate.setVisibility((View.VISIBLE));
+            textViewTime.setVisibility((View.VISIBLE));
+            textViewDateTime.setVisibility(View.GONE);
+        }else{
+            textViewDateTime.setText(annObj.getDateStart() + "  " + annObj.getTimeStart() + " - "
+                    + annObj.getDateEnd() + "  " + annObj.getTimeEnd());
+            textViewDate.setVisibility((View.GONE));
+            textViewTime.setVisibility((View.GONE));
+            textViewDateTime.setVisibility(View.VISIBLE);
+        }
         textViewVenue.setText("Venue: " + annObj.getVenue());
         textViewContent.setText(annObj.getContent());
+
+        //get facebook link
+        if(annObj.getUrl().equals("empty"))
+            facebookUrl.setVisibility(View.GONE);
+        else{
+            facebookUrl.setText(annObj.getUrl());
+            facebookUrl.setVisibility(View.VISIBLE);
+        }
 
         //get Image
         rootStorage = dbStorage.getInstance().getReference().child("Announcement").child("EventAnn").child(annObj.getBanner());

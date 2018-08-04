@@ -26,6 +26,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
@@ -54,12 +55,14 @@ public class EventAnnRequestPage extends AppCompatActivity implements DatePicker
     private DatabaseReference rootDatabase;
     private StorageReference rootStorage;
 
+    private LinearLayout layout3, layout4, layout5, layout6;
 
-    private EditText editTextTitle, editTextVenue, editTextContent;
+    private EditText editTextTitle, editTextVenue, editTextContent, editTextFBLink;
     private TextView textViewStartDate, textViewEndDate, textViewStartTime, textViewEndTime,
             textViewImageTitle, textViewImageDateTime;
 
-    private Button buttonSetTitle, buttonDPStart,buttonDPEnd, buttonTPStart, buttonTPEnd, buttonUploadImage, buttonLight, buttonDark, buttonSubmit;
+    private Button buttonSetTitle, buttonDPStart,buttonDPEnd, buttonTPStart, buttonTPEnd,
+            buttonUploadImage, buttonLight, buttonDark, buttonSubmit;
     private ImageView imageViewBanner;
 
     private Calendar calendar;
@@ -82,9 +85,15 @@ public class EventAnnRequestPage extends AppCompatActivity implements DatePicker
         rootDatabase = dbDatabase.getInstance().getReference().child("Announcement").child("EventAnn");
         rootStorage = dbStorage.getInstance().getReference().child("Announcement").child("EventAnn");
 
+        layout3 = (LinearLayout) findViewById(R.id.layout3);
+        layout4 = (LinearLayout) findViewById(R.id.layout4);
+        layout5 = (LinearLayout) findViewById(R.id.layout5);
+        layout6 = (LinearLayout) findViewById(R.id.layout6);
+
         editTextTitle = (EditText) findViewById(R.id.editTextTitle);
         editTextVenue = (EditText) findViewById(R.id.editTextVenue);
         editTextContent = (EditText) findViewById(R.id.editTextContent);
+        editTextFBLink = (EditText) findViewById(R.id.editTextFBLink);
 
         textViewStartDate = (TextView) findViewById(R.id.textViewStartDate);
         textViewEndDate = (TextView) findViewById(R.id.textViewEndDate);
@@ -121,7 +130,6 @@ public class EventAnnRequestPage extends AppCompatActivity implements DatePicker
         bIsDateStart = true;
         bIsTimeStart = true;
         bIsLight = true;
-
         bIsPoint = false;
 
         iImageCount = 0;
@@ -134,6 +142,7 @@ public class EventAnnRequestPage extends AppCompatActivity implements DatePicker
             public void onClick(View v) {
                 textViewImageTitle.setText(editTextTitle.getText().toString());
                 closeKeyboard();
+                Toast.makeText(EventAnnRequestPage.this, "Preview banner updated", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -261,6 +270,7 @@ public class EventAnnRequestPage extends AppCompatActivity implements DatePicker
                 buttonLight.setSelected(true);
                 buttonDark.setSelected(false);
                 textViewImageTitle.setTextColor(Color.parseColor("#000000"));
+                imageViewBanner.setBackgroundResource(R.drawable.default_banner);
                 bIsLight = true;
             }
         });
@@ -271,6 +281,7 @@ public class EventAnnRequestPage extends AppCompatActivity implements DatePicker
                 buttonLight.setSelected(false);
                 buttonDark.setSelected(true);
                 textViewImageTitle.setTextColor(Color.parseColor("#FFFFFF"));
+                imageViewBanner.setBackgroundResource(R.drawable.default_banner_dark);
                 bIsLight = false;
             }
         });
@@ -355,19 +366,27 @@ public class EventAnnRequestPage extends AppCompatActivity implements DatePicker
             editTextTitle.setError("Announcement title has to be included");
 
         if(editTextVenue.getText().toString().isEmpty())
-            editTextVenue.setError("A venue must be given");
+            editTextVenue.setError("Venue has to be included");
 
-        if(textViewStartDate.getText().toString().isEmpty())
-            textViewStartDate.setError("Error");
+        if(textViewStartDate.getText().toString().isEmpty()) {
+            layout3.requestFocus();
+            textViewStartDate.setError("No Date");
+        }
 
-        if(textViewEndDate.getText().toString().isEmpty())
-            textViewEndDate.setError("Error");
+        if(textViewEndDate.getText().toString().isEmpty()) {
+            layout4.requestFocus();
+            textViewEndDate.setError("No Date");
+        }
 
-        if(textViewStartTime.getText().toString().isEmpty())
-            textViewStartTime.setError("Error");
+        if(textViewStartTime.getText().toString().isEmpty()) {
+            layout5.requestFocus();
+            textViewStartTime.setError("No Time");
+        }
 
-        if(textViewEndTime.getText().toString().isEmpty())
-            textViewEndTime.setError("Error");
+        if(textViewEndTime.getText().toString().isEmpty()) {
+            layout6.requestFocus();
+            textViewEndTime.setError("No Time");
+        }
 
         if(editTextContent.getText().toString().isEmpty())
             editTextContent.setError("Empty content");
@@ -388,15 +407,17 @@ public class EventAnnRequestPage extends AppCompatActivity implements DatePicker
             }
 
             if (dateStart.after(dateEnd)) {
-                textViewStartDate.setError("Error");
+                textViewStartDate.requestFocus();
+                textViewStartDate.setError("Start date pass end date");
                 textViewEndDate.setError("Error");
-                sErrorMessage = "Invalid Date Selected \n";
+                sErrorMessage = "Invalid Date Selected";
                 Toast.makeText(EventAnnRequestPage.this, sErrorMessage, Toast.LENGTH_LONG).show();
                 bValid = false;
             }
             if (dateStart.equals(dateEnd)) {
                 if (timeStart.after(timeEnd)) {
-                    textViewStartTime.setError("Error");
+                    textViewStartTime.requestFocus();
+                    textViewStartTime.setError("Start time pass end time");
                     textViewEndTime.setError("Error");
                     sErrorMessage = "Invalid Time Selected";
                     Toast.makeText(EventAnnRequestPage.this, sErrorMessage, Toast.LENGTH_LONG).show();
@@ -464,6 +485,7 @@ public class EventAnnRequestPage extends AppCompatActivity implements DatePicker
                 String id = rootDatabase.push().getKey();
                 String banner = id;
                 String background = "light";
+                String FB = "empty";
 
                 if(iImageCount == 0)
                     banner = "default";
@@ -471,9 +493,12 @@ public class EventAnnRequestPage extends AppCompatActivity implements DatePicker
                 if(bIsLight == false)
                     background = "dark";
 
+                if(editTextFBLink.getText().toString().trim().isEmpty() == false)
+                    FB = editTextFBLink.getText().toString();
+
                 EventAnn ann = new EventAnn(editTextTitle.getText().toString(), editTextVenue.getText().toString(), "Isaac Club",
                         dateFormat.format(today), timeFormat.format(today), editTextContent.getText().toString(),
-                        banner, background, textViewStartDate.getText().toString(), textViewEndDate.getText().toString(),
+                        FB, banner, background, textViewStartDate.getText().toString(), textViewEndDate.getText().toString(),
                         textViewStartTime.getText().toString(), textViewEndTime.getText().toString(), "approved");// status using approve for testing purposes
 
                 rootDatabase.child(id).setValue(ann);
