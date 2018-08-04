@@ -26,7 +26,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/catName"
             android:text="CAT NAME"
-            android:textSize="15dp"
+            android:textSize="15sp"
             android:textColor="#020202"
             android:textAlignment="center"/>
 
@@ -35,7 +35,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/catCount"
             android:textColor="#060606"
-            android:textSize="13dp"
+            android:textSize="13sp"
             android:text="CAT COUNT"
             android:textAlignment="center"/>
 
