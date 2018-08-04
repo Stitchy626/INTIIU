@@ -10,26 +10,27 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/ic_launcher_intiicon_finale"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity
-            android:name=".MainMenu"
-            android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar">
+
+        <activity android:name=".Splash"
+            android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
-        <activity android:name=".StudentBooking" />
+
+        <activity
+            android:name=".MainMenu"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity
             android:name=".INTIAnnPage"
             android:label="INTI Announcement"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".INTIAnnItemPage" />
         <activity
             android:name=".EventAnnPage"
             android:label="Event Announcement"
@@ -38,17 +39,16 @@
             android:name=".EventAnnRequestPage"
             android:label="Event Announcement Request"
             android:windowSoftInputMode="stateAlwaysHidden" />
-        <activity android:name=".LNFPage" />
         <activity
             android:name=".EventAnnItemPage"
             android:label="Event Announcement Item" />
         <activity android:name=".LNFItemPage" />
-        <activity android:name=".auth">
+        <activity android:name=".auth" />
+        <activity android:name=".Profile" />
+        <activity android:name=".INTIAnnItemPage" />
+        <activity android:name=".StudentBooking" />
+        <activity android:name=".LNFPage" />
 
-
-
-        </activity>
-        <activity android:name=".Profile"></activity>
     </application>
 
 </manifest>

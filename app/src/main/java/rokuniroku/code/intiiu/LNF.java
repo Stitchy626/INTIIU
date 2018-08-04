@@ -3,7 +3,7 @@ package rokuniroku.code.intiiu;
 public class LNF {
 
     private String name;
-    private String count;
+    private int count;
     private String image;
 
     public LNF(){
@@ -11,7 +11,7 @@ public class LNF {
 
     }
 
-    public LNF(String name, String count, String image) {
+    public LNF(String name, int count, String image) {
         this.name = name;
         this.count = count;
         this.image = image;
@@ -25,11 +25,11 @@ public class LNF {
         this.name = name;
     }
 
-    public String getCount() {
+    public int getCount() {
         return count;
     }
 
-    public void setCount(String count) {
+    public void setCount(int count) {
         this.count = count;
     }
 

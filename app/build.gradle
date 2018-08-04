@@ -41,6 +41,9 @@ dependencies {
     implementation 'com.android.support.constraint:constraint-layout:1.0.0-alpha8'
     implementation 'com.android.support:cardview-v7:27.1.1'
     implementation 'com.android.support:recyclerview-v7:27.1.1'
+    implementation 'gr.pantrif:easy-android-splash-screen:0.0.1'
+
+    implementation 'de.hdodenhof:circleimageview:2.1.0'
 }
 
 apply plugin: 'com.google.gms.google-services'
