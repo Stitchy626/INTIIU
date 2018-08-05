@@ -2,9 +2,9 @@ package rokuniroku.code.intiiu;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -22,18 +22,14 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
 
 public class LNFPage extends AppCompatActivity {
-
 
     private RecyclerView mLNFList;
     private DatabaseReference mDatabase;
     private Query query;
     private ArrayList<String> arrList = new ArrayList<>();
-
     public String n;
 
     @Override
@@ -42,11 +38,9 @@ public class LNFPage extends AppCompatActivity {
         setContentView(R.layout.activity_lnfpage);
         mDatabase = FirebaseDatabase.getInstance().getReference().child("Category");
         mDatabase.keepSynced(true);
-
         mLNFList = (RecyclerView)findViewById(R.id.myrecyclerview);
         mLNFList.setHasFixedSize(true);
         mLNFList.setLayoutManager(new LinearLayoutManager(this));
-
         mDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -62,8 +56,9 @@ public class LNFPage extends AppCompatActivity {
 
             }
         });
-
     }
+
+
 
     @Override
     protected void onStart() {
@@ -76,7 +71,6 @@ public class LNFPage extends AppCompatActivity {
                 viewHolder.setName(model.getName());
                 viewHolder.setCount("Total : " + model.getCount());
                 viewHolder.setImage(getApplicationContext(), model.getImage());
-
                 viewHolder.mView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
