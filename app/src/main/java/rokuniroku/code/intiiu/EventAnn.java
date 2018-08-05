@@ -10,8 +10,8 @@ public class EventAnn implements Serializable{
     private String dateUpload;
     private String timeUpload;
     private String content;
-    private String url;
-    private String banner;
+    private String url;//facebook link
+    private String banner;//unique entry key to locate the image in the storage
     private String bannerBackground;
     private String dateStart;
     private String dateEnd;

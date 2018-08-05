@@ -19,6 +19,7 @@
                                   <option name="values">
                                     <map>
                                       <entry key="assetType" value="IMAGE" />
+                                      <entry key="iconShape" value="NONE" />
                                       <entry key="imageAsset" value="C:\Users\Yangz\Desktop\Project 626 Images\icon_faculty_replacement.png" />
                                       <entry key="outputName" value="ic_intiann_faculty_proxy" />
                                     </map>

@@ -33,6 +33,8 @@ import android.widget.Toast;
 
 import com.google.android.gms.auth.api.signin.internal.Storage;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
@@ -50,6 +52,8 @@ import java.util.TimeZone;
 
 public class EventAnnRequestPage extends AppCompatActivity implements DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener{
 
+    private FirebaseAuth dbAuth;
+    private FirebaseUser user;
     private FirebaseDatabase dbDatabase;
     private FirebaseStorage dbStorage;
     private DatabaseReference rootDatabase;
@@ -82,6 +86,7 @@ public class EventAnnRequestPage extends AppCompatActivity implements DatePicker
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_event_ann_request_page);
 
+        user = dbAuth.getInstance().getCurrentUser();
         rootDatabase = dbDatabase.getInstance().getReference().child("Announcement").child("EventAnn");
         rootStorage = dbStorage.getInstance().getReference().child("Announcement").child("EventAnn");
 
@@ -499,7 +504,7 @@ public class EventAnnRequestPage extends AppCompatActivity implements DatePicker
                 EventAnn ann = new EventAnn(editTextTitle.getText().toString(), editTextVenue.getText().toString(), "Isaac Club",
                         dateFormat.format(today), timeFormat.format(today), editTextContent.getText().toString(),
                         FB, banner, background, textViewStartDate.getText().toString(), textViewEndDate.getText().toString(),
-                        textViewStartTime.getText().toString(), textViewEndTime.getText().toString(), "approved");// status using approve for testing purposes
+                        textViewStartTime.getText().toString(), textViewEndTime.getText().toString(), "pending");// status using approve for testing purposes
 
                 rootDatabase.child(id).setValue(ann);
 
