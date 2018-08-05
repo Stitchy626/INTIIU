@@ -17,7 +17,7 @@
             android:layout_height="match_parent"
             android:id = "@+id/imageViewIcon"
             android:layout_weight="1"
-            android:background="@mipmap/icon_faculty"/>
+            android:background="@mipmap/ic_intiann_faculty_proxy"/>
 
         <LinearLayout
             android:layout_width="0dp"
@@ -32,7 +32,7 @@
                 android:id = "@+id/textViewTitle"
                 android:layout_weight="1"
                 android:text="Title"
-                android:textSize="22dp"
+                android:textSize="22sp"
                 android:gravity="center"/>
 
             <LinearLayout
@@ -48,7 +48,7 @@
                     android:id = "@+id/textViewDateUpload"
                     android:layout_weight="1"
                     android:text="Date"
-                    android:textSize="18dp"
+                    android:textSize="18sp"
                     android:gravity="center"/>
 
                 <TextView
@@ -57,7 +57,7 @@
                     android:id = "@+id/textViewTimeUpload"
                     android:layout_weight="1"
                     android:text="Time"
-                    android:textSize="18dp"
+                    android:textSize="18sp"
                     android:gravity="center"/>
 
             </LinearLayout>
