@@ -29,8 +29,6 @@ public class Splash extends AppCompatActivity {
         //config.getFooterTextView().setTextColor(Color.BLACK);
         //config.getBeforeLogoTextView().setTextColor(Color.WHITE);
         config.getAfterLogoTextView().setTextColor(Color.BLACK);
-        
-
         View easySplashScreen = config.create();
         setContentView(easySplashScreen);
     }
