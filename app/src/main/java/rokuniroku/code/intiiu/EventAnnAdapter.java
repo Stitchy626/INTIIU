@@ -64,8 +64,10 @@ public class EventAnnAdapter extends ArrayAdapter<EventAnn> {
 
         if(ann.getBannerBackground().compareTo("light") == 0) {
             textViewTitle.setTextColor(Color.parseColor("#000000"));
+            imageViewBanner.setBackgroundResource(R.drawable.default_banner);
         }else {
             textViewTitle.setTextColor(Color.parseColor("#FFFFFF"));
+            imageViewBanner.setBackgroundResource(R.drawable.default_banner_dark);
         }
 
         return listViewItem;

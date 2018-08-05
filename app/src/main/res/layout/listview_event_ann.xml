@@ -35,7 +35,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:id = "@+id/textViewDateTime"
-        android:text="27/05/2018 16:00 - 28/06/2018 15:59"
+        android:text="27/05/2018  16:00 - 28/06/2018  15:59"
         android:textColor="#000000"
         android:gravity="center"
         android:layout_weight="1"/>

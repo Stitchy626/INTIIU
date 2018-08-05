@@ -17,10 +17,10 @@
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
                 android:text="Title: "
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
-                android:gravity="center"/>
+                android:gravity="center"
+                android:layout_weight="1"/>
             <RelativeLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
@@ -55,10 +55,10 @@
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
                 android:text="Venue: "
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
-                android:gravity="center"/>
+                android:gravity="center"
+                android:layout_weight="1"/>
             <RelativeLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
@@ -79,15 +79,17 @@
             android:id = "@+id/layout3"
             android:layout_below="@+id/layout2"
             android:orientation="horizontal"
-            android:weightSum="2">
+            android:weightSum="2"
+            android:focusable="true"
+            android:focusableInTouchMode="true">
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
                 android:text="Event Start Date: "
                 android:textColor="#000000"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
-                android:gravity="center"/>
+                android:gravity="center"
+                android:layout_weight="1"/>
             <RelativeLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
@@ -98,20 +100,20 @@
                     android:id = "@+id/textViewStartDate"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
                     android:gravity="center"
-                    android:layout_toLeftOf="@+id/buttonDPStart"/>
+                    android:layout_toLeftOf="@+id/buttonDPStart"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"/>
                 <Button
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:id="@+id/buttonDPStart"
-                    android:background="@drawable/intilogo"
                     android:gravity="center"
                     android:layout_centerVertical="true"
                     android:layout_alignParentRight="true"
-                    android:layout_marginRight="5dp"/>
+                    android:layout_marginRight="5dp"
+                    android:background="@mipmap/ic_event_calendar"/>
             </RelativeLayout>
         </LinearLayout>
-
-
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -119,7 +121,9 @@
             android:id = "@+id/layout4"
             android:layout_below="@+id/layout3"
             android:orientation="horizontal"
-            android:weightSum="2">
+            android:weightSum="2"
+            android:focusable="true"
+            android:focusableInTouchMode="true">
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
@@ -143,15 +147,13 @@
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:id="@+id/buttonDPEnd"
-                    android:background="@drawable/intilogo"
                     android:gravity="center"
                     android:layout_centerVertical="true"
                     android:layout_alignParentRight="true"
-                    android:layout_marginRight="5dp"/>
+                    android:layout_marginRight="5dp"
+                    android:background="@mipmap/ic_event_calendar"/>
             </RelativeLayout>
         </LinearLayout>
-
-
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -159,7 +161,9 @@
             android:id = "@+id/layout5"
             android:layout_below="@+id/layout4"
             android:orientation="horizontal"
-            android:weightSum="2">
+            android:weightSum="2"
+            android:focusable="true"
+            android:focusableInTouchMode="true">
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
@@ -178,20 +182,20 @@
                     android:id = "@+id/textViewStartTime"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
                     android:gravity="center"
-                    android:layout_toLeftOf="@+id/buttonTPStart"/>
+                    android:layout_toLeftOf="@+id/buttonTPStart"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"/>
                 <Button
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:id="@+id/buttonTPStart"
-                    android:background="@mipmap/ic_icon_clock"
                     android:gravity="center"
                     android:layout_centerVertical="true"
                     android:layout_alignParentRight="true"
-                    android:layout_marginRight="5dp"/>
+                    android:layout_marginRight="5dp"
+                    android:background="@mipmap/ic_event_clock"/>
             </RelativeLayout>
         </LinearLayout>
-
-
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -199,7 +203,9 @@
             android:id = "@+id/layout6"
             android:layout_below="@+id/layout5"
             android:orientation="horizontal"
-            android:weightSum="2">
+            android:weightSum="2"
+            android:focusable="true"
+            android:focusableInTouchMode="true">
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
@@ -223,15 +229,13 @@
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:id="@+id/buttonTPEnd"
-                    android:background="@mipmap/ic_icon_clock"
                     android:gravity="center"
                     android:layout_centerVertical="true"
                     android:layout_alignParentRight="true"
-                    android:layout_marginRight="5dp"/>
+                    android:layout_marginRight="5dp"
+                    android:background="@mipmap/ic_event_clock"/>
             </RelativeLayout>
         </LinearLayout>
-
-
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -254,8 +258,8 @@
                     android:layout_height="match_parent"
                     android:id="@+id/buttonUploadImage"
                     android:text="Choose Image"
-                    android:layout_weight="1"
                     android:gravity="center"
+                    android:layout_weight="1"
                     android:layout_marginRight="5dp"/>
         </LinearLayout>
 
@@ -264,17 +268,18 @@
             android:layout_height="60dp"
             android:id = "@+id/layout8"
             android:layout_below="@+id/layout7"
+            android:layout_marginTop="3dp"
             android:orientation="horizontal"
             android:weightSum="2"
-            android:layout_marginTop="3dp">
+            >
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
                 android:text="Banner Background: "
                 android:textColor="#000000"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
-                android:gravity="center"/>
+                android:gravity="center"
+                android:layout_weight="1"/>
 
             <LinearLayout
                 android:layout_width="0dp"
@@ -287,8 +292,8 @@
                 android:layout_height="match_parent"
                 android:id="@+id/buttonLight"
                 android:text="Light"
-                android:layout_weight="1"
                 android:gravity="center"
+                android:layout_weight="1"
                 android:layout_marginRight="5dp"/>
 
             <Button
@@ -296,8 +301,8 @@
                 android:layout_height="match_parent"
                 android:id="@+id/buttonDark"
                 android:text="Dark"
-                android:layout_weight="1"
                 android:gravity="center"
+                android:layout_weight="1"
                 android:layout_marginRight="5dp"/>
             </LinearLayout>
         </LinearLayout>
@@ -306,11 +311,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id = "@+id/layout9"
-            android:layout_below="@+id/layout8"
             android:text="Preview: "
             android:textColor="#000000"
+            android:layout_below="@+id/layout8"
             android:layout_marginLeft="25dp"/>
-
 
 
         <LinearLayout
@@ -318,10 +322,10 @@
             android:layout_height="150dp"
             android:id = "@+id/layout10"
             android:layout_below="@+id/layout9"
+            android:layout_marginTop="5dp"
             android:minHeight="150dp"
             android:orientation="vertical"
-            android:weightSum="5"
-            android:layout_marginTop="5dp">
+            android:weightSum="5">
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
@@ -353,40 +357,55 @@
         </LinearLayout>
 
 
-
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:id = "@+id/layout11"
-            android:layout_below="@+id/layout10"
             android:text="Content: "
             android:textColor="#000000"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+            android:layout_below="@+id/layout10"
             android:layout_marginLeft="25dp"
             android:layout_marginTop="25dp"/>
-
-
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id = "@+id/editTextContent"
+            android:hint="Fill"
             android:layout_below="@+id/layout11"
             android:layout_marginLeft="25dp"
             android:layout_marginRight="25dp"/>
 
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id = "@+id/layout12"
+            android:text="Facebook Link: "
+            android:textColor="#000000"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+            android:layout_below="@+id/editTextContent"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="25dp"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id = "@+id/editTextFBLink"
+            android:hint="Fill if there is a link available"
+            android:layout_below="@+id/layout12"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp"/>
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id = "@+id/buttonSubmit"
-            android:layout_below="@+id/editTextContent"
+            android:layout_below="@+id/editTextFBLink"
             android:text="Submit"
             android:layout_centerHorizontal="true"
             android:layout_margin="25dp"/>
-
-
 
         </RelativeLayout>
 
