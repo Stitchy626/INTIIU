@@ -72,6 +72,7 @@
             android:paddingStart="10dp"
             android:paddingEnd="10dp"
             android:layout_centerHorizontal="true"
-            android:background="@drawable/ers_reason"/>
+            android:background="@drawable/ers_reason" />
     </RelativeLayout>
+
 </RelativeLayout>

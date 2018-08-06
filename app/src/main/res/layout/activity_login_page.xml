@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".auth">
+    tools:context=".LoginPage">
 
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
@@ -181,7 +181,14 @@
                 android:text="Or Login With"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="10dp"
-                android:textSize="14dp"/>
+                android:textSize="14dp"
+                android:visibility="gone"/>
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text = "Toast"
+                android:id = "@+id/buttonToast"
+                android:layout_below="@+id/textView1"/>
 
             <com.google.android.gms.common.SignInButton
                 android:id="@+id/buttonSignInGoogle"
@@ -189,7 +196,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
                 android:layout_marginTop="10dp"
-                android:layout_below="@+id/textView1" />
+                android:layout_below="@+id/buttonToast" />
 
             <Button
                 android:id="@+id/buttonSignOut"

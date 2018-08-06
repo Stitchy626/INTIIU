@@ -15,11 +15,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/buttonSelection"
-        android:orientation="horizontal"
-        android:weightSum="2"
         android:layout_margin="8dp"
-        android:layout_below="@+id/myToolbar">
-
+        android:layout_below="@+id/myToolbar"
+        android:orientation="horizontal"
+        android:weightSum="2">
         <Button
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -30,7 +29,6 @@
             android:gravity="center"
             android:layout_weight="1"
             android:layout_margin="3dp"/>
-
         <Button
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -41,7 +39,6 @@
             android:gravity="center"
             android:layout_weight="1"
             android:layout_margin="3dp"/>
-
     </LinearLayout>
 
     <ListView
@@ -49,9 +46,7 @@
         android:layout_height="wrap_content"
         android:id = "@+id/listViewAnn"
         android:layout_below="@id/buttonSelection"
-        android:dividerHeight="10sp">
-
-    </ListView>
-
+        android:dividerHeight="10sp"
+        android:divider="@android:color/transparent"/>
 
 </RelativeLayout>

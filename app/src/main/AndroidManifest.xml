@@ -13,19 +13,26 @@
         android:roundIcon="@mipmap/ic_launcher_intiicon_finale"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
         <activity
             android:name=".Splash"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".MainMenu"
-            android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".MainMenu"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+
+        <activity android:name=".HomePageActivity"
+            android:label="New Main Menu"/>
+
         <activity
             android:name=".INTIAnnPage"
             android:label="INTI Announcement"
@@ -34,26 +41,43 @@
             android:name=".EventAnnPage"
             android:label="Event Announcement"
             android:theme="@style/AppTheme.NoActionBar" />
+
         <activity
             android:name=".EventAnnRequestPage"
             android:label="Event Announcement Request"
             android:windowSoftInputMode="stateAlwaysHidden" />
+
         <activity
             android:name=".EventAnnItemPage"
             android:label="Event Announcement Item" />
-        <activity android:name=".LNFItemPage" />
-        <activity android:name=".auth" />
-        <activity android:name=".Profile" />
-        <activity android:name=".INTIAnnItemPage" />
-        <activity android:name=".StudentBooking" />
-        <activity android:name=".LNFPage" />
+
+        <activity
+            android:name=".LNFItemPage" />
+
+        <activity
+            android:name=".INTIAnnItemPage" />
+
+        <activity
+            android:name=".StudentBooking" />
+
+        <activity
+            android:name=".LNFPage"
+            android:label="Lost &amp; Found"/>
+
         <activity
             android:name=".EventAnnRequestStatusPage"
             android:label="Event Request Status" />
-        <activity android:name=".AcademicCalender" />
-        <activity android:name=".BusSchedule" />
-        <activity android:name=".LoginPage" />
-        <activity android:name=".LogoutPage"></activity>
+
+        <activity
+            android:name=".AcademicCalender" />
+
+        <activity
+            android:name=".BusSchedule" />
+
+        <activity
+            android:name=".LoginPage"
+            android:label="Log in"/>
+
     </application>
 
 </manifest>

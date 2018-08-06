@@ -190,7 +190,7 @@
                         android:id="@+id/imgView_Event"
                         android:layout_width="wrap_content"
                         android:layout_height="130dp"
-                        app:srcCompat="@drawable/ic_event" />
+                        app:srcCompat="@drawable/ic_event1" />
 
 
                     <TextView

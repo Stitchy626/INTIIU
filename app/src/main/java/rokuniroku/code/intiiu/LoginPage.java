@@ -33,7 +33,7 @@ public class LoginPage extends BaseActivity {
 
     private GoogleSignInClient mGoogleSignInClient;
 
-    private Button buttonSignInClub, buttonSignOut;
+    private Button buttonSignInClub, buttonSignOut, buttonToast;
     private SignInButton buttonSignInGoogle;
     private EditText editTextUsername,editTextPassword;
 
@@ -49,6 +49,7 @@ public class LoginPage extends BaseActivity {
         editTextUsername=(EditText) findViewById(R.id.editTextUsername);
         editTextPassword=(EditText)findViewById(R.id.editTextPassword);
         buttonSignOut = (Button) findViewById(R.id.buttonSignOut);
+        buttonToast = (Button) findViewById(R.id.buttonToast);
 
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
@@ -75,6 +76,13 @@ public class LoginPage extends BaseActivity {
             @Override
             public void onClick(View view) {
                 LoginClub();
+            }
+        });
+
+        buttonToast.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(LoginPage.this, mAuth.getCurrentUser().getDisplayName().toString(), Toast.LENGTH_SHORT).show();
             }
         });
     }
