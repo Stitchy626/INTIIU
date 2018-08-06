@@ -48,6 +48,10 @@
         <activity android:name=".INTIAnnItemPage" />
         <activity android:name=".StudentBooking" />
         <activity android:name=".LNFPage" />
+        <activity android:name=".EventAnnRequestStatusPage"
+            android:label="Event Request Status"/>
+        <activity android:name=".AcademicCalender"/>
+        <activity android:name=".BusSchedule"/>
 
     </application>
 
