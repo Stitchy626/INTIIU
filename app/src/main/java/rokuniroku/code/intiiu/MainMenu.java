@@ -99,7 +99,7 @@ public class MainMenu extends AppCompatActivity
                         dialogInterface.dismiss();
                         finish();
                     }
-                }).create();
+                }).setCancelable( false ).create();
         alertDialog.show();
 
     }
