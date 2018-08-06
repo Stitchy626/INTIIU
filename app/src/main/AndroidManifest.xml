@@ -46,6 +46,8 @@
         <activity android:name=".LNFPage" />
         <activity android:name=".EventAnnRequestStatusPage"
             android:label="Event Request Status"></activity>
+        <activity android:name=".AcademicCalender"></activity>
+        <activity android:name=".BusSchedule"></activity>
     </application>
 
 </manifest>
