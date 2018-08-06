@@ -107,5 +107,6 @@
         <item>Miscellaneous</item>
         <item>Equipments</item>
     </string-array>
+    <string name="title_activity_home_page">HomePageActivity</string>
 
 </resources>
