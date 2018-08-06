@@ -1,8 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Splash">
+    tools:context=".Splash"
+    android:background="@drawable/bg">
 
-</android.support.constraint.ConstraintLayout>
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:contentDescription="@string/inti_logo"
+        android:id="@+id/splashImage"
+        android:src="@drawable/inti_logo_finale"/>
+<!--
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/splashImage"
+        android:id="@+id/splashText"
+        android:layout_marginTop="15dp"
+        android:textSize="20sp"
+        android:layout_centerHorizontal="true"
+        android:text="Education That Empowers"
+        android:textColor="@color/colorPrimary"/>
+        -->
+
+</RelativeLayout>
