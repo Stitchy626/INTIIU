@@ -1,6 +1,7 @@
 package rokuniroku.code.intiiu;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.text.TextUtils;
 
@@ -11,6 +12,7 @@ public class UpdateHelper {
     public static String KEY_UPDATE_ENABLE = "is_Update";
     public static String KEY_UPDATE_VERSION= "version";
     public static String KEY_UPDATE_URL= "update_url";
+    public Thread timer = Splash.timer1;
 
     public interface OnUpdateCheckListener{
         void onUpdateCheckListener(String urlApp);
@@ -39,6 +41,25 @@ public class UpdateHelper {
             if(!TextUtils.equals(currentVersion, appVersion) && onUpdateCheckListener !=null)
             {
                 onUpdateCheckListener.onUpdateCheckListener(updateURL);
+            } else
+            {
+                timer = new Thread() {
+                    @Override
+                    public void run() {
+                        try {
+                            sleep( 3000 );
+                            Intent intent = new Intent( context, MainMenu.class );
+                            context.startActivity( intent );
+                            super.run();
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                };
+
+
+                timer.start();
+
             }
         }
 

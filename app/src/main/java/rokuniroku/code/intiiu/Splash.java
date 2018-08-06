@@ -11,11 +11,15 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 
+import java.util.Timer;
+
 /*
 Reference = https://www.youtube.com/watch?v=g-oAWrAvOMo&t=23s
  */
 
 public class Splash extends AppCompatActivity implements UpdateHelper.OnUpdateCheckListener {
+
+    public static Thread timer1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,27 +30,33 @@ public class Splash extends AppCompatActivity implements UpdateHelper.OnUpdateCh
         Animation animation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.splash_fade);
         imageView.startAnimation(animation);
 
-        //Update Check
-        UpdateHelper.with(this)
-                .onUpdateCheck(this)
-                .check();
+            //Update Check
+            UpdateHelper.with( this )
+                    .onUpdateCheck( this )
+                    .check();
 
-        Thread timer = new Thread(){
-            @Override
-            public void run() {
-                try {
-                    sleep(2000);
-                    Intent intent = new Intent(getApplicationContext(), MainMenu.class);
-                    startActivity(intent);
-                    finish();
-                    super.run();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
+            /*
+
+             timer1 = new Thread() {
+                @Override
+                public void run() {
+                    try {
+                        sleep( 3000 );
+                        Intent intent = new Intent( getApplicationContext(), MainMenu.class );
+                        startActivity( intent );
+                        finish();
+                        super.run();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
                 }
-            }
-        };
+            };
 
-        timer.start();
+
+            timer1.start();
+
+*/
+
     }
 
     //Update Class
