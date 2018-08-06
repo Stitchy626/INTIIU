@@ -35,7 +35,7 @@ public class Splash extends AppCompatActivity implements UpdateHelper.OnUpdateCh
             @Override
             public void run() {
                 try {
-                    sleep(2000);
+                    sleep(3000);
                     Intent intent = new Intent(getApplicationContext(), MainMenu.class);
                     startActivity(intent);
                     finish();

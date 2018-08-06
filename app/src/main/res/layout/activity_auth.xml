@@ -24,7 +24,7 @@
                 android:id="@+id/linearlayout1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/Primary"
+                android:background="@color/colorPrimary"
                 android:gravity="center_horizontal"
                 android:orientation="vertical">
 
@@ -69,7 +69,7 @@
                     android:id="@+id/imageView_userIcon"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:background="@color/Primary"
+                    android:background="@color/colorPrimary"
                     android:src="@drawable/student"/>
 
                 <EditText
@@ -79,7 +79,7 @@
                     android:layout_alignBottom="@+id/imageView_userIcon"
                     android:layout_alignParentTop="true"
                     android:layout_toRightOf="@+id/imageView_userIcon"
-                    android:background="@color/editText"
+                    android:background="@color/colorPrimary"
                     android:hint="Email Address"
                     android:inputType="textEmailAddress"
                     android:paddingLeft="20dp"
@@ -101,7 +101,7 @@
                     android:id="@+id/imageView_passwordIcon"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:background="@color/Primary"
+                    android:background="@color/colorPrimary"
                     android:src="@drawable/password"
                     android:padding="5dp"/>
 
@@ -112,7 +112,7 @@
                     android:layout_alignBottom="@+id/imageView_passwordIcon"
                     android:layout_alignParentTop="true"
                     android:layout_toRightOf="@+id/imageView_passwordIcon"
-                    android:background="@color/editText"
+                    android:background="@color/colorPrimary"
                     android:hint="Password"
                     android:inputType="textPassword"
                     android:paddingLeft="20dp"
@@ -135,17 +135,17 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:text="Remember Me!"
-                    android:textColor="@color/textColor" />
+                    android:textColor="@color/colorPrimary" />
 
                 <Button
                     android:id="@+id/reset_pass"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
-                    android:background="@color/transparent"
+                    android:background="@color/colorPrimary"
                     android:text="Forgot password?"
                     android:textAllCaps="false"
-                    android:textColor="@color/textColor"
+                    android:textColor="@color/colorPrimary"
                     android:textSize="13dp" />
             </RelativeLayout>
 
@@ -154,7 +154,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/relativeLayout3"
-                android:background="@color/Primary"
+                android:background="@color/colorPrimary"
                 android:layout_marginRight="30dp"
                 android:layout_marginLeft="30dp"
                 android:text="Sign in"
