@@ -7,9 +7,8 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.view.View;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -17,13 +16,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Button;
+import android.view.View;
 import android.widget.ImageView;
-import android.widget.Toast;
 import android.widget.ViewFlipper;
 
 public class MainMenu extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, UpdateHelper.OnUpdateCheckListener{
+        implements NavigationView.OnNavigationItemSelectedListener {
 
     ViewFlipper v_flipper;
 
@@ -33,7 +31,6 @@ public class MainMenu extends AppCompatActivity
         setContentView(R.layout.activity_main_menu);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -61,52 +58,11 @@ public class MainMenu extends AppCompatActivity
             flipperImage(image);
         }
 
-        startActivity(new Intent(MainMenu.this, LNFPage.class));
+        startActivity(new Intent(MainMenu.this, EventAnnRequestStatusPage.class));
 
 
-        //Update Check
-        UpdateHelper.with(this)
-                .onUpdateCheck(this)
-                .check();
-    }
-
-
-
-    //Update Class
-    @Override
-    public void onUpdateCheckListener(final String urlApp) {
-
-        AlertDialog alertDialog = new AlertDialog.Builder(this)
-                .setTitle("A New Version of this App is avaiable")
-                .setMessage("Please Update to the lastest version")
-                .setPositiveButton("UPDATE", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        //open google playstore to the app
-                        try{
-                            //if user has google playstore in their phone
-                            startActivity( new Intent( Intent.ACTION_VIEW,
-                                    Uri.parse("market://details?id=" + getPackageName())) );
-                        } catch (ActivityNotFoundException e){
-                            //if user dont have playstore in their phone, open website playstore
-                            startActivity( new Intent( Intent.ACTION_VIEW,
-                                    Uri.parse("http://play.google.com/store/apps/details?id=" + getPackageName())) );
-                        }
-
-                    }
-                }).setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-
-                        dialogInterface.dismiss();
-                        finish();
-                    }
-                }).create();
-        alertDialog.show();
 
     }
-
-
 
     public void flipperImage(int images){
         ImageView imageview = new ImageView(this);
@@ -177,7 +133,6 @@ public class MainMenu extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-
 
     public void dog(){
         String amber = "I am a dog";

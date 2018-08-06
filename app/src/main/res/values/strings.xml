@@ -6,6 +6,7 @@
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
+    <string name="inti_logo">INTI Logo</string>
 
     <string-array name="normal_booking_start_time_one_hour">
         <item>10 am</item>

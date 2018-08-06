@@ -9,16 +9,25 @@
         android:layout_height="match_parent">
 
 
-        <ImageView
+
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="240dp"
-            android:id = "@+id/imageViewBanner"
-            android:background="@drawable/common_google_signin_btn_icon_dark_focused"/>
+            android:layout_height="wrap_content"
+            android:id = "@+id/layoutBanner"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/default_banner">
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id = "@+id/imageViewBanner"
+                android:scaleType="fitCenter"/>
+        </RelativeLayout>
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@+id/imageViewBanner">
+            android:layout_below="@+id/layoutBanner">
 
             <TextView
                 android:layout_width="match_parent"
@@ -39,11 +48,23 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:id = "@+id/textViewDateTime"
+                android:text = "Date Time - >"
+                android:textSize="15dp"
+                android:textColor="#000000"
+                android:layout_below="@+id/textViewCat"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:visibility = "gone"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:id = "@+id/textViewDate"
                 android:text="Date - > "
                 android:textSize="15dp"
                 android:textColor="#000000"
-                android:layout_below="@+id/textViewCat"
+                android:layout_below="@+id/textViewDateTime"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="10dp"/>
 
@@ -73,7 +94,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:id = "@+id/textViewContent"
-                android:text="Content GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG"
+                android:text="Content "
                 android:textSize="18dp"
                 android:textColor="#000000"
                 android:layout_below="@+id/textViewVenue"

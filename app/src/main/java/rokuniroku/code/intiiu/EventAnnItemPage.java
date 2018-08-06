@@ -14,7 +14,8 @@ import com.google.firebase.storage.StorageReference;
 public class EventAnnItemPage extends AppCompatActivity {
 
     private ImageView imageViewBanner;
-    private TextView textViewTitle, textViewClub, textViewDateTime,textViewDate, textViewTime, textViewVenue, textViewContent, facebookUrl;
+    private TextView textViewBanner, textViewTitle, textViewClub, textViewDateTime,textViewDate, textViewTime,
+            textViewVenue, textViewContent, facebookUrl;
 
     private FirebaseStorage dbStorage;
     private StorageReference rootStorage;
@@ -29,6 +30,7 @@ public class EventAnnItemPage extends AppCompatActivity {
         rootStorage = dbStorage.getInstance().getReference();
 
         imageViewBanner = (ImageView) findViewById(R.id.imageViewBanner);
+        textViewBanner = (TextView) findViewById(R.id.textViewBanner);
         textViewTitle = (TextView) findViewById(R.id.textViewTitle);
         textViewClub = (TextView) findViewById(R.id.textViewClub);
         textViewDateTime = (TextView) findViewById(R.id.textViewDateTime);
@@ -70,12 +72,18 @@ public class EventAnnItemPage extends AppCompatActivity {
         }
 
         //get Image
-        rootStorage = dbStorage.getInstance().getReference().child("Announcement").child("EventAnn").child(annObj.getBanner());
+        if(annObj.getBanner().equals("default") == false){
+            rootStorage = dbStorage.getInstance().getReference().child("Announcement").child("EventAnn").child(annObj.getBanner());
 
-        Glide.with(EventAnnItemPage.this)
-                .using(new FirebaseImageLoader())
-                .load(rootStorage)
-                .into(imageViewBanner);
+            Glide.with(EventAnnItemPage.this)
+                    .using(new FirebaseImageLoader())
+                    .load(rootStorage)
+                    .into(imageViewBanner);
+
+            textViewBanner.setVisibility(View.GONE);
+        }else {
+            textViewBanner.setVisibility(View.VISIBLE);
+        }
 
     }
 }
