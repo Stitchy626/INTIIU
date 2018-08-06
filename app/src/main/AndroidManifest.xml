@@ -17,13 +17,12 @@
             android:name=".MainMenu"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
-        <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
-
         <activity
             android:name=".INTIAnnPage"
             android:label="INTI Announcement"
@@ -45,7 +44,8 @@
         <activity android:name=".INTIAnnItemPage" />
         <activity android:name=".StudentBooking" />
         <activity android:name=".LNFPage" />
-
+        <activity android:name=".EventAnnRequestStatusPage"
+            android:label="Event Request Status"></activity>
     </application>
 
 </manifest>

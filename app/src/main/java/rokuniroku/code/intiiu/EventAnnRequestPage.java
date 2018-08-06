@@ -504,7 +504,7 @@ public class EventAnnRequestPage extends AppCompatActivity implements DatePicker
                 EventAnn ann = new EventAnn(editTextTitle.getText().toString(), editTextVenue.getText().toString(), "Isaac Club",
                         dateFormat.format(today), timeFormat.format(today), editTextContent.getText().toString(),
                         FB, banner, background, textViewStartDate.getText().toString(), textViewEndDate.getText().toString(),
-                        textViewStartTime.getText().toString(), textViewEndTime.getText().toString(), "pending");// status using approve for testing purposes
+                        textViewStartTime.getText().toString(), textViewEndTime.getText().toString(), "empty","approved");// status using approve for testing purposes
 
                 rootDatabase.child(id).setValue(ann);
 
