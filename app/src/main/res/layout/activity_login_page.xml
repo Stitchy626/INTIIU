@@ -69,11 +69,12 @@
                     android:id="@+id/imageView_userIcon"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:background="@color/colorPrimary"
-                    android:src="@drawable/student"/>
+                    android:background="@color/colorWhite"
+                    android:src="@drawable/student"
+                    android:layout_marginRight="10dp"/>
 
                 <EditText
-                    android:id="@+id/username"
+                    android:id="@+id/editTextUsername"
                     android:layout_width="match_parent"
                     android:layout_height="39dp"
                     android:layout_alignBottom="@+id/imageView_userIcon"
@@ -101,12 +102,13 @@
                     android:id="@+id/imageView_passwordIcon"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:background="@color/colorPrimary"
+                    android:background="@color/colorWhite"
                     android:src="@drawable/password"
-                    android:padding="5dp"/>
+                    android:padding="5dp"
+                    android:layout_marginRight="10dp"/>
 
                 <EditText
-                    android:id="@+id/password"
+                    android:id="@+id/editTextPassword"
                     android:layout_width="match_parent"
                     android:layout_height="39dp"
                     android:layout_alignBottom="@+id/imageView_passwordIcon"
@@ -135,22 +137,22 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:text="Remember Me!"
-                    android:textColor="@color/colorPrimary" />
+                    android:textColor="@color/colorBlack" />
 
                 <Button
                     android:id="@+id/reset_pass"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="30dp"
                     android:layout_alignParentRight="true"
-                    android:background="@color/colorPrimary"
+                    android:background="@android:color/transparent"
                     android:text="Forgot password?"
                     android:textAllCaps="false"
-                    android:textColor="@color/colorPrimary"
+                    android:textColor="@color/colorBlack"
                     android:textSize="13dp" />
             </RelativeLayout>
 
             <Button
-                android:id="@+id/btn_signin"
+                android:id="@+id/buttonSignInClub"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/relativeLayout3"
@@ -159,12 +161,12 @@
                 android:layout_marginLeft="30dp"
                 android:text="Sign in"
                 android:fontFamily="sans-serif-medium"/>
-            
+
             <ImageView
                 android:id="@+id/imageView2"
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
-                android:layout_below="@id/btn_signin"
+                android:layout_below="@id/buttonSignInClub"
                 android:layerType="software"
                 android:src="@drawable/dash"
                 android:layout_marginLeft="30dp"
@@ -182,16 +184,25 @@
                 android:textSize="14dp"/>
 
             <com.google.android.gms.common.SignInButton
-                android:id="@+id/sign_in_button"
+                android:id="@+id/buttonSignInGoogle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
                 android:layout_marginTop="10dp"
-                android:layout_below="@+id/textView1"/>
-            
+                android:layout_below="@+id/textView1" />
+
+            <Button
+                android:id="@+id/buttonSignOut"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Sign Out"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="10dp"
+                android:layout_below="@+id/buttonSignInGoogle"  />
+
         </RelativeLayout>
 
     </android.support.v7.widget.CardView>
-    
+
 
 </RelativeLayout>
