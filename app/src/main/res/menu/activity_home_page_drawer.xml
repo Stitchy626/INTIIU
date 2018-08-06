@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_AcademicCalendar"
+            android:icon="@drawable/ic_academic_calendar1"
+            android:title="Academic Calendar" />
+        <item
+            android:id="@+id/nav_Announcement"
+            android:icon="@drawable/ic_announcement"
+            android:title="Announcement" />
+        <item
+            android:id="@+id/nav_BusSchedule"
+            android:icon="@drawable/ic_bus_schedule"
+            android:title="Bus Schedule" />
+        <item
+            android:id="@+id/nav_lostnFound"
+            android:icon="@drawable/ic_lostnfound"
+            android:title="Lost and Found" />
+        <item
+            android:id="@+id/nav_EventAnn"
+            android:icon="@drawable/ic_event1"
+            android:title="Event Announcement" />
+
+    </group>
+
+    <item android:title="   ">
+        <menu>
+            <item
+                android:id="@+id/nav_signout"
+                android:icon="@drawable/ic_signout"
+                android:title="Sign Out" />
+        </menu>
+    </item >
+</menu>
