@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.google.android.gms.auth.api.Auth;
@@ -41,7 +42,7 @@ public class auth extends AppCompatActivity {
     public GoogleApiClient googleApiClient;
 
     // Sing out button.
-    Button SignOutButton;
+    Button SignOutButton,SignInButton;
 
     // Google Sign In button .
     com.google.android.gms.common.SignInButton signInButton;
@@ -49,14 +50,18 @@ public class auth extends AppCompatActivity {
     // TextView to Show Login User Email and Name.
     TextView LoginUserName, LoginUserEmail;
 
+    EditText e1,e2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_auth);
 
+        e1=(EditText) findViewById(R.id.username);
 
-        signInButton = (SignInButton) findViewById(R.id.sign_in_button);
+        e2=(EditText)findViewById(R.id.password);
+
+        SignInButton = (Button) findViewById(R.id.btn_signin);
 
         SignOutButton= (Button) findViewById(R.id.sign_out);
 
@@ -122,11 +127,6 @@ public class auth extends AppCompatActivity {
 
         startActivityForResult(AuthIntent, RequestSignInCode);
     }
-
-
-
-
-
 
 
     @Override
@@ -225,5 +225,31 @@ public class auth extends AppCompatActivity {
 
 // After logout setting up login button visibility to visible.
         signInButton.setVisibility(View.VISIBLE);
+    }
+
+    public void loginUser(View v){
+        if(e1.getText().toString().equals("")&& e2.getText().toString().equals(""))
+        {
+            Toast.makeText(auth.this,"Blank fields are not allowed",Toast.LENGTH_SHORT).show();
+        }
+        else
+        {
+            firebaseAuth.signInWithEmailAndPassword(e1.getText().toString(),e2.getText().toString())
+                    .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if(task.isSuccessful())
+                            {
+                                Toast.makeText(auth.this,"Successful login",Toast.LENGTH_SHORT).show();
+                                finish();
+                                Intent i = new Intent(auth.this,MainMenu.class);
+                                startActivity(i);
+                            }
+                            else{
+                                Toast.makeText(auth.this,"Login Unsuccessful,Please try again.",Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
+        }
     }
 }
