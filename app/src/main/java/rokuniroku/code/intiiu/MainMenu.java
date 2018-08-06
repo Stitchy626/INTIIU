@@ -21,7 +21,7 @@ import android.widget.ImageView;
 import android.widget.ViewFlipper;
 
 public class MainMenu extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, UpdateHelper.OnUpdateCheckListener{
+        implements NavigationView.OnNavigationItemSelectedListener {
 
     ViewFlipper v_flipper;
 
@@ -61,49 +61,8 @@ public class MainMenu extends AppCompatActivity
         startActivity(new Intent(MainMenu.this, EventAnnRequestStatusPage.class));
 
 
-        //Update Check
-        UpdateHelper.with(this)
-                .onUpdateCheck(this)
-                .check();
-    }
-
-
-
-    //Update Class
-    @Override
-    public void onUpdateCheckListener(final String urlApp) {
-
-        AlertDialog alertDialog = new AlertDialog.Builder(this)
-                .setTitle("A New Version of this App is avaiable")
-                .setMessage("Please Update to the lastest version")
-                .setPositiveButton("UPDATE", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        //open google playstore to the app
-                        try{
-                            //if user has google playstore in their phone
-                            startActivity( new Intent( Intent.ACTION_VIEW,
-                                    Uri.parse("market://details?id=" + getPackageName())) );
-                        } catch (ActivityNotFoundException e){
-                            //if user dont have playstore in their phone, open website playstore
-                            startActivity( new Intent( Intent.ACTION_VIEW,
-                                    Uri.parse("http://play.google.com/store/apps/details?id=" + getPackageName())) );
-                        }
-
-                    }
-                }).setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-
-                        dialogInterface.dismiss();
-                        finish();
-                    }
-                }).setCancelable( false ).create();
-        alertDialog.show();
 
     }
-
-
 
     public void flipperImage(int images){
         ImageView imageview = new ImageView(this);
