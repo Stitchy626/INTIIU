@@ -58,7 +58,7 @@ public class MainMenu extends AppCompatActivity
             flipperImage(image);
         }
 
-        startActivity(new Intent(MainMenu.this, auth.class));
+        startActivity(new Intent(MainMenu.this, LoginPage.class));
 
 
 

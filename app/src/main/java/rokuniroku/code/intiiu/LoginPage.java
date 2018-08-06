@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -32,8 +33,9 @@ public class LoginPage extends BaseActivity {
 
     private GoogleSignInClient mGoogleSignInClient;
 
+    private Button buttonSignInClub, buttonSignOut;
     private SignInButton buttonSignInGoogle;
-    private Button buttonSignOut;
+    private EditText editTextUsername,editTextPassword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +44,10 @@ public class LoginPage extends BaseActivity {
 
         mAuth = FirebaseAuth.getInstance();
 
-        buttonSignInGoogle = (SignInButton) findViewById(R.id.buttonSignInGoogle);
+        buttonSignInClub = (Button) findViewById(R.id.buttonSignInClub);
+        buttonSignInGoogle = (SignInButton)findViewById(R.id.buttonSignInGoogle);
+        editTextUsername=(EditText) findViewById(R.id.editTextUsername);
+        editTextPassword=(EditText)findViewById(R.id.editTextPassword);
         buttonSignOut = (Button) findViewById(R.id.buttonSignOut);
 
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -50,19 +55,26 @@ public class LoginPage extends BaseActivity {
                 .requestEmail()
                 .build();
 
-        mGoogleSignInClient = GoogleSignIn.getClient(LoginPage.this, gso);
+        mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
 
         buttonSignInGoogle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                signIn();
+                UserSignIn();
             }
         });
 
         buttonSignOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                signOut();
+                UserSignOut();
+            }
+        });
+
+        buttonSignInClub.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                LoginClub();
             }
         });
     }
@@ -118,13 +130,15 @@ public class LoginPage extends BaseActivity {
                             email = email.substring(startZ, email.length());
 
                             if (email.equals(emailValidation)) {
-                                //startActivity(new Intent(LoginPage.this, MainMenu.class));
+                                startActivity(new Intent(LoginPage.this, EventAnnPage.class));
                                 Toast.makeText(LoginPage.this, "Login Success", Toast.LENGTH_LONG).show();
 
                                 //startActivity(new Intent(LoginPage.this, LogoutPage.class));
+                            }else{
+                                UserSignOut();
                             }
                         }else {
-                                signOut();
+                                UserSignOut();
                         }
 
                         // [START_EXCLUDE]
@@ -134,12 +148,12 @@ public class LoginPage extends BaseActivity {
                 });
     }
 
-    private void signIn() {
+    private void UserSignIn() {
         Intent signInIntent = mGoogleSignInClient.getSignInIntent();
         startActivityForResult(signInIntent, RC_SIGN_IN);
     }
 
-    private void signOut() {
+    private void UserSignOut() {
         // Firebase sign out
         mAuth.signOut();
 
@@ -151,6 +165,33 @@ public class LoginPage extends BaseActivity {
                         Toast.makeText(LoginPage.this, "Logout", Toast.LENGTH_LONG).show();
                     }
                 });
+    }
+
+    private void LoginClub(){
+        if(editTextUsername.getText().toString().equals("")&& editTextPassword.getText().toString().equals(""))
+        {
+            Toast.makeText(LoginPage.this,"Blank fields are not allowed",Toast.LENGTH_SHORT).show();
+        }
+        else
+        {
+            mAuth.signInWithEmailAndPassword(editTextUsername.getText().toString(),editTextPassword.getText().toString())
+                    .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if(task.isSuccessful())
+                            {
+                                Toast.makeText(LoginPage.this,"Successful login",Toast.LENGTH_SHORT).show();
+                                Intent i = new Intent(LoginPage.this,EventAnnPage.class);
+                                startActivity(i);
+                                finish();
+                            }
+                            else
+                            {
+                                Toast.makeText(LoginPage.this,"Login Unsuccessful,Please try again.",Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
+        }
     }
 
 }
