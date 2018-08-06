@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:id = "@+id/layoutRow"
+        android:orientation="horizontal"
+        android:weightSum="7">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:id = "@+id/textViewDateUpload"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+            android:gravity="center"
+            android:layout_weight="2"
+            android:background="@drawable/ers_row"/>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="3"
+            android:background="@drawable/ers_row">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id = "@+id/textViewTitle"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                android:maxLines="1"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="5dp"/>
+        </RelativeLayout>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:id = "@+id/textViewStatus"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+            android:gravity="center"
+            android:layout_weight="2"
+            android:background="@drawable/ers_row"/>
+    </LinearLayout>
+    
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id = "@+id/textViewReason"
+        android:textColor="#000000"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+        android:layout_below="@+id/layoutRow"
+        android:layout_marginStart="25dp"
+        android:layout_marginEnd="25dp"
+        android:padding = "5dp"
+        android:background="@drawable/ers_reason_desc"
+        android:visibility="gone"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id = "@+id/layoutReason"
+        android:layout_below = "@+id/textViewReason"
+        android:visibility="gone">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text = "Reason"
+            android:textColor="#000000"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/ers_reason"/>
+    </RelativeLayout>
+</RelativeLayout>

@@ -10,20 +10,21 @@ public class EventAnn implements Serializable{
     private String dateUpload;
     private String timeUpload;
     private String content;
-    private String url;
-    private String banner;
+    private String url;//facebook link
+    private String banner;//unique entry key to locate the image in the storage
     private String bannerBackground;
     private String dateStart;
     private String dateEnd;
     private String timeStart;
     private String timeEnd;
+    private String reason;
     private String status;
 
     public EventAnn(){
 
     }
 
-    public EventAnn(String title, String venue, String club, String dateUpload, String timeUpload, String content, String url, String banner, String bannerBackground, String dateStart, String dateEnd, String timeStart, String timeEnd, String status) {
+    public EventAnn(String title, String venue, String club, String dateUpload, String timeUpload, String content, String url, String banner, String bannerBackground, String dateStart, String dateEnd, String timeStart, String timeEnd, String reason, String status) {
         this.title = title;
         this.venue = venue;
         this.club = club;
@@ -37,6 +38,7 @@ public class EventAnn implements Serializable{
         this.dateEnd = dateEnd;
         this.timeStart = timeStart;
         this.timeEnd = timeEnd;
+        this.reason = reason;
         this.status = status;
     }
 
@@ -90,6 +92,10 @@ public class EventAnn implements Serializable{
 
     public String getTimeEnd() {
         return timeEnd;
+    }
+
+    public String getReason() {
+        return reason;
     }
 
     public String getStatus() {

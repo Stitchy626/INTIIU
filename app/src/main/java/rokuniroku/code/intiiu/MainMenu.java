@@ -59,7 +59,7 @@ public class MainMenu extends AppCompatActivity
             flipperImage(image);
         }
 
-        startActivity(new Intent(MainMenu.this, LNFPage.class));
+        startActivity(new Intent(MainMenu.this, INTIAnnPage.class));
 
 
         //Update Check
@@ -99,7 +99,7 @@ public class MainMenu extends AppCompatActivity
                         dialogInterface.dismiss();
                         finish();
                     }
-                }).create();
+                }).setCancelable( false ).create();
         alertDialog.show();
 
     }

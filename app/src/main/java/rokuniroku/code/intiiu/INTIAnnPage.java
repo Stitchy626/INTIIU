@@ -41,6 +41,8 @@ public class INTIAnnPage extends AppCompatActivity {
 
     private ArrayList<INTIAnn> annList;
 
+    private SimpleDateFormat dateFormat, dateFormatGMT08;
+
     private Toolbar myToolbar;
 
     @Override
@@ -58,6 +60,10 @@ public class INTIAnnPage extends AppCompatActivity {
         listViewAnn = (ListView) findViewById(R.id.listViewAnn);
 
         annList = new ArrayList<>();
+
+        dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        dateFormatGMT08 = new SimpleDateFormat("dd/MM/yyyy");
+        dateFormatGMT08.setTimeZone(TimeZone.getTimeZone("GMT+08"));
 
         PopulateINTIAnn(textViewCategory.getText().toString());
 
@@ -212,16 +218,11 @@ public class INTIAnnPage extends AppCompatActivity {
 
         Calendar calendar = Calendar.getInstance();
 
-        final SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");//date format
-        SimpleDateFormat timeFormat = new SimpleDateFormat("h:mm a");//time format
+        final Date today = calendar.getTime();
 
-        dateFormat.setTimeZone(TimeZone.getTimeZone("GMT+08")); //set to the correct time zone
-
-        final String today = dateFormat.format(calendar.getTime());
-
-        if(category.equals("ALL")){
+        if (category.equals("ALL")) {
             query = rootDatabase;
-        }else
+        } else
             query = rootDatabase.orderByChild("category").equalTo(category);
 
 
@@ -234,11 +235,28 @@ public class INTIAnnPage extends AppCompatActivity {
 
                     INTIAnn announcement = snapshot.getValue(INTIAnn.class);
 
+                    ArrayList<Date> date = new ArrayList<>();
+
                     //Delete for expired announcement
-                    if (announcement.getCourtDate().equals(today))
-                        rootDatabase.child(snapshot.getKey()).removeValue();
-                    else
+                    /*if(announcement.getDeleteDate().equals(today))
+                        DeleteAnn(snapshot.getKey().toString());
+                    else{
                         annList.add(announcement);
+                    }*/
+
+                    try {
+                        date.add(dateFormat.parse(dateFormatGMT08.format(today)));
+                        date.add(dateFormat.parse(announcement.getDeleteDate()));
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
+                    if (date.get(0).equals(date.get(1)) || date.get(0).after(date.get(1))) {
+                        DeleteAnn(snapshot.getKey().toString());
+                    } else {
+                        annList.add(announcement);
+                    }
+
                 }
 
                 //Sort the announcement that latest should be on top
@@ -297,6 +315,11 @@ public class INTIAnnPage extends AppCompatActivity {
             }
         });
     }
+
+    private void DeleteAnn(String key) {
+
+        rootDatabase.child(key).removeValue();
+    }
 }
 
 /*private void PushINTIAnn() {
@@ -314,14 +337,13 @@ public class INTIAnnPage extends AppCompatActivity {
             Date today = calendar.getTime();
             String id = rootDatabase.push().getKey();
 
-
             calendar.add(Calendar.DAY_OF_YEAR, 1);
 
-            INTIAnn ann = new INTIAnn(id, "MPH", "COLAL", dateFormat.format(today), "13:52", "bubu", "This should be the content area", "dunno how leh", "28/06/2018 - 28/06/2018", "4:00 PM - 6:00 PM"); //putting getters in object class causes the app to crash if class field doesn't have private access
+            INTIAnn ann = new INTIAnn(id, "MPH", "COLAL", dateFormat.format(today), "13:52", dateFormat.format(today),
+                    "This should be the content area", "default",
+                    "28/06/2018","29/06/2018", "4:00 PM","6:00 PM");
 
             rootDatabase.child(id).setValue(ann);
-
-
         }
     }*/
 
