@@ -76,13 +76,14 @@
                 <EditText
                     android:id="@+id/editTextUsername"
                     android:layout_width="match_parent"
-                    android:layout_height="39dp"
+                    android:layout_height="wrap_content"
                     android:layout_alignBottom="@+id/imageView_userIcon"
                     android:layout_alignParentTop="true"
                     android:layout_toRightOf="@+id/imageView_userIcon"
                     android:background="@color/colorPrimary"
-                    android:hint="Email Address"
+                    android:hint="Enter Club Email Here"
                     android:inputType="textEmailAddress"
+                    android:textColorHint="@color/colorBlack"
                     android:paddingLeft="20dp"
                     android:textSize="20dp" />
 
@@ -115,7 +116,8 @@
                     android:layout_alignParentTop="true"
                     android:layout_toRightOf="@+id/imageView_passwordIcon"
                     android:background="@color/colorPrimary"
-                    android:hint="Password"
+                    android:hint="Club Password"
+                    android:textColorHint="@color/colorBlack"
                     android:inputType="textPassword"
                     android:paddingLeft="20dp"
                     android:textSize="20dp" />
@@ -159,13 +161,14 @@
                 android:background="@color/colorPrimary"
                 android:layout_marginRight="30dp"
                 android:layout_marginLeft="30dp"
+                android:layout_marginTop="15dp"
                 android:text="Sign in"
                 android:fontFamily="sans-serif-medium"/>
 
             <ImageView
                 android:id="@+id/imageView2"
                 android:layout_width="match_parent"
-                android:layout_height="2dp"
+                android:layout_height="3dp"
                 android:layout_below="@id/buttonSignInClub"
                 android:layerType="software"
                 android:src="@drawable/dash"
@@ -178,17 +181,29 @@
                 android:layout_below="@+id/imageView2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Or Login With"
+                android:text="Student Can Login Via Student Email"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="10dp"
-                android:textSize="14dp"/>
+                android:textSize="15dp"
+                android:textColor="@color/colorBlack"/>
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_below="@+id/textView1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Using Google Sign In"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="1dp"
+                android:textSize="15dp"
+                android:textColor="@color/colorBlack"/>
 
             <com.google.android.gms.common.SignInButton
                 android:id="@+id/buttonSignInGoogle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="30sp"
                 android:layout_below="@+id/textView1" />
 
         </RelativeLayout>

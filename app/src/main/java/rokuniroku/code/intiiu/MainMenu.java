@@ -60,8 +60,6 @@ public class MainMenu extends AppCompatActivity
 
         startActivity(new Intent(MainMenu.this, LoginPage.class));
 
-
-
     }
 
     public void flipperImage(int images){
