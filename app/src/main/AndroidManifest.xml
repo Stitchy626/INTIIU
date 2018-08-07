@@ -26,7 +26,6 @@
 
         <activity
             android:name=".HomePage"
-            android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar"/>
 
         <activity
@@ -48,8 +47,7 @@
             android:label="Event Announcement Item" />
 
         <activity
-            android:name=".LNFItemPage"
-            android:label="@string/lostnfound"/>
+            android:name=".LNFItemPage" />
 
         <activity
             android:name=".INTIAnnItemPage" />
@@ -59,24 +57,26 @@
 
         <activity
             android:name=".LNFPage"
-            android:label="@string/lostnfound"/>
+            android:label="Lost &amp; Found"/>
 
         <activity
             android:name=".EventAnnRequestStatusPage"
             android:label="Event Request Status" />
 
         <activity
-            android:name=".AcademicCalender"
-            android:label="@string/academic_calender"  />
+            android:name=".AcademicCalender" />
+        
+        <activity
+            android:name=".ResetPasswordActivity"/>
 
         <activity
-            android:name=".BusSchedule"
-            android:label="@string/bus_schedule"  />
+            android:name=".BusSchedule" />
 
         <activity
             android:name=".LoginPage"
             android:label="Log in"/>
 
     </application>
+
 
 </manifest>
