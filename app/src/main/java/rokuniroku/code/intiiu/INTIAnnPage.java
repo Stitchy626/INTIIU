@@ -6,7 +6,6 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -21,13 +20,10 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
-import org.w3c.dom.Text;
-
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
 import java.util.TimeZone;
 
 public class INTIAnnPage extends AppCompatActivity {
@@ -51,7 +47,7 @@ public class INTIAnnPage extends AppCompatActivity {
         setContentView(R.layout.activity_intiann_page);
 
         myToolbar = (Toolbar) findViewById(R.id.main_toolbar);
-        myToolbar.setOverflowIcon(ContextCompat.getDrawable(getApplicationContext(), R.drawable.filter_white));
+        myToolbar.setOverflowIcon(ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_intiann_filter));
         setSupportActionBar(myToolbar);
 
         rootDatabase = dbDatabase.getInstance().getReference().child("Announcement").child("INTIAnn");
@@ -66,6 +62,7 @@ public class INTIAnnPage extends AppCompatActivity {
         dateFormatGMT08.setTimeZone(TimeZone.getTimeZone("GMT+08"));
 
         PopulateINTIAnn(textViewCategory.getText().toString());
+        //PushINTIAnn();
 
         listViewAnn.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -82,7 +79,7 @@ public class INTIAnnPage extends AppCompatActivity {
 
     //Filter Menu
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.ann_menu, menu);
+        getMenuInflater().inflate(R.menu.menu_intiann, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -92,123 +89,213 @@ public class INTIAnnPage extends AppCompatActivity {
         switch (item.getItemId()) {
 
             case R.id.action_All:
+                if (item.isChecked())
+                    item.setChecked(false);
+                else
+                    item.setChecked(true);
                 textViewCategory.setText(item.getTitle());
                 PopulateINTIAnn(item.getTitle().toString());
                 return true;
 
-            case R.id.action_AccomodationOffice:
+            case R.id.action_ACO:
+                if (item.isChecked())
+                    item.setChecked(false);
+                else
+                    item.setChecked(true);
                 textViewCategory.setText(item.getTitle());
                 PopulateINTIAnn(item.getTitle().toString());
                 return true;
 
-            case R.id.action_AdmissionsCounselling:
+            case R.id.action_ADC:
+                if (item.isChecked())
+                    item.setChecked(false);
+                else
+                    item.setChecked(true);
                 textViewCategory.setText(item.getTitle());
                 PopulateINTIAnn(item.getTitle().toString());
                 return true;
 
             case R.id.action_AFM:
+                if (item.isChecked())
+                    item.setChecked(false);
+                else
+                    item.setChecked(true);
                 textViewCategory.setText(item.getTitle());
                 PopulateINTIAnn(item.getTitle().toString());
                 return true;
 
             case R.id.action_CAE:
+                if (item.isChecked())
+                    item.setChecked(false);
+                else
+                    item.setChecked(true);
                 textViewCategory.setText(item.getTitle());
                 PopulateINTIAnn(item.getTitle().toString());
                 return true;
 
             case R.id.action_COLAL:
+                if (item.isChecked())
+                    item.setChecked(false);
+                else
+                    item.setChecked(true);
                 textViewCategory.setText(item.getTitle());
                 PopulateINTIAnn(item.getTitle().toString());
                 return true;
 
-            case R.id.action_CounsellingCentre:
+            case R.id.action_CC:
+                if (item.isChecked())
+                    item.setChecked(false);
+                else
+                    item.setChecked(true);
                 textViewCategory.setText(item.getTitle());
                 PopulateINTIAnn(item.getTitle().toString());
                 return true;
 
             case R.id.action_CS:
+                if (item.isChecked())
+                    item.setChecked(false);
+                else
+                    item.setChecked(true);
                 textViewCategory.setText(item.getTitle());
                 PopulateINTIAnn(item.getTitle().toString());
                 return true;
 
             case R.id.action_EC:
+                if (item.isChecked())
+                    item.setChecked(false);
+                else
+                    item.setChecked(true);
                 textViewCategory.setText(item.getTitle());
                 PopulateINTIAnn(item.getTitle().toString());
                 return true;
 
             case R.id.action_FEQS:
+                if (item.isChecked())
+                    item.setChecked(false);
+                else
+                    item.setChecked(true);
                 textViewCategory.setText(item.getTitle());
                 PopulateINTIAnn(item.getTitle().toString());
                 return true;
 
             case R.id.action_FHLS:
+                if (item.isChecked())
+                    item.setChecked(false);
+                else
+                    item.setChecked(true);
                 textViewCategory.setText(item.getTitle());
                 PopulateINTIAnn(item.getTitle().toString());
                 return true;
 
             case R.id.action_FITS:
+                if (item.isChecked())
+                    item.setChecked(false);
+                else
+                    item.setChecked(true);
                 textViewCategory.setText(item.getTitle());
                 PopulateINTIAnn(item.getTitle().toString());
                 return true;
 
             case R.id.action_FOBCAL:
+                if (item.isChecked())
+                    item.setChecked(false);
+                else
+                    item.setChecked(true);
                 textViewCategory.setText(item.getTitle());
                 PopulateINTIAnn(item.getTitle().toString());
                 return true;
 
             case R.id.action_FinanceScholarship:
+                if (item.isChecked())
+                    item.setChecked(false);
+                else
+                    item.setChecked(true);
                 textViewCategory.setText(item.getTitle());
                 PopulateINTIAnn(item.getTitle().toString());
                 return true;
 
             case R.id.action_INSO:
+                if (item.isChecked())
+                    item.setChecked(false);
+                else
+                    item.setChecked(true);
                 textViewCategory.setText(item.getTitle());
                 PopulateINTIAnn(item.getTitle().toString());
                 return true;
 
-            case R.id.action_InternationalStudentSupport:
+            case R.id.action_ISS:
+                if (item.isChecked())
+                    item.setChecked(false);
+                else
+                    item.setChecked(true);
                 textViewCategory.setText(item.getTitle());
                 PopulateINTIAnn(item.getTitle().toString());
                 return true;
 
             case R.id.action_Library:
+                if (item.isChecked())
+                    item.setChecked(false);
+                else
+                    item.setChecked(true);
                 textViewCategory.setText(item.getTitle());
                 PopulateINTIAnn(item.getTitle().toString());
                 return true;
 
             case R.id.action_OAR:
+                if (item.isChecked())
+                    item.setChecked(false);
+                else
+                    item.setChecked(true);
                 textViewCategory.setText(item.getTitle());
                 PopulateINTIAnn(item.getTitle().toString());
                 return true;
 
             case R.id.action_ORDC:
+                if (item.isChecked())
+                    item.setChecked(false);
+                else
+                    item.setChecked(true);
                 textViewCategory.setText(item.getTitle());
                 PopulateINTIAnn(item.getTitle().toString());
                 return true;
 
             case R.id.action_RO:
+                if (item.isChecked())
+                    item.setChecked(false);
+                else
+                    item.setChecked(true);
                 textViewCategory.setText(item.getTitle());
                 PopulateINTIAnn(item.getTitle().toString());
                 return true;
 
             case R.id.action_SafetySecurity:
+                if (item.isChecked())
+                    item.setChecked(false);
+                else
+                    item.setChecked(true);
                 textViewCategory.setText(item.getTitle());
                 PopulateINTIAnn(item.getTitle().toString());
                 return true;
 
             case R.id.action_SAO:
+                if (item.isChecked())
+                    item.setChecked(false);
+                else
+                    item.setChecked(true);
                 textViewCategory.setText(item.getTitle());
                 PopulateINTIAnn(item.getTitle().toString());
                 return true;
 
             case R.id.action_TL:
+                if (item.isChecked())
+                    item.setChecked(false);
+                else
+                    item.setChecked(true);
                 textViewCategory.setText(item.getTitle());
                 PopulateINTIAnn(item.getTitle().toString());
                 return true;
 
             default:
-                // If we got here, the user's action was not recognized.
-                // Invoke the superclass to handle it.
                 return super.onOptionsItemSelected(item);
         }
     }
@@ -236,13 +323,6 @@ public class INTIAnnPage extends AppCompatActivity {
                     INTIAnn announcement = snapshot.getValue(INTIAnn.class);
 
                     ArrayList<Date> date = new ArrayList<>();
-
-                    //Delete for expired announcement
-                    /*if(announcement.getDeleteDate().equals(today))
-                        DeleteAnn(snapshot.getKey().toString());
-                    else{
-                        annList.add(announcement);
-                    }*/
 
                     try {
                         date.add(dateFormat.parse(dateFormatGMT08.format(today)));
@@ -320,9 +400,8 @@ public class INTIAnnPage extends AppCompatActivity {
 
         rootDatabase.child(key).removeValue();
     }
-}
 
-/*private void PushINTIAnn() {
+    private void PushINTIAnn() {
 
         Calendar calendar = Calendar.getInstance();
 
@@ -332,20 +411,24 @@ public class INTIAnnPage extends AppCompatActivity {
         dateFormat.setTimeZone(TimeZone.getTimeZone("GMT+08"));
         timeFormat.setTimeZone(TimeZone.getTimeZone("GMT+08"));
 
-        for (int x = 1; x <= 5; x++) {
+        for (int x = 1; x <= 2; x++) {
 
             Date today = calendar.getTime();
             String id = rootDatabase.push().getKey();
 
             calendar.add(Calendar.DAY_OF_YEAR, 1);
+            calendar.add(Calendar.MINUTE, 1);
 
-            INTIAnn ann = new INTIAnn(id, "MPH", "COLAL", dateFormat.format(today), "13:52", dateFormat.format(today),
-                    "This should be the content area", "default",
-                    "28/06/2018","29/06/2018", "4:00 PM","6:00 PM");
+            INTIAnn ann = new INTIAnn("The IT Geek", "MPH", "RO", dateFormat.format(today), timeFormat.format(today), "04/05/2017",
+                    "Testing for design", "default",
+                    "29/06/2019","29/06/2019", "16:00","18:00");
 
             rootDatabase.child(id).setValue(ann);
         }
-    }*/
+    }
+}
+
+/**/
 
 
 

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="85dp"
+        android:orientation = "horizontal"
+        android:weightSum="4"
+        android:layout_margin="8dp"
+        android:background="@drawable/design_intiann_listview_row">
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:id = "@+id/imageViewIcon"
+            android:layout_weight="1"
+            android:src="@mipmap/ic_intiann_faculty_proxy"
+            android:scaleType="fitCenter"/>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="3"
+            android:orientation="vertical"
+            android:weightSum="2">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id = "@+id/textViewTitle"
+                    android:text="Title"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    android:gravity="center"
+                    android:layout_centerInParent="true"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:background="@color/colorLightRed"
+                    android:layout_below="@+id/textViewTitle"
+                    android:layout_marginStart="25dp"
+                    android:layout_marginEnd="25dp"/>
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:id = "@+id/textViewDateUpload"
+                    android:layout_weight="1"
+                    android:text="Date"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                    android:gravity="center"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:id = "@+id/textViewTimeUpload"
+                    android:layout_weight="1"
+                    android:text="Time"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                    android:gravity="center"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>

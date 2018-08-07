@@ -52,8 +52,8 @@ import java.util.TimeZone;
 
 public class EventAnnRequestPage extends AppCompatActivity implements DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener{
 
-    private FirebaseAuth dbAuth;
-    private FirebaseUser user;
+    private FirebaseAuth mAuth;
+    private FirebaseUser mUser;
     private FirebaseDatabase dbDatabase;
     private FirebaseStorage dbStorage;
     private DatabaseReference rootDatabase;
@@ -86,7 +86,7 @@ public class EventAnnRequestPage extends AppCompatActivity implements DatePicker
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_event_ann_request_page);
 
-        user = dbAuth.getInstance().getCurrentUser();
+        mUser = mAuth.getInstance().getCurrentUser();
         rootDatabase = dbDatabase.getInstance().getReference().child("Announcement").child("EventAnn");
         rootStorage = dbStorage.getInstance().getReference().child("Announcement").child("EventAnn");
 
@@ -501,8 +501,8 @@ public class EventAnnRequestPage extends AppCompatActivity implements DatePicker
                 if(editTextFBLink.getText().toString().trim().isEmpty() == false)
                     FB = editTextFBLink.getText().toString();
 
-                EventAnn ann = new EventAnn(editTextTitle.getText().toString(), editTextVenue.getText().toString(), "Isaac Club",
-                        dateFormat.format(today), timeFormat.format(today), editTextContent.getText().toString(),
+                EventAnn ann = new EventAnn(editTextTitle.getText().toString(), editTextVenue.getText().toString(), mUser.getEmail().toString(),//getDisplayName() cant be use becos its not a real email
+                        dateFormat.format(today), timeFormat.format(today), textViewEndDate.getText().toString(), editTextContent.getText().toString(),
                         FB, banner, background, textViewStartDate.getText().toString(), textViewEndDate.getText().toString(),
                         textViewStartTime.getText().toString(), textViewEndTime.getText().toString(), "empty","approved");// status using approve for testing purposes
 

@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,7 +27,7 @@ public class EventAnnAdapter extends ArrayAdapter<EventAnn> {
     private StorageReference rootStorage;
 
     public EventAnnAdapter(Activity context, ArrayList<EventAnn> annList){
-        super(context, R.layout.listview_event_ann, annList);
+        super(context, R.layout.listview_eventann, annList);
         this.context = context;
         this.annList = annList;
     }
@@ -38,7 +37,7 @@ public class EventAnnAdapter extends ArrayAdapter<EventAnn> {
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         LayoutInflater inflater = context.getLayoutInflater();
 
-        View listViewItem = inflater.inflate(R.layout.listview_event_ann, null, true);
+        View listViewItem = inflater.inflate(R.layout.listview_eventann, null, true);
 
         TextView textViewTitle = (TextView) listViewItem.findViewById(R.id.textViewTitle);
         TextView textViewDateTime = (TextView) listViewItem.findViewById(R.id.textViewDateTime);

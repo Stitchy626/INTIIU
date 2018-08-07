@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item android:id="@+id/action_history"
+        android:title="STATUS"
+        android:icon="@drawable/ic_event_history"
+        app:showAsAction="always"/>
+
+    <item android:id="@+id/action_request"
+        android:title="REQUEST"
+        android:icon="@drawable/ic_event_request"
+        app:showAsAction="always"/>
+
+</menu>

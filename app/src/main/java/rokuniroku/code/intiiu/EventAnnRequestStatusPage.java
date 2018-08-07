@@ -9,6 +9,8 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -16,10 +18,16 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.TimeZone;
 
 public class EventAnnRequestStatusPage extends AppCompatActivity {
 
+    private FirebaseAuth mAuth;
+    private FirebaseUser mUser;
     private FirebaseDatabase dbDatabase;
     private DatabaseReference rootDatabase;
     private Query query;
@@ -28,17 +36,29 @@ public class EventAnnRequestStatusPage extends AppCompatActivity {
 
     private ArrayList<EventAnn> annList;
 
+    private SimpleDateFormat dateFormat, dateFormatGMT08;
+
+    private Calendar calendar;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_event_ann_request_status_page);
 
+        mUser = mAuth.getInstance().getCurrentUser();
         rootDatabase = dbDatabase.getInstance().getReference().child("Announcement").child("EventAnn");
-        query = rootDatabase.orderByChild("club").equalTo("Isaac Club");
+        query = rootDatabase.orderByChild("club").equalTo(mUser.getEmail().toString());
 
         listViewStatus = (ListView) findViewById(R.id.listViewStatus);
 
         annList = new ArrayList<EventAnn>();
+
+        dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        dateFormatGMT08 = new SimpleDateFormat("dd/MM/yyyy");
+        dateFormatGMT08.setTimeZone(TimeZone.getTimeZone("GMT+08"));
+
+        calendar = Calendar.getInstance();
 
 
         query.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -47,45 +67,64 @@ public class EventAnnRequestStatusPage extends AppCompatActivity {
 
                 annList.clear();
                 for(DataSnapshot snapshot: dataSnapshot.getChildren()){
-                    annList.add(snapshot.getValue(EventAnn.class));
+                    EventAnn announcement = snapshot.getValue(EventAnn.class);
 
-                    //Sort uploaded date and time
-                    for (int x = 0; x < annList.size(); x++) {
-                        for (int y = 0; y < annList.size() - x - 1; y++) {
-                            //YEAR
-                            if (annList.get(y).getDateUpload().substring(6, 10).compareTo(annList.get(y + 1).getDateUpload().substring(6, 10)) < 0) {
+                    //Delete rejected request after 2 weeks
+                    if(announcement.getStatus().equals("rejected")){
+
+                        ArrayList<Date> date = new ArrayList<>();
+
+                        try{
+                            date.add(dateFormat.parse(dateFormatGMT08.format(calendar.getTime())));
+                            date.add(dateFormat.parse(announcement.getDeleteDate()));
+                        }catch(Exception e){
+                            e.printStackTrace();
+                        }
+
+                        if(date.get(0).equals(date.get(1)) || date.get(0).after(date.get(1)))
+                            DeleteEvent(snapshot.getKey().toString());
+                        else
+                            annList.add(announcement);
+                    }else
+                        annList.add(announcement);
+                }
+
+                //Sort by uploaded date and time
+                for (int x = 0; x < annList.size(); x++) {
+                    for (int y = 0; y < annList.size() - x - 1; y++) {
+                        //YEAR
+                        if (annList.get(y).getDateUpload().substring(6, 10).compareTo(annList.get(y + 1).getDateUpload().substring(6, 10)) < 0) {
+                            EventAnn temp = annList.get(y);
+                            annList.set(y, annList.get(y + 1));
+                            annList.set(y + 1, temp);
+
+                        } else if (annList.get(y).getDateUpload().substring(6, 10).compareTo(annList.get(y + 1).getDateUpload().substring(6, 10)) == 0) {
+                            //MONTH
+                            if (annList.get(y).getDateUpload().substring(3, 5).compareTo(annList.get(y + 1).getDateUpload().substring(3, 5)) < 0) {
                                 EventAnn temp = annList.get(y);
                                 annList.set(y, annList.get(y + 1));
                                 annList.set(y + 1, temp);
 
-                            } else if (annList.get(y).getDateUpload().substring(6, 10).compareTo(annList.get(y + 1).getDateUpload().substring(6, 10)) == 0) {
-                                //MONTH
-                                if (annList.get(y).getDateUpload().substring(3, 5).compareTo(annList.get(y + 1).getDateUpload().substring(3, 5)) < 0) {
+                            } else if (annList.get(y).getDateUpload().substring(3, 5).compareTo(annList.get(y + 1).getDateUpload().substring(3, 5)) == 0) {
+                                //DAY
+                                if (annList.get(y).getDateUpload().substring(0, 2).compareTo(annList.get(y + 1).getDateUpload().substring(0, 2)) < 0) {
                                     EventAnn temp = annList.get(y);
                                     annList.set(y, annList.get(y + 1));
                                     annList.set(y + 1, temp);
 
-                                } else if (annList.get(y).getDateUpload().substring(3, 5).compareTo(annList.get(y + 1).getDateUpload().substring(3, 5)) == 0) {
-                                    //DAY
-                                    if (annList.get(y).getDateUpload().substring(0, 2).compareTo(annList.get(y + 1).getDateUpload().substring(0, 2)) < 0) {
+                                } else if (annList.get(y).getDateUpload().substring(0, 2).compareTo(annList.get(y + 1).getDateUpload().substring(0, 2)) == 0) {
+                                    //HOUR
+                                    if (annList.get(y).getTimeUpload().substring(0, 2).compareTo(annList.get(y + 1).getTimeUpload().substring(0, 2)) < 0) {
                                         EventAnn temp = annList.get(y);
                                         annList.set(y, annList.get(y + 1));
                                         annList.set(y + 1, temp);
 
-                                    } else if (annList.get(y).getDateUpload().substring(0, 2).compareTo(annList.get(y + 1).getDateUpload().substring(0, 2)) == 0) {
-                                        //HOUR
-                                        if (annList.get(y).getTimeUpload().substring(0, 2).compareTo(annList.get(y + 1).getTimeUpload().substring(0, 2)) < 0) {
+                                    } else if (annList.get(y).getTimeUpload().substring(0, 2).compareTo(annList.get(y + 1).getTimeUpload().substring(0, 2)) == 0) {
+                                        //MINUTE
+                                        if (annList.get(y).getTimeUpload().substring(3, 5).compareTo(annList.get(y + 1).getTimeUpload().substring(3, 5)) < 0) {
                                             EventAnn temp = annList.get(y);
                                             annList.set(y, annList.get(y + 1));
                                             annList.set(y + 1, temp);
-
-                                        } else if (annList.get(y).getTimeUpload().substring(0, 2).compareTo(annList.get(y + 1).getTimeUpload().substring(0, 2)) == 0) {
-                                            //MINUTE
-                                            if (annList.get(y).getTimeUpload().substring(3, 5).compareTo(annList.get(y + 1).getTimeUpload().substring(3, 5)) < 0) {
-                                                EventAnn temp = annList.get(y);
-                                                annList.set(y, annList.get(y + 1));
-                                                annList.set(y + 1, temp);
-                                            }
                                         }
                                     }
                                 }
@@ -120,4 +159,10 @@ public class EventAnnRequestStatusPage extends AppCompatActivity {
         });
 
     }
+
+    private void DeleteEvent(String key){
+
+        rootDatabase.child(key).removeValue();
+    }
+
 }

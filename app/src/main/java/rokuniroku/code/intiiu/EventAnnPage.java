@@ -1,23 +1,19 @@
 package rokuniroku.code.intiiu;
 
 import android.content.Intent;
-import android.graphics.Color;
-import android.support.annotation.ColorInt;
 import android.support.annotation.NonNull;
-import android.support.constraint.solver.widgets.Snapshot;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.support.v7.widget.Toolbar;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -36,6 +32,10 @@ import java.util.TimeZone;
 
 public class EventAnnPage extends AppCompatActivity {
 
+    private static String userValidation = "@student.newinti.edu.my", clubValidaton = "@club.newinti.edu.my";
+
+    private FirebaseAuth mAuth;
+    private FirebaseUser mUser;
     private FirebaseDatabase dbDatabase;
     private DatabaseReference rootDatabase;
     private FirebaseStorage dbStorage;
@@ -52,11 +52,29 @@ public class EventAnnPage extends AppCompatActivity {
 
     private boolean bIsToday;
 
+    private String email;
+
+    private int startPoint;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_event_ann_page);
 
+        mAuth = FirebaseAuth.getInstance();
+        mUser = mAuth.getCurrentUser();
+        email = mUser.getEmail().toString();
+
+        startPoint = 0;
+
+        for (int x = 0; x < email.length(); x++) {
+            if (email.charAt(x) == '@') {
+                startPoint = x;
+                break;
+            }
+        }
+
+        email = email.substring(startPoint, email.length());
 
         rootDatabase = dbDatabase.getInstance().getReference().child("Announcement").child("EventAnn");
         rootStorage = dbStorage.getInstance().getReference().child("Announcement").child("EventAnn");
@@ -125,7 +143,9 @@ public class EventAnnPage extends AppCompatActivity {
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.event_ann_menu, menu);
+        if(email.equals(clubValidaton))
+            getMenuInflater().inflate(R.menu.menu_eventann, menu);
+
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -142,8 +162,6 @@ public class EventAnnPage extends AppCompatActivity {
                 return true;
 
             default:
-                // If we got here, the user's action was not recognized.
-                // Invoke the superclass to handle it.
                 return super.onOptionsItemSelected(item);
         }
     }
@@ -183,7 +201,7 @@ public class EventAnnPage extends AppCompatActivity {
                     }
 
 
-                    //Managing the announcement
+                    //Managing the announcement //Delete approved event after event date is over
                     if(date.get(0).before(date.get(1))){ // before start date
                         annListUpcoming.add(announcement);
                     }else if(date.get(0).after(date.get(2))) { // after end date
