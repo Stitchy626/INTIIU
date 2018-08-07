@@ -23,8 +23,8 @@
             <LinearLayout
                 android:id="@+id/linearlayout1"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/colorPrimary"
+                android:layout_height="127dp"
+                android:background="@color/colorAccent"
                 android:gravity="center_horizontal"
                 android:orientation="vertical">
 
@@ -34,7 +34,7 @@
                     android:layout_marginTop="10dp"
                     android:background="@drawable/circle"
                     android:padding="10dp"
-                    android:src="@drawable/lock2"/>
+                    android:src="@drawable/lock2" />
 
 
                 <TextView
@@ -42,9 +42,10 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="25dp"
                     android:layout_marginTop="10dp"
-                    android:fontFamily="sans-serif-medium"
+                    android:fontFamily="serif"
                     android:text="Club Login"
-                    android:textSize="20sp" />
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                    android:textColor="@color/colorBlack" />
             </LinearLayout>
 
             <ImageView
@@ -64,7 +65,7 @@
                 android:layout_below="@+id/imageview1"
                 android:layout_marginLeft="30dp"
                 android:layout_marginRight="30dp"
-                android:layout_marginTop="30dp">
+                android:layout_marginTop="20dp">
 
                 <ImageView
                     android:id="@+id/imageView_userIcon"
@@ -82,7 +83,7 @@
                     android:layout_alignParentTop="true"
                     android:layout_toRightOf="@+id/imageView_userIcon"
                     android:background="@drawable/square"
-                    android:hint="Club E-mail"
+                    android:hint="Club Email"
                     android:inputType="textEmailAddress"
                     android:textColorHint="@color/colorBlack"
                     android:paddingLeft="20dp"
@@ -164,7 +165,7 @@
                 android:background="@drawable/buttoncolor"
                 android:layout_marginRight="30dp"
                 android:layout_marginLeft="30dp"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="20dp"
                 android:text="Sign in"
                 android:textColor="@color/colorBlack"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
@@ -179,17 +180,17 @@
                 android:src="@drawable/dash"
                 android:layout_marginLeft="30dp"
                 android:layout_marginRight="30dp"
-                android:layout_marginTop="10dp"/>
+                android:layout_marginTop="40dp"/>
 
             <TextView
                 android:id="@+id/textView1"
                 android:layout_below="@+id/imageView2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Student Can Login Via Student Email"
+                android:text="Student Login Via INTI Email"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="10dp"
-                android:textSize="15dp"
+                android:layout_marginTop="20dp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                 android:textColor="@color/colorBlack"/>
 
             <com.google.android.gms.common.SignInButton
@@ -197,7 +198,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="52dp"
                 android:layout_alignParentStart="true"
-                android:layout_marginTop="15sp"
+                android:layout_marginTop="10sp"
                 android:layout_marginRight="30dp"
                 android:layout_marginLeft="30dp"
                 android:layout_below="@+id/textView1" />
