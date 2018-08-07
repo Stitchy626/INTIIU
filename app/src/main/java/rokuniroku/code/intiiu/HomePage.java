@@ -40,7 +40,7 @@ public class HomePage extends AppCompatActivity
     private ImageView imgViewAcademicCalendar, imgView_Announcement, imgView_BusSchedule, imgView_lostnFound,
             imgView_Event;
 
-    
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
