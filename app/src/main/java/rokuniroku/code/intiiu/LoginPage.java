@@ -33,7 +33,7 @@ public class LoginPage extends BaseActivity {
 
     private GoogleSignInClient mGoogleSignInClient;
 
-    private Button buttonSignInClub, buttonSignOut, buttonToast;
+    private Button buttonSignInClub;
     private SignInButton buttonSignInGoogle;
     private EditText editTextUsername,editTextPassword;
 
@@ -48,8 +48,6 @@ public class LoginPage extends BaseActivity {
         buttonSignInGoogle = (SignInButton)findViewById(R.id.buttonSignInGoogle);
         editTextUsername=(EditText) findViewById(R.id.editTextUsername);
         editTextPassword=(EditText)findViewById(R.id.editTextPassword);
-        buttonSignOut = (Button) findViewById(R.id.buttonSignOut);
-        buttonToast = (Button) findViewById(R.id.buttonToast);
 
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
@@ -58,17 +56,11 @@ public class LoginPage extends BaseActivity {
 
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
 
+
         buttonSignInGoogle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 UserSignIn();
-            }
-        });
-
-        buttonSignOut.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                UserSignOut();
             }
         });
 
@@ -78,19 +70,6 @@ public class LoginPage extends BaseActivity {
                 LoginClub();
             }
         });
-
-        buttonToast.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(LoginPage.this, mAuth.getCurrentUser().getDisplayName().toString(), Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-        FirebaseUser currentUser = mAuth.getCurrentUser();
     }
 
     @Override
@@ -138,15 +117,15 @@ public class LoginPage extends BaseActivity {
                             email = email.substring(startZ, email.length());
 
                             if (email.equals(emailValidation)) {
-                                startActivity(new Intent(LoginPage.this, EventAnnPage.class));
-                                Toast.makeText(LoginPage.this, "Login Success", Toast.LENGTH_LONG).show();
+                                startActivity(new Intent(LoginPage.this, HomePage.class));
+                                Toast.makeText(LoginPage.this, "Login Successful", Toast.LENGTH_LONG).show();
 
                                 //startActivity(new Intent(LoginPage.this, LogoutPage.class));
                             }else{
-                                UserSignOut();
+                                SignOut();
                             }
                         }else {
-                                UserSignOut();
+                                SignOut();
                         }
 
                         // [START_EXCLUDE]
@@ -161,7 +140,7 @@ public class LoginPage extends BaseActivity {
         startActivityForResult(signInIntent, RC_SIGN_IN);
     }
 
-    private void UserSignOut() {
+    private void SignOut() {
         // Firebase sign out
         mAuth.signOut();
 
@@ -170,7 +149,7 @@ public class LoginPage extends BaseActivity {
                 new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
-                        Toast.makeText(LoginPage.this, "Logout", Toast.LENGTH_LONG).show();
+                        Toast.makeText(LoginPage.this, "Please login with INTI email", Toast.LENGTH_LONG).show();
                     }
                 });
     }
@@ -188,9 +167,8 @@ public class LoginPage extends BaseActivity {
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if(task.isSuccessful())
                             {
-                                Toast.makeText(LoginPage.this,"Successful login",Toast.LENGTH_SHORT).show();
-                                Intent i = new Intent(LoginPage.this,EventAnnPage.class);
-                                startActivity(i);
+                                Toast.makeText(LoginPage.this,"Login Successful",Toast.LENGTH_SHORT).show();
+                                startActivity(new Intent(LoginPage.this,HomePage.class));
                                 finish();
                             }
                             else

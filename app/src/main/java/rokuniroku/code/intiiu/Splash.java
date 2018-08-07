@@ -44,7 +44,7 @@ public class Splash extends AppCompatActivity  {
                     //Silent Login
                     mUser = mAuth.getCurrentUser();
                     if (mUser != null) {
-                        startActivity(new Intent(Splash.this, HomePageActivity.class));
+                        startActivity(new Intent(Splash.this, HomePage.class));
                         //the HomeActivity Page not working the one amber push
                     } else {
                         startActivity(new Intent(Splash.this, LoginPage.class));
