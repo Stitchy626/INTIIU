@@ -137,6 +137,10 @@ public class EventAnnPage extends AppCompatActivity {
                 startActivity(new Intent(EventAnnPage.this, EventAnnRequestPage.class));
                 return true;
 
+            case R.id.action_history:
+                startActivity(new Intent(EventAnnPage.this, EventAnnRequestStatusPage.class));
+                return true;
+
             default:
                 // If we got here, the user's action was not recognized.
                 // Invoke the superclass to handle it.

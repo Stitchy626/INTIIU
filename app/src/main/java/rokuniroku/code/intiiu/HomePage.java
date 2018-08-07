@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -16,11 +17,24 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
+import android.widget.Toast;
+
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 
-public class HomePageActivity extends AppCompatActivity
+public class HomePage extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, UpdateHelper.OnUpdateCheckListener {
 
+    private FirebaseAuth mAuth;
+    //private FirebaseUser mUser;
+
+    private GoogleSignInClient mGoogleSignInClient;
 
     private ImageView imgViewAcademicCalendar,imgView_Announcement,imgView_BusSchedule,imgView_lostnFound,
     imgView_Event;
@@ -32,6 +46,18 @@ public class HomePageActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Home Page");
+
+        //Authentication
+        mAuth = FirebaseAuth.getInstance();
+        //mUser = mAuth.getCurrentUser();
+
+        //Google configuration
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(getString(R.string.default_web_client_id))
+                .requestEmail()
+                .build();
+
+        mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
 
 
         //Update Check
@@ -198,10 +224,26 @@ public class HomePageActivity extends AppCompatActivity
             startActivity(intent);
 
         } else if (id == R.id.nav_signout) {
+            SignOut();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private void SignOut() {
+        // Firebase sign out
+        mAuth.signOut();
+
+        // Google sign out
+        mGoogleSignInClient.signOut().addOnCompleteListener(this,
+                new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        startActivity(new Intent(HomePage.this, LoginPage.class));
+                        Toast.makeText(HomePage.this, "Logout Successful", Toast.LENGTH_LONG).show();
+                    }
+                });
     }
 }

@@ -25,13 +25,7 @@
         </activity>
 
         <activity
-            android:name=".MainMenu"
-            android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar">
-        </activity>
-
-        <activity
-            android:name=".HomePageActivity"
+            android:name=".HomePage"
             android:theme="@style/AppTheme.NoActionBar"/>
 
         <activity
