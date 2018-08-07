@@ -49,7 +49,7 @@
                      android:layout_height="wrap_content"
                      android:id="@+id/catCount"
                      android:textColor="#060606"
-                     android:textSize="13sp"
+                     android:textSize="15sp"
                      android:text="CAT COUNT"
                      android:textAlignment="center"/>
 

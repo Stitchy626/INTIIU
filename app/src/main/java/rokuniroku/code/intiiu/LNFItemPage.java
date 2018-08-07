@@ -57,12 +57,12 @@ public class LNFItemPage extends AppCompatActivity {
                 if(v.equalsIgnoreCase("Student ID")) {
                     for (DataSnapshot ds : dataSnapshot.getChildren()) {
                             item = ds.getValue(LNFItem.class);
-                            list.add(item.getFoundDate() + "        " + item.getFoundTime() + "             " + item.getDescription().toString());
+                            list.add(item.getFoundDate() + "        " + item.getFoundTime() + "              " + item.getDescription().toString());
                     }
                 }else{
                     for (DataSnapshot ds : dataSnapshot.getChildren()) {
                         item = ds.getValue(LNFItem.class);
-                        list.add(item.getFoundDate() + "        " + item.getFoundTime() + "             " + item.getVenue().toString());
+                        list.add(item.getFoundDate() + "        " + item.getFoundTime() + "              " + item.getVenue().toString());
                     }
                 }
                 listView.setAdapter(adapter);

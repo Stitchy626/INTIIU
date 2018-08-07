@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text=" Date Found       Time Found        Location Found"
-        android:textSize="11sp" />
+        android:textSize="18sp" />
 
     <ListView
         android:id="@+id/listView"
