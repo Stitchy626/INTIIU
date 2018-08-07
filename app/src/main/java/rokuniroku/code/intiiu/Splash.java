@@ -11,7 +11,8 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 
-import java.util.Timer;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 /*
 Reference = https://www.youtube.com/watch?v=g-oAWrAvOMo&t=23s
@@ -19,43 +20,48 @@ Reference = https://www.youtube.com/watch?v=g-oAWrAvOMo&t=23s
 
 public class Splash extends AppCompatActivity implements UpdateHelper.OnUpdateCheckListener {
 
-    public static Thread timer1;
+    private FirebaseAuth mAuth;
+    private FirebaseUser mUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
 
+        mAuth = FirebaseAuth.getInstance();
+
         ImageView imageView = findViewById(R.id.splashImage);
         Animation animation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.splash_fade);
         imageView.startAnimation(animation);
 
-            //Update Check
-            UpdateHelper.with( this )
-                    .onUpdateCheck( this )
-                    .check();
+        //Update Check
+        UpdateHelper.with(this)
+                .onUpdateCheck(this)
+                .check();
 
-            /*
-
-             timer1 = new Thread() {
-                @Override
-                public void run() {
-                    try {
-                        sleep( 3000 );
-                        Intent intent = new Intent( getApplicationContext(), MainMenu.class );
-                        startActivity( intent );
-                        finish();
-                        super.run();
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
+        Thread timer = new Thread(){
+            @Override
+            public void run() {
+                try {
+                    sleep(3000);
+                    //Silent Login
+                    mUser = mAuth.getCurrentUser();
+                    if (mUser != null) {
+                        startActivity(new Intent(Splash.this, HomePageActivity.class));
+                        //the HomeActivity Page not working the one amber push
+                    } else {
+                        startActivity(new Intent(Splash.this, LoginPage.class));
                     }
+                    finish();
+                    super.run();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
                 }
-            };
+            }
+        };
 
+        timer.start();
 
-            timer1.start();
-
-*/
 
     }
 

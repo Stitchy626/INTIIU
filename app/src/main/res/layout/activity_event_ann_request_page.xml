@@ -30,8 +30,9 @@
                     android:layout_height="match_parent"
                     android:id = "@+id/editTextTitle"
                     android:hint="Fill"
-                    android:layout_marginRight = "5dp"
-                    android:layout_toLeftOf="@+id/buttonSetTitle"/>
+                    android:layout_marginEnd = "5dp"
+                    android:layout_toStartOf="@+id/buttonSetTitle"
+                    android:inputType="text"/>
                 <Button
                     android:layout_width="50dp"
                     android:layout_height="50dp"
@@ -40,8 +41,8 @@
                     android:tooltipText="Set preview banner"
                     android:gravity="center"
                     android:layout_centerVertical="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginRight="5dp"/>
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="5dp"/>
             </RelativeLayout>
         </LinearLayout>
 
@@ -68,10 +69,10 @@
                     android:layout_height="match_parent"
                     android:id = "@+id/editTextVenue"
                     android:hint="Fill"
-                    android:layout_marginRight = "5dp"/>
+                    android:layout_marginEnd = "5dp"
+                    android:inputType="text"/>
             </RelativeLayout>
         </LinearLayout>
-
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -100,7 +101,7 @@
                     android:id = "@+id/textViewStartDate"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
                     android:gravity="center"
-                    android:layout_toLeftOf="@+id/buttonDPStart"
+                    android:layout_toStartOf="@+id/buttonDPStart"
                     android:focusable="true"
                     android:focusableInTouchMode="true"/>
                 <Button
@@ -109,8 +110,8 @@
                     android:id="@+id/buttonDPStart"
                     android:gravity="center"
                     android:layout_centerVertical="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginRight="5dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd ="5dp"
                     android:background="@mipmap/ic_event_calendar"/>
             </RelativeLayout>
         </LinearLayout>
@@ -142,15 +143,15 @@
                     android:id = "@+id/textViewEndDate"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
                     android:gravity="center"
-                    android:layout_toLeftOf="@+id/buttonDPEnd"/>
+                    android:layout_toStartOf="@+id/buttonDPEnd"/>
                 <Button
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:id="@+id/buttonDPEnd"
                     android:gravity="center"
                     android:layout_centerVertical="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginRight="5dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="5dp"
                     android:background="@mipmap/ic_event_calendar"/>
             </RelativeLayout>
         </LinearLayout>
@@ -182,7 +183,7 @@
                     android:id = "@+id/textViewStartTime"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
                     android:gravity="center"
-                    android:layout_toLeftOf="@+id/buttonTPStart"
+                    android:layout_toStartOf="@+id/buttonTPStart"
                     android:focusable="true"
                     android:focusableInTouchMode="true"/>
                 <Button
@@ -191,8 +192,8 @@
                     android:id="@+id/buttonTPStart"
                     android:gravity="center"
                     android:layout_centerVertical="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginRight="5dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="5dp"
                     android:background="@mipmap/ic_event_clock"/>
             </RelativeLayout>
         </LinearLayout>
@@ -224,15 +225,15 @@
                     android:id = "@+id/textViewEndTime"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
                     android:gravity="center"
-                    android:layout_toLeftOf="@+id/buttonTPEnd"/>
+                    android:layout_toStartOf="@+id/buttonTPEnd"/>
                 <Button
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:id="@+id/buttonTPEnd"
                     android:gravity="center"
                     android:layout_centerVertical="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginRight="5dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="5dp"
                     android:background="@mipmap/ic_event_clock"/>
             </RelativeLayout>
         </LinearLayout>
@@ -252,7 +253,6 @@
                 android:textColor="#000000"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
                 android:gravity="center"/>
-
                 <Button
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
@@ -260,7 +260,7 @@
                     android:text="Choose Image"
                     android:gravity="center"
                     android:layout_weight="1"
-                    android:layout_marginRight="5dp"/>
+                    android:layout_marginEnd="5dp"/>
         </LinearLayout>
 
         <LinearLayout
@@ -270,8 +270,7 @@
             android:layout_below="@+id/layout7"
             android:layout_marginTop="3dp"
             android:orientation="horizontal"
-            android:weightSum="2"
-            >
+            android:weightSum="4">
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
@@ -279,14 +278,8 @@
                 android:textColor="#000000"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
                 android:gravity="center"
-                android:layout_weight="1"/>
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:orientation="horizontal"
-                android:weightSum="2">
+                android:maxLines="1"
+                android:layout_weight="2"/>
             <Button
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
@@ -294,8 +287,7 @@
                 android:text="Light"
                 android:gravity="center"
                 android:layout_weight="1"
-                android:layout_marginRight="5dp"/>
-
+                android:layout_marginEnd="5dp"/>
             <Button
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
@@ -303,8 +295,7 @@
                 android:text="Dark"
                 android:gravity="center"
                 android:layout_weight="1"
-                android:layout_marginRight="5dp"/>
-            </LinearLayout>
+                android:layout_marginEnd="5dp"/>
         </LinearLayout>
 
         <TextView
@@ -314,8 +305,7 @@
             android:text="Preview: "
             android:textColor="#000000"
             android:layout_below="@+id/layout8"
-            android:layout_marginLeft="25dp"/>
-
+            android:layout_marginStart="25dp"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -331,8 +321,8 @@
                 android:layout_height="0dp"
                 android:layout_weight="4"
                 android:layout_marginTop="8dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginRight="8dp">
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp">
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -356,7 +346,6 @@
                 android:layout_weight="1"/>
         </LinearLayout>
 
-
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -365,7 +354,7 @@
             android:textColor="#000000"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
             android:layout_below="@+id/layout10"
-            android:layout_marginLeft="25dp"
+            android:layout_marginStart="25dp"
             android:layout_marginTop="25dp"/>
 
         <EditText
@@ -374,9 +363,9 @@
             android:id = "@+id/editTextContent"
             android:hint="Fill"
             android:layout_below="@+id/layout11"
-            android:layout_marginLeft="25dp"
-            android:layout_marginRight="25dp"/>
-
+            android:layout_marginStart="25dp"
+            android:layout_marginEnd="25dp"
+            android:inputType="text"/>
 
         <TextView
             android:layout_width="match_parent"
@@ -386,7 +375,7 @@
             android:textColor="#000000"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
             android:layout_below="@+id/editTextContent"
-            android:layout_marginLeft="25dp"
+            android:layout_marginStart="25dp"
             android:layout_marginTop="25dp"/>
 
         <EditText
@@ -395,8 +384,9 @@
             android:id = "@+id/editTextFBLink"
             android:hint="Fill if there is a link available"
             android:layout_below="@+id/layout12"
-            android:layout_marginLeft="25dp"
-            android:layout_marginRight="25dp"/>
+            android:layout_marginStart="25dp"
+            android:layout_marginEnd="25dp"
+            android:inputType="text"/>
 
         <Button
             android:layout_width="wrap_content"
@@ -407,6 +397,6 @@
             android:layout_centerHorizontal="true"
             android:layout_margin="25dp"/>
 
-        </RelativeLayout>
+    </RelativeLayout>
 
 </ScrollView>

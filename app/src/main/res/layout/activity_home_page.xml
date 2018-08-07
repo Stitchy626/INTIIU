@@ -9,7 +9,7 @@
     tools:openDrawer="start">
 
     <include
-        layout="@layout/app_bar_main_menu"
+        layout="@layout/app_bar_home_page"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
@@ -19,18 +19,7 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
-        app:headerLayout="@layout/nav_header_main_menu"
-        app:menu="@menu/activity_main_menu_drawer" />
-
-    <Button
-        android:id="@+id/sign_out"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="Click Here To Sign Out"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:visibility="gone"
-        />
+        app:headerLayout="@layout/nav_header_home_page"
+        app:menu="@menu/activity_home_page_drawer" />
 
 </android.support.v4.widget.DrawerLayout>

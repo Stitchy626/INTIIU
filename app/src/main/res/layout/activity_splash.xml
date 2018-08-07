@@ -9,9 +9,9 @@
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:id="@+id/splashImage"
         android:layout_centerInParent="true"
         android:contentDescription="@string/inti_logo"
-        android:id="@+id/splashImage"
         android:src="@drawable/inti_logo_finale"/>
 <!--
     <TextView
