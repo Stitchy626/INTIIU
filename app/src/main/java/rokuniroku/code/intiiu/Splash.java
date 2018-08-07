@@ -47,7 +47,7 @@ public class Splash extends AppCompatActivity implements UpdateHelper.OnUpdateCh
                     //Silent Login
                     mUser = mAuth.getCurrentUser();
                     if (mUser != null) {
-                        startActivity(new Intent(Splash.this, EventAnnPage.class));
+                        startActivity(new Intent(Splash.this, HomePageActivity.class));
                         //the HomeActivity Page not working the one amber push
                     } else {
                         startActivity(new Intent(Splash.this, LoginPage.class));
