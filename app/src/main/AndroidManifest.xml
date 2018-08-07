@@ -48,7 +48,8 @@
             android:label="Event Announcement Item" />
 
         <activity
-            android:name=".LNFItemPage" />
+            android:name=".LNFItemPage"
+            android:label="@string/lostnfound"/>
 
         <activity
             android:name=".INTIAnnItemPage" />
@@ -58,7 +59,7 @@
 
         <activity
             android:name=".LNFPage"
-            android:label="Lost &amp; Found"/>
+            android:label="@string/lostnfound"/>
 
         <activity
             android:name=".EventAnnRequestStatusPage"

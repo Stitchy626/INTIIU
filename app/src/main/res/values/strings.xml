@@ -9,6 +9,7 @@
     <string name="inti_logo">INTI Logo</string>
     <string name= "academic_calender">Academic Calender</string>
     <string name="bus_schedule">Bus Schedule</string>
+    <string name="lostnfound">Lost And Found</string>
 
     <string-array name="normal_booking_start_time_one_hour">
         <item>10 am</item>
