@@ -77,9 +77,9 @@ public class INTIAnnItemPage extends AppCompatActivity {
         textViewContent.setText(annObj.getContent());
 
         if(annObj.getBanner().equals("default")){
-            if(annObj.getCategory().equals("AccomodationOffice"))
+            if(annObj.getCategory().equals("ACO"))
                 imageViewBanner.setImageResource(R.mipmap.ic_intiann_aco);
-            else if(annObj.getCategory().equals("AdmissionsCounselling"))
+            else if(annObj.getCategory().equals("ADC"))
                 imageViewBanner.setImageResource(R.mipmap.ic_intiann_aro);
             else if(annObj.getCategory().equals("AFM"))
                 imageViewBanner.setImageResource(R.mipmap.ic_intiann_afmco);
@@ -87,7 +87,7 @@ public class INTIAnnItemPage extends AppCompatActivity {
                 imageViewBanner.setImageResource(R.mipmap.ic_intiann_cae);
             else if(annObj.getCategory().equals("COLAL"))
                 imageViewBanner.setImageResource(R.mipmap.ic_intiann_colal);
-            else if(annObj.getCategory().equals("CounsellingCentre"))
+            else if(annObj.getCategory().equals("CC"))
                 imageViewBanner.setImageResource(R.mipmap.ic_intiann_cc);
             else if(annObj.getCategory().equals("CS"))
                 imageViewBanner.setImageResource(R.mipmap.ic_intiann_cs);
@@ -105,7 +105,7 @@ public class INTIAnnItemPage extends AppCompatActivity {
                 imageViewBanner.setImageResource(R.mipmap.ic_intiann_fns);
             else if(annObj.getCategory().equals("INSO"))
                 imageViewBanner.setImageResource(R.mipmap.ic_intiann_it);
-            else if(annObj.getCategory().equals("InternationalStudentSupport"))
+            else if(annObj.getCategory().equals("ISS"))
                 imageViewBanner.setImageResource(R.mipmap.ic_intiann_iss);
             else if(annObj.getCategory().equals("Library"))
                 imageViewBanner.setImageResource(R.mipmap.ic_intiann_lib);
@@ -115,7 +115,7 @@ public class INTIAnnItemPage extends AppCompatActivity {
                 imageViewBanner.setImageResource(R.mipmap.ic_intiann_ordc);
             else if(annObj.getCategory().equals("RO"))
                 imageViewBanner.setImageResource(R.mipmap.ic_intiann_ro);
-            else if(annObj.getCategory().equals("SafetySecurity"))
+            else if(annObj.getCategory().equals("Safety & Security"))
                 imageViewBanner.setImageResource(R.mipmap.ic_intiann_sns);
             else if(annObj.getCategory().equals("SAO"))
                 imageViewBanner.setImageResource(R.mipmap.ic_intiann_sao);
@@ -127,7 +127,7 @@ public class INTIAnnItemPage extends AppCompatActivity {
             imageViewBanner.getLayoutParams().height = 400;
             layoutBanner.setBackgroundResource(0);
         }else {
-            storageRef = storageRef.child("Announcement").child("INTIAnn").child(annObj.getBanner());
+            storageRef = storageRef.child("Announcement").child("INTIAnn").child(annObj.getBanner()+".jpg");
 
             Glide.with(INTIAnnItemPage.this)
                     .using(new FirebaseImageLoader())

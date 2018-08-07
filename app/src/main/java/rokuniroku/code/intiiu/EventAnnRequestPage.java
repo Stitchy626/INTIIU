@@ -502,7 +502,7 @@ public class EventAnnRequestPage extends AppCompatActivity implements DatePicker
                     FB = editTextFBLink.getText().toString();
 
                 EventAnn ann = new EventAnn(editTextTitle.getText().toString(), editTextVenue.getText().toString(), mUser.getEmail().toString(),//getDisplayName() cant be use becos its not a real email
-                        dateFormat.format(today), timeFormat.format(today), textViewEndDate.getText().toString(), editTextContent.getText().toString(),
+                        dateFormat.format(today), timeFormat.format(today), "empty", editTextContent.getText().toString(),
                         FB, banner, background, textViewStartDate.getText().toString(), textViewEndDate.getText().toString(),
                         textViewStartTime.getText().toString(), textViewEndTime.getText().toString(), "empty","approved");// status using approve for testing purposes
 

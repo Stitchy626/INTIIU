@@ -79,7 +79,7 @@ public class INTIAnnAdapter extends ArrayAdapter<INTIAnn>{
             imageViewIcon.setImageResource(R.mipmap.ic_intiann_ordc);
         else if(ann.getCategory().equals("RO"))
             imageViewIcon.setImageResource(R.mipmap.ic_intiann_ro);
-        else if(ann.getCategory().equals("SafetySecurity"))
+        else if(ann.getCategory().equals("Safety & Security"))
             imageViewIcon.setImageResource(R.mipmap.ic_intiann_sns);
         else if(ann.getCategory().equals("SAO"))
             imageViewIcon.setImageResource(R.mipmap.ic_intiann_sao);

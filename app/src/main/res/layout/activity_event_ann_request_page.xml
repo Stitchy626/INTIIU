@@ -365,7 +365,7 @@
             android:layout_below="@+id/layout11"
             android:layout_marginStart="25dp"
             android:layout_marginEnd="25dp"
-            android:inputType="text"/>
+            android:inputType="textMultiLine"/>
 
         <TextView
             android:layout_width="match_parent"

@@ -15,7 +15,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:id = "@+id/textViewDateUpload"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
             android:gravity="center"
             android:layout_weight="2"
             android:background="@drawable/design_ers_row"/>
@@ -29,7 +29,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id = "@+id/textViewTitle"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
                 android:maxLines="1"
                 android:layout_centerVertical="true"
                 android:layout_marginStart="5dp"/>
@@ -39,7 +39,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:id = "@+id/textViewStatus"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
             android:gravity="center"
             android:layout_weight="2"
             android:background="@drawable/design_ers_row"/>

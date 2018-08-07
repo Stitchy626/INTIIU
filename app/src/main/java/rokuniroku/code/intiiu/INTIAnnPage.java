@@ -411,7 +411,7 @@ public class INTIAnnPage extends AppCompatActivity {
         dateFormat.setTimeZone(TimeZone.getTimeZone("GMT+08"));
         timeFormat.setTimeZone(TimeZone.getTimeZone("GMT+08"));
 
-        for (int x = 1; x <= 2; x++) {
+        for (int x = 1; x <= 1; x++) {
 
             Date today = calendar.getTime();
             String id = rootDatabase.push().getKey();
@@ -419,9 +419,15 @@ public class INTIAnnPage extends AppCompatActivity {
             calendar.add(Calendar.DAY_OF_YEAR, 1);
             calendar.add(Calendar.MINUTE, 1);
 
-            INTIAnn ann = new INTIAnn("The IT Geek", "MPH", "RO", dateFormat.format(today), timeFormat.format(today), "04/05/2017",
-                    "Testing for design", "default",
-                    "29/06/2019","29/06/2019", "16:00","18:00");
+            INTIAnn ann = new INTIAnn("Notice Fron Security Office", "INTI", "Safety&Security", "08/07/2018", timeFormat.format(today), "23/08/2018",
+                    "Dear Students,\n" +
+                            "\n" +
+                            "Please be informed that you will be denied access to enter IIU premise if you failed to provide your original Student I.D. This is for Security and Safety purpose.\n" +
+                            "\n" +
+                            "This standard procedure which already exist, will be strictly followed by the security and safety department. Students are given 1 day time period to get their replacement student I.D if they have lost it.\n" +
+                            "\n" +
+                            "This procedure will take place effective 3rd of August 2018 and providing student I.D via mobile is unacceptable and not valid.", id,
+                    "18/08/2018","18/08/2018", "00:00","23:59");
 
             rootDatabase.child(id).setValue(ann);
         }
