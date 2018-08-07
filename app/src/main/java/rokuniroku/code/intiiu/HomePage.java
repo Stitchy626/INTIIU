@@ -17,6 +17,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -26,30 +27,54 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-
-
 public class HomePage extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, UpdateHelper.OnUpdateCheckListener {
 
     private FirebaseAuth mAuth;
     //private FirebaseUser mUser;
 
+    private String emailValidation = "@student.newinti.edu.my", clubValidaton = "@club.newinti.edu.my";
+
     private GoogleSignInClient mGoogleSignInClient;
 
-    private ImageView imgViewAcademicCalendar,imgView_Announcement,imgView_BusSchedule,imgView_lostnFound,
-    imgView_Event;
+    private ImageView imgViewAcademicCalendar, imgView_Announcement, imgView_BusSchedule, imgView_lostnFound,
+            imgView_Event;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home_page);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("INTI IU");
 
         //Authentication
         mAuth = FirebaseAuth.getInstance();
         //mUser = mAuth.getCurrentUser();
+
+        FirebaseUser user = mAuth.getCurrentUser();
+        String email = user.getEmail().toString();
+        int startZ = 0;
+        for (int x = 0; x < email.length(); x++) {
+            if (email.charAt(x) == '@') {
+                startZ = x;
+
+                break;
+            }
+        }
+
+        email = email.substring(startZ, email.length());
+        if (email.equals(emailValidation)) {
+            setContentView(R.layout.activity_home_page);
+            NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+            navigationView.setNavigationItemSelectedListener(this);
+
+        } else if (email.equals(clubValidaton)) {
+            setContentView(R.layout.activity_club_home_page);
+            NavigationView navigationView = (NavigationView) findViewById(R.id.nav_clubview);
+            navigationView.setNavigationItemSelectedListener(this);
+        }
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("Home Page");
+
 
         //Google configuration
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -71,20 +96,20 @@ public class HomePage extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        /*NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-
-        imgView_Announcement = (ImageView)findViewById(R.id.imgView_Announcement);
-        imgView_BusSchedule = (ImageView)findViewById(R.id.imgView_BusSchedule);
-        imgView_Event = (ImageView)findViewById(R.id.imgView_Event);
-        imgView_lostnFound = (ImageView)findViewById(R.id.imgView_LostnFound);
-        imgViewAcademicCalendar = (ImageView)findViewById(R.id.imgView_AcademicCalender);
+*/
+        imgView_Announcement = (ImageView) findViewById(R.id.imgView_Announcement);
+        imgView_BusSchedule = (ImageView) findViewById(R.id.imgView_BusSchedule);
+        imgView_Event = (ImageView) findViewById(R.id.imgView_Event);
+        imgView_lostnFound = (ImageView) findViewById(R.id.imgView_LostnFound);
+        imgViewAcademicCalendar = (ImageView) findViewById(R.id.imgView_AcademicCalender);
 
         imgViewAcademicCalendar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-            Intent intent = new Intent(getApplicationContext(), AcademicCalender.class);
-            startActivity(intent);
+                Intent intent = new Intent(getApplicationContext(), AcademicCalender.class);
+                startActivity(intent);
             }
 
         });
@@ -126,9 +151,6 @@ public class HomePage extends AppCompatActivity
         });
 
 
-
-
-
     }
 
     //Update Class
@@ -142,14 +164,14 @@ public class HomePage extends AppCompatActivity
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         //open google playstore to the app
-                        try{
+                        try {
                             //if user has google playstore in their phone
-                            startActivity( new Intent( Intent.ACTION_VIEW,
-                                    Uri.parse("market://details?id=" + getPackageName())) );
-                        } catch (ActivityNotFoundException e){
+                            startActivity(new Intent(Intent.ACTION_VIEW,
+                                    Uri.parse("market://details?id=" + getPackageName())));
+                        } catch (ActivityNotFoundException e) {
                             //if user dont have playstore in their phone, open website playstore
-                            startActivity( new Intent( Intent.ACTION_VIEW,
-                                    Uri.parse("http://play.google.com/store/apps/details?id=" + getPackageName())) );
+                            startActivity(new Intent(Intent.ACTION_VIEW,
+                                    Uri.parse("http://play.google.com/store/apps/details?id=" + getPackageName())));
                         }
 
                     }
@@ -160,7 +182,7 @@ public class HomePage extends AppCompatActivity
                         dialogInterface.dismiss();
                         finish();
                     }
-                }).setCancelable( false ).create();
+                }).setCancelable(false).create();
         alertDialog.show();
 
     }
@@ -216,11 +238,15 @@ public class HomePage extends AppCompatActivity
             startActivity(intent);
 
         } else if (id == R.id.nav_BusSchedule) {
-                Intent intent = new Intent(getApplicationContext(), BusSchedule.class);
-                startActivity(intent);
+            Intent intent = new Intent(getApplicationContext(), BusSchedule.class);
+            startActivity(intent);
 
         } else if (id == R.id.nav_lostnFound) {
             Intent intent = new Intent(getApplicationContext(), LNFPage.class);
+            startActivity(intent);
+
+        } else if (id == R.id.nav_EventAnnReq) {
+            Intent intent = new Intent(getApplicationContext(), EventAnnRequestPage.class);
             startActivity(intent);
 
         } else if (id == R.id.nav_signout) {
@@ -247,3 +273,5 @@ public class HomePage extends AppCompatActivity
                 });
     }
 }
+
+
