@@ -1,6 +1,10 @@
 package rokuniroku.code.intiiu;
 
+import android.app.AlertDialog;
+import android.content.ActivityNotFoundException;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -15,7 +19,7 @@ import android.widget.ImageView;
 
 
 public class HomePageActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener, UpdateHelper.OnUpdateCheckListener {
 
 
     private ImageView imgViewAcademicCalendar,imgView_Announcement,imgView_BusSchedule,imgView_lostnFound,
@@ -29,6 +33,11 @@ public class HomePageActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Home Page");
 
+
+        //Update Check
+        UpdateHelper.with(this)
+                .onUpdateCheck(this)
+                .check();
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -95,6 +104,41 @@ public class HomePageActivity extends AppCompatActivity
 
 
     }
+
+    //Update Class
+    @Override
+    public void onUpdateCheckListener(final String urlApp) {
+
+        AlertDialog alertDialog = new AlertDialog.Builder(this)
+                .setTitle("A New Version of this App is avaiable")
+                .setMessage("Please Update to the lastest version")
+                .setPositiveButton("UPDATE", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        //open google playstore to the app
+                        try{
+                            //if user has google playstore in their phone
+                            startActivity( new Intent( Intent.ACTION_VIEW,
+                                    Uri.parse("market://details?id=" + getPackageName())) );
+                        } catch (ActivityNotFoundException e){
+                            //if user dont have playstore in their phone, open website playstore
+                            startActivity( new Intent( Intent.ACTION_VIEW,
+                                    Uri.parse("http://play.google.com/store/apps/details?id=" + getPackageName())) );
+                        }
+
+                    }
+                }).setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                        dialogInterface.dismiss();
+                        finish();
+                    }
+                }).setCancelable( false ).create();
+        alertDialog.show();
+
+    }
+
 
     @Override
     public void onBackPressed() {
