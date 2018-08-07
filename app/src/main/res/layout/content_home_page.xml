@@ -91,7 +91,7 @@
                         android:id="@+id/imgView_AcademicCalender"
                         android:layout_width="wrap_content"
                         android:layout_height="130dp"
-                        app:srcCompat="@drawable/ic_academic_calendar" />
+                        app:srcCompat="@drawable/ic_academic_calendar1" />
 
 
                     <TextView
