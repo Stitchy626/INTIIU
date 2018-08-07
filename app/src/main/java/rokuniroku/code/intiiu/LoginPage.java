@@ -33,7 +33,7 @@ public class LoginPage extends BaseActivity {
 
     private GoogleSignInClient mGoogleSignInClient;
 
-    private Button buttonSignInClub;
+    private Button buttonSignInClub,buttonResetPassword;
     private SignInButton buttonSignInGoogle;
     private EditText editTextUsername,editTextPassword;
 
@@ -44,6 +44,7 @@ public class LoginPage extends BaseActivity {
 
         mAuth = FirebaseAuth.getInstance();
 
+        buttonResetPassword=(Button) findViewById(R.id.buttonResetPassword);
         buttonSignInClub = (Button) findViewById(R.id.buttonSignInClub);
         buttonSignInGoogle = (SignInButton)findViewById(R.id.buttonSignInGoogle);
         editTextUsername=(EditText) findViewById(R.id.editTextUsername);
@@ -56,6 +57,12 @@ public class LoginPage extends BaseActivity {
 
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
 
+        buttonResetPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(LoginPage.this,ResetPasswordActivity.class));
+            }
+        });
 
         buttonSignInGoogle.setOnClickListener(new View.OnClickListener() {
             @Override

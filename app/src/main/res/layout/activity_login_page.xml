@@ -34,7 +34,8 @@
                     android:layout_marginTop="10dp"
                     android:background="@drawable/circle"
                     android:padding="10dp"
-                    android:src="@drawable/lock" />
+                    android:src="@drawable/lock2"/>
+
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -42,7 +43,7 @@
                     android:layout_marginBottom="25dp"
                     android:layout_marginTop="10dp"
                     android:fontFamily="sans-serif-medium"
-                    android:text="LOGIN"
+                    android:text="Club Login"
                     android:textSize="20sp" />
             </LinearLayout>
 
@@ -54,7 +55,7 @@
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="-10dp"
                 android:rotation="45"
-                android:src="@drawable/square" />
+                android:src="@drawable/square2" />
 
             <RelativeLayout
                 android:id="@+id/relativeLayout1"
@@ -80,12 +81,12 @@
                     android:layout_alignBottom="@+id/imageView_userIcon"
                     android:layout_alignParentTop="true"
                     android:layout_toRightOf="@+id/imageView_userIcon"
-                    android:background="@color/colorPrimary"
-                    android:hint="Enter Club Email Here"
+                    android:background="@drawable/square"
+                    android:hint="Club E-mail"
                     android:inputType="textEmailAddress"
                     android:textColorHint="@color/colorBlack"
                     android:paddingLeft="20dp"
-                    android:textSize="20dp" />
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
 
 
             </RelativeLayout>
@@ -115,12 +116,12 @@
                     android:layout_alignBottom="@+id/imageView_passwordIcon"
                     android:layout_alignParentTop="true"
                     android:layout_toRightOf="@+id/imageView_passwordIcon"
-                    android:background="@color/colorPrimary"
-                    android:hint="Club Password"
+                    android:background="@drawable/square"
+                    android:hint="Password"
                     android:textColorHint="@color/colorBlack"
                     android:inputType="textPassword"
                     android:paddingLeft="20dp"
-                    android:textSize="20dp" />
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
 
             </RelativeLayout>
 
@@ -139,18 +140,20 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:text="Remember Me!"
-                    android:textColor="@color/colorBlack" />
+                    android:textColor="@color/colorBlack"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small"/>
 
                 <Button
-                    android:id="@+id/reset_pass"
+                    android:id="@+id/buttonResetPassword"
                     android:layout_width="wrap_content"
                     android:layout_height="30dp"
                     android:layout_alignParentRight="true"
                     android:background="@android:color/transparent"
                     android:text="Forgot password?"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
                     android:textAllCaps="false"
                     android:textColor="@color/colorBlack"
-                    android:textSize="13dp" />
+                     />
             </RelativeLayout>
 
             <Button
@@ -158,17 +161,19 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/relativeLayout3"
-                android:background="@color/colorPrimary"
+                android:background="@drawable/buttoncolor"
                 android:layout_marginRight="30dp"
                 android:layout_marginLeft="30dp"
                 android:layout_marginTop="15dp"
                 android:text="Sign in"
+                android:textColor="@color/colorBlack"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                 android:fontFamily="sans-serif-medium"/>
 
             <ImageView
                 android:id="@+id/imageView2"
                 android:layout_width="match_parent"
-                android:layout_height="3dp"
+                android:layout_height="6dp"
                 android:layout_below="@id/buttonSignInClub"
                 android:layerType="software"
                 android:src="@drawable/dash"
@@ -187,23 +192,14 @@
                 android:textSize="15dp"
                 android:textColor="@color/colorBlack"/>
 
-            <TextView
-                android:id="@+id/textView2"
-                android:layout_below="@+id/textView1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Using Google Sign In"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="1dp"
-                android:textSize="15dp"
-                android:textColor="@color/colorBlack"/>
-
             <com.google.android.gms.common.SignInButton
                 android:id="@+id/buttonSignInGoogle"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="52dp"
                 android:layout_alignParentStart="true"
-                android:layout_marginTop="30sp"
+                android:layout_marginTop="15sp"
+                android:layout_marginRight="30dp"
+                android:layout_marginLeft="30dp"
                 android:layout_below="@+id/textView1" />
 
         </RelativeLayout>
