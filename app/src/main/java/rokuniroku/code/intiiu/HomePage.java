@@ -45,7 +45,7 @@ public class HomePage extends AppCompatActivity
         setContentView(R.layout.activity_home_page);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Home Page");
+        getSupportActionBar().setTitle("INTI IU");
 
         //Authentication
         mAuth = FirebaseAuth.getInstance();

@@ -64,7 +64,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:text="Announcement"
+                        android:text="INTI Announcement"
                         android:textSize="16sp"
                         android:textStyle="bold" />
                 </LinearLayout>
@@ -91,7 +91,7 @@
                         android:id="@+id/imgView_AcademicCalender"
                         android:layout_width="wrap_content"
                         android:layout_height="130dp"
-                        app:srcCompat="@drawable/ic_academic_calendar" />
+                        app:srcCompat="@drawable/ic_academic_calendar1" />
 
 
                     <TextView
