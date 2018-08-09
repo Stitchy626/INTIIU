@@ -74,7 +74,7 @@ public class HomePage extends AppCompatActivity
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Home Page");
+        getSupportActionBar().setTitle("INTI IU");
 
 
         //Google configuration

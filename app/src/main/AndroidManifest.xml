@@ -26,6 +26,7 @@
 
         <activity
             android:name=".HomePage"
+            android:label="INTI IU"
             android:theme="@style/AppTheme.NoActionBar"/>
 
         <activity
@@ -57,20 +58,22 @@
 
         <activity
             android:name=".LNFPage"
-            android:label="Lost &amp; Found"/>
+            android:label="Lost And Found"/>
 
         <activity
             android:name=".EventAnnRequestStatusPage"
             android:label="Event Request Status" />
 
         <activity
-            android:name=".AcademicCalender" />
+            android:name=".AcademicCalender"
+            android:label="@string/academic_calender"/>
 
         <activity
             android:name=".ResetPasswordActivity"/>
 
         <activity
-            android:name=".BusSchedule" />
+            android:name=".BusSchedule"
+            android:label="@string/bus_schedule"/>
 
         <activity
             android:name=".LoginPage"
