@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.ActivityNotFoundException;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -31,14 +32,20 @@ public class HomePage extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, UpdateHelper.OnUpdateCheckListener {
 
     private FirebaseAuth mAuth;
-    //private FirebaseUser mUser;
+    private FirebaseUser mUser;
 
     private String emailValidation = "@student.newinti.edu.my", clubValidaton = "@club.newinti.edu.my";
 
     private GoogleSignInClient mGoogleSignInClient;
 
     private ImageView imgViewAcademicCalendar, imgView_Announcement, imgView_BusSchedule, imgView_lostnFound,
-            imgView_Event;
+            imgView_Event, imagView_UserPic;
+
+    private TextView txtView_UserName, txtView_UserEmail;
+
+    private View navHeaderView;
+
+    private NavigationView navigationView;
 
 
     @Override
@@ -47,7 +54,7 @@ public class HomePage extends AppCompatActivity
 
         //Authentication
         mAuth = FirebaseAuth.getInstance();
-        //mUser = mAuth.getCurrentUser();
+        mUser = mAuth.getCurrentUser();
 
         FirebaseUser user = mAuth.getCurrentUser();
         String email = user.getEmail().toString();
@@ -61,16 +68,28 @@ public class HomePage extends AppCompatActivity
         }
 
         email = email.substring(startZ, email.length());
+        //navigation bar
         if (email.equals(emailValidation)) {
             setContentView(R.layout.activity_home_page);
-            NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+            navigationView = (NavigationView) findViewById(R.id.nav_view);
             navigationView.setNavigationItemSelectedListener(this);
 
         } else if (email.equals(clubValidaton)) {
             setContentView(R.layout.activity_club_home_page);
-            NavigationView navigationView = (NavigationView) findViewById(R.id.nav_clubview);
+            navigationView = (NavigationView) findViewById(R.id.nav_clubview);
             navigationView.setNavigationItemSelectedListener(this);
         }
+
+        navHeaderView = navigationView.inflateHeaderView(R.layout.nav_header_home_page);
+        imagView_UserPic = (ImageView) navHeaderView.findViewById(R.id.imagView_UserPic);
+        txtView_UserName = (TextView) navHeaderView.findViewById(R.id.txtView_UserName);
+        txtView_UserEmail = (TextView) navHeaderView.findViewById(R.id.txtView_UserEmail);
+
+        imagView_UserPic.setImageURI(mUser.getPhotoUrl());
+        txtView_UserName.setText(mUser.getDisplayName());
+        txtView_UserEmail.setText(mUser.getEmail());
+        //END navigation bar
+
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -97,9 +116,7 @@ public class HomePage extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        /*NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
-*/
+        //content page
         imgView_Announcement = (ImageView) findViewById(R.id.imgView_Announcement);
         imgView_BusSchedule = (ImageView) findViewById(R.id.imgView_BusSchedule);
         imgView_Event = (ImageView) findViewById(R.id.imgView_Event);
