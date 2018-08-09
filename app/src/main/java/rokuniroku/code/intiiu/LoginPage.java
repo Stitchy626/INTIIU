@@ -163,9 +163,17 @@ public class LoginPage extends BaseActivity {
     }
 
     private void LoginClub(){
-        if(editTextUsername.getText().toString().equals("")|| editTextPassword.getText().toString().equals(""))
-        {
-            Toast.makeText(LoginPage.this,"Blank fields are not allowed",Toast.LENGTH_SHORT).show();
+        if(editTextUsername.getText().toString().equals("")&& editTextPassword.getText().toString().equals("")) {
+            Toast.makeText(LoginPage.this, "All fields has to be filled", Toast.LENGTH_SHORT).show();
+            editTextUsername.setError("Username needed");
+            editTextPassword.setError("Password needed");
+            editTextUsername.requestFocus();
+        }else if(editTextUsername.getText().toString().equals("")){
+            editTextUsername.setError("Username needed");
+            editTextUsername.requestFocus();
+        }else if(editTextPassword.getText().toString().equals("")){
+            editTextPassword.setError("Password needed");
+            editTextPassword.requestFocus();
         }
         else
         {

@@ -85,8 +85,8 @@
                     android:background="@drawable/square"
                     android:hint="Club Email"
                     android:inputType="textEmailAddress"
-                    android:textColorHint="@color/colorBlack"
                     android:paddingLeft="20dp"
+                    android:paddingRight="10dp"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
 
 
@@ -119,9 +119,9 @@
                     android:layout_toRightOf="@+id/imageView_passwordIcon"
                     android:background="@drawable/square"
                     android:hint="Password"
-                    android:textColorHint="@color/colorBlack"
                     android:inputType="textPassword"
                     android:paddingLeft="20dp"
+                    android:paddingRight="10dp"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
 
             </RelativeLayout>
