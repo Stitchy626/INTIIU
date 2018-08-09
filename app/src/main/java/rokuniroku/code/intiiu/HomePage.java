@@ -151,7 +151,6 @@ public class HomePage extends AppCompatActivity
 
         });
 
-
     }
 
     //Update Class
