@@ -162,7 +162,7 @@ public class LoginPage extends BaseActivity {
     }
 
     private void LoginClub(){
-        if(editTextUsername.getText().toString().equals("")&& editTextPassword.getText().toString().equals(""))
+        if(editTextUsername.getText().toString().equals("")|| editTextPassword.getText().toString().equals(""))
         {
             Toast.makeText(LoginPage.this,"Blank fields are not allowed",Toast.LENGTH_SHORT).show();
         }
