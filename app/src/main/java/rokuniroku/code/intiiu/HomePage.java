@@ -28,6 +28,8 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.squareup.picasso.Picasso;
+
 public class HomePage extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, UpdateHelper.OnUpdateCheckListener {
 
@@ -39,7 +41,9 @@ public class HomePage extends AppCompatActivity
     private GoogleSignInClient mGoogleSignInClient;
 
     private ImageView imgViewAcademicCalendar, imgView_Announcement, imgView_BusSchedule, imgView_lostnFound,
-            imgView_Event, imagView_UserPic;
+            imgView_Event;
+
+    de.hdodenhof.circleimageview.CircleImageView imagView_UserPic;
 
     private TextView txtView_UserName, txtView_UserEmail;
 
@@ -81,11 +85,11 @@ public class HomePage extends AppCompatActivity
         }
 
         navHeaderView = navigationView.inflateHeaderView(R.layout.nav_header_home_page);
-        imagView_UserPic = (ImageView) navHeaderView.findViewById(R.id.imagView_UserPic);
+        imagView_UserPic = (de.hdodenhof.circleimageview.CircleImageView) navHeaderView.findViewById(R.id.imagView_UserPic);
         txtView_UserName = (TextView) navHeaderView.findViewById(R.id.txtView_UserName);
         txtView_UserEmail = (TextView) navHeaderView.findViewById(R.id.txtView_UserEmail);
 
-        imagView_UserPic.setImageURI(mUser.getPhotoUrl());
+        Picasso.with(this).load(mUser.getPhotoUrl()).into(imagView_UserPic);
         txtView_UserName.setText(mUser.getDisplayName());
         txtView_UserEmail.setText(mUser.getEmail());
         //END navigation bar
