@@ -126,6 +126,7 @@ public class LoginPage extends BaseActivity {
                             if (email.equals(emailValidation)) {
                                 startActivity(new Intent(LoginPage.this, HomePage.class));
                                 Toast.makeText(LoginPage.this, "Login Successful", Toast.LENGTH_LONG).show();
+                                finish();
 
                                 //startActivity(new Intent(LoginPage.this, LogoutPage.class));
                             }else{
