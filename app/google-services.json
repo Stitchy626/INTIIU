@@ -83,6 +83,38 @@
       },
       "oauth_client": [
         {
+          "client_id": "56714154031-jlj32nv6ld7aq51el8mc216kv1koemqo.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "rokuniroku.code.newintiiu",
+            "certificate_hash": "36cbe02bd331b8a7a7bf927120b8aa4432bb0b2b"
+          }
+        },
+        {
+          "client_id": "56714154031-6bh2t5k3bmj17292ikreseq865fj4sp9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "rokuniroku.code.newintiiu",
+            "certificate_hash": "e285a37896ecc9008de04d5cb6f4badf9a9fecca"
+          }
+        },
+        {
+          "client_id": "56714154031-1lmakarg8b99prs6167pp0u8qt147kqj.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "rokuniroku.code.newintiiu",
+            "certificate_hash": "bd7a14a9039f4b108c29a189461ac67a7e7261cc"
+          }
+        },
+        {
+          "client_id": "56714154031-qab91ipsnhbflusn2ltel0qpkjvjft63.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "rokuniroku.code.newintiiu",
+            "certificate_hash": "aa1bdaff14b80c6700eb1c4887215518ca580b90"
+          }
+        },
+        {
           "client_id": "56714154031-fj1orv8fjugkvs7cphm9j8fnrm4rprir.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -97,8 +129,57 @@
           "status": 1
         },
         "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "56714154031-fj1orv8fjugkvs7cphm9j8fnrm4rprir.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:56714154031:android:d0ce89a90904b5de",
+        "android_client_info": {
+          "package_name": "rokuniroku.newinti.intiiu"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "56714154031-ro9nvf1vqkrfcrt2a7jvf8rbjd7j7rkq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "rokuniroku.newinti.intiiu",
+            "certificate_hash": "36cbe02bd331b8a7a7bf927120b8aa4432bb0b2b"
+          }
+        },
+        {
+          "client_id": "56714154031-fj1orv8fjugkvs7cphm9j8fnrm4rprir.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDwNKphn3w9VNjTHB7-Y4-gMZLEIv1UckM"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "56714154031-fj1orv8fjugkvs7cphm9j8fnrm4rprir.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         },
         "ads_service": {
           "status": 2
