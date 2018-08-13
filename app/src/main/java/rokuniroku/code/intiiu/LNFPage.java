@@ -75,7 +75,7 @@ public class LNFPage extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         n = (String) arrList.get(position);
-                        Toast.makeText(LNFPage.this, n, Toast.LENGTH_LONG).show();
+                        //Toast.makeText(LNFPage.this, n, Toast.LENGTH_LONG).show();
                         Intent intent = new Intent (LNFPage.this, LNFItemPage.class);
                         intent.putExtra("cat", n);
                         startActivity(intent);
