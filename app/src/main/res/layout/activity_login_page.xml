@@ -1,211 +1,218 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LoginPage">
+    tools:context=".LoginPage"
+    android:fillViewport="true">
 
-    <android.support.v7.widget.CardView
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentTop="true"
-        app:cardCornerRadius="10dp"
-        app:cardElevation="3dp"
-        app:cardPreventCornerOverlap="false"
-        app:cardUseCompatPadding="true">
+        android:layout_height="match_parent">
 
-        <RelativeLayout
+        <android.support.v7.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <LinearLayout
-                android:id="@+id/linearlayout1"
-                android:layout_width="match_parent"
-                android:layout_height="127dp"
-                android:background="@color/colorAccent"
-                android:gravity="center_horizontal"
-                android:orientation="vertical">
-
-                <ImageView
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_marginTop="10dp"
-                    android:background="@drawable/circle"
-                    android:padding="10dp"
-                    android:src="@drawable/lock2" />
-
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="25dp"
-                    android:layout_marginTop="10dp"
-                    android:fontFamily="serif"
-                    android:text="Club Login"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                    android:textColor="@color/colorBlack" />
-            </LinearLayout>
-
-            <ImageView
-                android:id="@+id/imageview1"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_below="@id/linearlayout1"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="-10dp"
-                android:rotation="45"
-                android:src="@drawable/square2" />
+            android:layout_height="match_parent"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentTop="true"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="3dp"
+            app:cardPreventCornerOverlap="false"
+            app:cardUseCompatPadding="true">
 
             <RelativeLayout
-                android:id="@+id/relativeLayout1"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/imageview1"
-                android:layout_marginLeft="30dp"
-                android:layout_marginRight="30dp"
-                android:layout_marginTop="20dp">
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:id="@+id/linearlayout1"
+                    android:layout_width="match_parent"
+                    android:layout_height="127dp"
+                    android:background="@color/colorAccent"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_marginTop="10dp"
+                        android:background="@drawable/circle"
+                        android:padding="10dp"
+                        android:src="@drawable/lock2" />
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="25dp"
+                        android:layout_marginTop="10dp"
+                        android:fontFamily="serif"
+                        android:text="Club Login"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                        android:textColor="@color/colorBlack" />
+                </LinearLayout>
 
                 <ImageView
-                    android:id="@+id/imageView_userIcon"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:background="@color/colorWhite"
-                    android:src="@drawable/student"
-                    android:layout_marginRight="10dp"/>
+                    android:id="@+id/imageview1"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_below="@id/linearlayout1"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="-10dp"
+                    android:rotation="45"
+                    android:src="@drawable/square2" />
 
-                <EditText
-                    android:id="@+id/editTextUsername"
+                <RelativeLayout
+                    android:id="@+id/relativeLayout1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_alignBottom="@+id/imageView_userIcon"
-                    android:layout_alignParentTop="true"
-                    android:layout_toRightOf="@+id/imageView_userIcon"
-                    android:background="@drawable/square"
-                    android:hint="Club Email"
-                    android:inputType="textEmailAddress"
-                    android:paddingLeft="20dp"
-                    android:paddingRight="10dp"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+                    android:layout_below="@+id/imageview1"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="30dp"
+                    android:layout_marginTop="20dp">
+
+                    <ImageView
+                        android:id="@+id/imageView_userIcon"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:background="@color/colorWhite"
+                        android:src="@drawable/student"
+                        android:layout_marginRight="10dp"/>
+
+                    <EditText
+                        android:id="@+id/editTextUsername"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBottom="@+id/imageView_userIcon"
+                        android:layout_alignParentTop="true"
+                        android:layout_toRightOf="@+id/imageView_userIcon"
+                        android:background="@drawable/square"
+                        android:hint="Club Email"
+                        android:inputType="textEmailAddress"
+                        android:paddingLeft="20dp"
+                        android:paddingRight="10dp"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
 
 
-            </RelativeLayout>
+                </RelativeLayout>
 
-            <RelativeLayout
-                android:id="@+id/relativeLayout2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/relativeLayout1"
-                android:layout_marginLeft="30dp"
-                android:layout_marginRight="30dp"
-                android:layout_marginTop="15dp">
-
-                <ImageView
-                    android:id="@+id/imageView_passwordIcon"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:background="@color/colorWhite"
-                    android:src="@drawable/password"
-                    android:padding="5dp"
-                    android:layout_marginRight="10dp"/>
-
-                <EditText
-                    android:id="@+id/editTextPassword"
+                <RelativeLayout
+                    android:id="@+id/relativeLayout2"
                     android:layout_width="match_parent"
-                    android:layout_height="39dp"
-                    android:layout_alignBottom="@+id/imageView_passwordIcon"
-                    android:layout_alignParentTop="true"
-                    android:layout_toRightOf="@+id/imageView_passwordIcon"
-                    android:background="@drawable/square"
-                    android:hint="Password"
-                    android:inputType="textPassword"
-                    android:paddingLeft="20dp"
-                    android:paddingRight="10dp"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
-
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/relativeLayout3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/relativeLayout2"
-                android:layout_marginLeft="30dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginRight="30dp">
-
-                <CheckBox
-                    android:id="@+id/remember_id"
-                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:text="Remember Me!"
-                    android:textColor="@color/colorBlack"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Small"/>
+                    android:layout_below="@+id/relativeLayout1"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="30dp"
+                    android:layout_marginTop="15dp">
+
+                    <ImageView
+                        android:id="@+id/imageView_passwordIcon"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:background="@color/colorWhite"
+                        android:src="@drawable/password"
+                        android:padding="5dp"
+                        android:layout_marginRight="10dp"/>
+
+                    <EditText
+                        android:id="@+id/editTextPassword"
+                        android:layout_width="match_parent"
+                        android:layout_height="39dp"
+                        android:layout_alignBottom="@+id/imageView_passwordIcon"
+                        android:layout_alignParentTop="true"
+                        android:layout_toRightOf="@+id/imageView_passwordIcon"
+                        android:background="@drawable/square"
+                        android:hint="Password"
+                        android:inputType="textPassword"
+                        android:paddingLeft="20dp"
+                        android:paddingRight="10dp"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/relativeLayout3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/relativeLayout2"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="30dp">
+
+                    <CheckBox
+                        android:id="@+id/remember_id"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:text="Remember Me!"
+                        android:textColor="@color/colorBlack"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Small"/>
+
+                    <Button
+                        android:id="@+id/buttonResetPassword"
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        android:layout_alignParentRight="true"
+                        android:background="@android:color/transparent"
+                        android:text="Forgot password?"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                        android:textAllCaps="false"
+                        android:textColor="@color/colorBlack"
+                         />
+                </RelativeLayout>
 
                 <Button
-                    android:id="@+id/buttonResetPassword"
-                    android:layout_width="wrap_content"
-                    android:layout_height="30dp"
-                    android:layout_alignParentRight="true"
-                    android:background="@android:color/transparent"
-                    android:text="Forgot password?"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                    android:textAllCaps="false"
+                    android:id="@+id/buttonSignInClub"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/relativeLayout3"
+                    android:background="@drawable/buttoncolor"
+                    android:layout_marginRight="30dp"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginTop="20dp"
+                    android:text="Sign in"
                     android:textColor="@color/colorBlack"
-                     />
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    android:fontFamily="sans-serif-medium"/>
+
+                <ImageView
+                    android:id="@+id/imageView2"
+                    android:layout_width="match_parent"
+                    android:layout_height="6dp"
+                    android:layout_below="@id/buttonSignInClub"
+                    android:layerType="software"
+                    android:src="@drawable/dash"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="30dp"
+                    android:layout_marginTop="40dp"/>
+
+                <TextView
+                    android:id="@+id/textView1"
+                    android:layout_below="@+id/imageView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Student Login Via INTI Email"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="20dp"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    android:textColor="@color/colorBlack"/>
+
+                <com.google.android.gms.common.SignInButton
+                    android:id="@+id/buttonSignInGoogle"
+                    android:layout_width="match_parent"
+                    android:layout_height="52dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginTop="10sp"
+                    android:layout_marginRight="30dp"
+                    android:layout_marginLeft="30dp"
+                    android:layout_below="@+id/textView1" />
+
             </RelativeLayout>
 
-            <Button
-                android:id="@+id/buttonSignInClub"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/relativeLayout3"
-                android:background="@drawable/buttoncolor"
-                android:layout_marginRight="30dp"
-                android:layout_marginLeft="30dp"
-                android:layout_marginTop="20dp"
-                android:text="Sign in"
-                android:textColor="@color/colorBlack"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                android:fontFamily="sans-serif-medium"/>
+        </android.support.v7.widget.CardView>
 
-            <ImageView
-                android:id="@+id/imageView2"
-                android:layout_width="match_parent"
-                android:layout_height="6dp"
-                android:layout_below="@id/buttonSignInClub"
-                android:layerType="software"
-                android:src="@drawable/dash"
-                android:layout_marginLeft="30dp"
-                android:layout_marginRight="30dp"
-                android:layout_marginTop="40dp"/>
+    </RelativeLayout>
 
-            <TextView
-                android:id="@+id/textView1"
-                android:layout_below="@+id/imageView2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Student Login Via INTI Email"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="20dp"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                android:textColor="@color/colorBlack"/>
-
-            <com.google.android.gms.common.SignInButton
-                android:id="@+id/buttonSignInGoogle"
-                android:layout_width="match_parent"
-                android:layout_height="52dp"
-                android:layout_alignParentStart="true"
-                android:layout_marginTop="10sp"
-                android:layout_marginRight="30dp"
-                android:layout_marginLeft="30dp"
-                android:layout_below="@+id/textView1" />
-
-        </RelativeLayout>
-
-    </android.support.v7.widget.CardView>
-
-
-</RelativeLayout>
+</ScrollView>

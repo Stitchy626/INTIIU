@@ -7,7 +7,7 @@
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
     <string name="inti_logo">INTI Logo</string>
-    <string name= "academic_calender">Academic Calender</string>
+    <string name="academic_calender">Academic Calender</string>
     <string name="bus_schedule">Bus Schedule</string>
     <string name="lostnfound">Lost And Found</string>
 
