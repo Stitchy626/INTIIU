@@ -23,6 +23,30 @@
           }
         },
         {
+          "client_id": "56714154031-hn5bnfbr92upcp739h78gabcgvnfrh0v.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "rokuniroku.code.intiiu",
+            "certificate_hash": "e285a37896ecc9008de04d5cb6f4badf9a9fecca"
+          }
+        },
+        {
+          "client_id": "56714154031-dt7qgd091rrgrpdmf9pbjbmptefhcfh0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "rokuniroku.code.intiiu",
+            "certificate_hash": "bd7a14a9039f4b108c29a189461ac67a7e7261cc"
+          }
+        },
+        {
+          "client_id": "56714154031-9q98eoepqmj2n6pq2jdvg9a1gnat4nd0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "rokuniroku.code.intiiu",
+            "certificate_hash": "aa1bdaff14b80c6700eb1c4887215518ca580b90"
+          }
+        },
+        {
           "client_id": "56714154031-fj1orv8fjugkvs7cphm9j8fnrm4rprir.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -44,6 +68,37 @@
               "client_type": 3
             }
           ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:56714154031:android:1e64d05d74cf744c",
+        "android_client_info": {
+          "package_name": "rokuniroku.code.newintiiu"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "56714154031-fj1orv8fjugkvs7cphm9j8fnrm4rprir.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDwNKphn3w9VNjTHB7-Y4-gMZLEIv1UckM"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
         },
         "ads_service": {
           "status": 2
