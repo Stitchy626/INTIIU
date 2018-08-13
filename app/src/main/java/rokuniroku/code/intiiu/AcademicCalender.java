@@ -24,7 +24,7 @@ public class AcademicCalender extends AppCompatActivity {
         setContentView( R.layout.activity_academic_calender );
 
         //the reference to the database
-        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child( "Academic Calender" );
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child( "Academic Calendar" );
         final RecyclerView recyclerView = findViewById( R.id.recyclerView );
 
 

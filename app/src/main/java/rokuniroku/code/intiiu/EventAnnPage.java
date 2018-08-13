@@ -32,7 +32,7 @@ import java.util.TimeZone;
 
 public class EventAnnPage extends AppCompatActivity {
 
-    private static String userValidation = "@student.newinti.edu.my", clubValidaton = "@club.newinti.edu.my";
+    private static String userValidation = "@student.newinti.edu.my";
 
     private FirebaseAuth mAuth;
     private FirebaseUser mUser;
@@ -143,7 +143,9 @@ public class EventAnnPage extends AppCompatActivity {
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
-        if(email.equals(clubValidaton))
+        if(email.equals(userValidation)){
+
+        }else
             getMenuInflater().inflate(R.menu.menu_eventann, menu);
 
         return super.onCreateOptionsMenu(menu);
