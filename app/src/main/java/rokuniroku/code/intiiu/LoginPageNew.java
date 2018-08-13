@@ -6,8 +6,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -36,20 +34,22 @@ import java.util.ArrayList;
 public class LoginPageNew extends BaseActivity {
 
     private static final String TAG = "SENPAI";
-    private static final int RC_SIGN_IN = 9001;
+    private static final int RC_SIGN_IN = 1998;
     private static String userValidation = "@student.newinti.edu.my";
 
     private FirebaseAuth mAuth;
     private FirebaseDatabase dbDatabase;
-    private DatabaseReference rootDatabase;
+    private DatabaseReference rootDatabaseRef;
 
     private SignInButton buttonSignInStudent, buttonSignInClub;
 
     private GoogleSignInClient mGoogleSignInClient;
 
-    private Boolean bIsClub, bIsClubClick;
+    private ArrayList<String> arrayClubValidation;
 
-    private ArrayList<String> arrayEmail;
+    // bIsClub checks for whether it is a club or not
+    // bIsClubClick listen for club sign in button click
+    private Boolean bIsClub, bIsClubClick;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,7 +58,7 @@ public class LoginPageNew extends BaseActivity {
 
         mAuth = FirebaseAuth.getInstance();
 
-        rootDatabase = dbDatabase.getInstance().getReference().child("Club");
+        rootDatabaseRef = dbDatabase.getInstance().getReference().child("Club");
 
         buttonSignInClub = (SignInButton) findViewById(R.id.buttonSignInClub);
         buttonSignInStudent = (SignInButton)findViewById(R.id.buttonSignInStudent);
@@ -70,26 +70,27 @@ public class LoginPageNew extends BaseActivity {
 
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
 
+        arrayClubValidation = new ArrayList<>();
+
         bIsClub = false;
         bIsClubClick = false;
 
-        arrayEmail = new ArrayList<>();
 
-        //start
-        rootDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
+        //Begin
+        rootDatabaseRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
                 for(DataSnapshot snapshot: dataSnapshot.getChildren()){
-                    arrayEmail.add(snapshot.getKey().toString());
+                    arrayClubValidation.add(snapshot.getKey().toString());
+
                 }
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-
             }
         });
+
     }
 
     @Override
@@ -106,8 +107,8 @@ public class LoginPageNew extends BaseActivity {
         buttonSignInClub.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                SignIn();
                 bIsClubClick = true;
+                SignIn();
             }
         });
 
@@ -117,19 +118,19 @@ public class LoginPageNew extends BaseActivity {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
         if (requestCode == RC_SIGN_IN) {
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
             try {
-                // Google Sign In was successful, authenticate with Firebase
+                // Google Sign In successful, authenticate with Firebase
                 GoogleSignInAccount account = task.getResult(ApiException.class);
                 firebaseAuthWithGoogle(account);
             } catch (ApiException e) {
-                // Google Sign In failed
+                // Google Sign In failed, could be sha1, or no connection
                 Toast.makeText(LoginPageNew.this, "Google sign in failed, Please try again later", Toast.LENGTH_LONG).show();
-                Log.w(TAG, "Google sign in failed", e);
+                Log.w(TAG, "Google sign in failed, ", e);
             }
         }
+
     }
 
     private void firebaseAuthWithGoogle(GoogleSignInAccount acct) {
@@ -146,8 +147,8 @@ public class LoginPageNew extends BaseActivity {
 
                             FirebaseUser user = mAuth.getCurrentUser();
                             bIsClub = false;
-
                             String email = user.getEmail().toString();
+
                             int startZ = 0;
 
                             for (int x = 0; x < email.length(); x++) {
@@ -158,10 +159,10 @@ public class LoginPageNew extends BaseActivity {
                             }
 
                             String backEmail = email.substring(startZ, email.length());
-                            final String frontEmail = email.substring(0, startZ).trim();
+                            String frontEmail = email.substring(0, startZ).trim();
 
-                            for(int x = 0; x < arrayEmail.size(); x++){
-                                if(frontEmail.equals(arrayEmail.get(x))){
+                            for(int x = 0; x < arrayClubValidation.size(); x++){
+                                if(frontEmail.equals(arrayClubValidation.get(x))){
                                     bIsClub = true;
                                     break;
                                 }
@@ -176,6 +177,7 @@ public class LoginPageNew extends BaseActivity {
                                 SignOut();
                             }
                         }else {
+                            //no connection
                             Toast.makeText(LoginPageNew.this, "Failed to sign in with credential", Toast.LENGTH_LONG).show();
                             Log.w(TAG, "signInWithCredential:failed", task.getException());
                         }
@@ -207,4 +209,5 @@ public class LoginPageNew extends BaseActivity {
                     }
                 });
     }
+
 }

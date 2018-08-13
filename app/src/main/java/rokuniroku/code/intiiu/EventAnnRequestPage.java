@@ -26,6 +26,7 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -49,7 +50,7 @@ public class EventAnnRequestPage extends AppCompatActivity {
     private FirebaseUser mUser;
     private FirebaseDatabase dbDatabase;
     private FirebaseStorage dbStorage;
-    private DatabaseReference rootDatabase, databaseUser;
+    private DatabaseReference rootDatabaseRef, userDatabaseRef;
     private StorageReference rootStorage;
 
     private LinearLayout layout3, layout4, layout5, layout6;
@@ -89,17 +90,17 @@ public class EventAnnRequestPage extends AppCompatActivity {
             }
         }
 
-        String frontEmail = email.substring(0, startZ).trim();
-        rootDatabase = dbDatabase.getInstance().getReference().child("Announcement").child("EventAnn");
-        rootStorage = dbStorage.getInstance().getReference().child("Announcement").child("EventAnn");
-        databaseUser = dbDatabase.getInstance().getReference().child("Club").child(frontEmail);
+        String frontEmail = email.substring(0, startZ);
 
-        databaseUser.addListenerForSingleValueEvent(new ValueEventListener() {
+        rootDatabaseRef = dbDatabase.getInstance().getReference().child("Announcement").child("EventAnn");
+        rootStorage = dbStorage.getInstance().getReference().child("Announcement").child("EventAnn");
+        userDatabaseRef = dbDatabase.getInstance().getReference().child("Club").child(frontEmail);
+
+        userDatabaseRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 sUserName = dataSnapshot.child("name").getValue(String.class);
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
@@ -153,9 +154,8 @@ public class EventAnnRequestPage extends AppCompatActivity {
 
         iImageCount = 0;
 
-        //Start
+        //START
         buttonLight.setSelected(true);
-
 
         buttonSetTitle.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -522,7 +522,7 @@ public class EventAnnRequestPage extends AppCompatActivity {
                 dateFormat.setTimeZone(TimeZone.getTimeZone("GMT+08"));
                 timeFormat.setTimeZone(TimeZone.getTimeZone("GMT+08"));
 
-                String id = rootDatabase.push().getKey();
+                String id = rootDatabaseRef.push().getKey();
                 String banner = id;
                 String background = "light";
                 String FB = "empty";
@@ -536,12 +536,12 @@ public class EventAnnRequestPage extends AppCompatActivity {
                 if(editTextFBLink.getText().toString().trim().isEmpty() == false)
                     FB = editTextFBLink.getText().toString();
 
-                EventAnn ann = new EventAnn(editTextTitle.getText().toString(), editTextVenue.getText().toString(), sUserName,//getDisplayName() cant be use becos its not a real email
+                EventAnn ann = new EventAnn(editTextTitle.getText().toString(), editTextVenue.getText().toString(), sUserName, mUser.getEmail().toString(),
                         dateFormat.format(today), timeFormat.format(today), "empty", editTextContent.getText().toString(),
                         FB, banner, background, textViewStartDate.getText().toString(), textViewEndDate.getText().toString(),
-                        textViewStartTime.getText().toString(), textViewEndTime.getText().toString(), "empty","pending");// status using approve for testing purposes
+                        textViewStartTime.getText().toString(), textViewEndTime.getText().toString(), "empty","pending");
 
-                rootDatabase.child(id).setValue(ann);
+                rootDatabaseRef.child(id).setValue(ann);
 
                 if(banner != "default") {
                     rootStorage = rootStorage.child(id);
@@ -549,6 +549,11 @@ public class EventAnnRequestPage extends AppCompatActivity {
                         @Override
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                             handler.sendEmptyMessage(0);
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            handler.sendEmptyMessage(1);
                         }
                     });
                 }else {
@@ -564,7 +569,15 @@ public class EventAnnRequestPage extends AppCompatActivity {
         @Override
         public void handleMessage(Message msg) {
             progressDialog.dismiss();
-            Toast.makeText(EventAnnRequestPage.this, "Request submitted", Toast.LENGTH_LONG).show();
+            switch(msg.what){
+                case 0:
+                    Toast.makeText(EventAnnRequestPage.this, "Request submitted", Toast.LENGTH_LONG).show();
+                    break;
+                case 1:
+                    Toast.makeText(EventAnnRequestPage.this, "Failed to sumbit", Toast.LENGTH_LONG).show();
+                    break;
+            }
+            startActivity(new Intent(EventAnnRequestPage.this, EventAnnRequestStatusPage.class));
         }
     };
 

@@ -29,8 +29,8 @@ public class EventAnnRequestStatusPage extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private FirebaseUser mUser;
     private FirebaseDatabase dbDatabase;
-    private DatabaseReference rootDatabase;
-    private Query query;
+    private DatabaseReference rootDatabaseRef;
+    private Query queryDatabaseRef;
 
     private ListView listViewStatus;
 
@@ -40,6 +40,7 @@ public class EventAnnRequestStatusPage extends AppCompatActivity {
 
     private Calendar calendar;
 
+    private String sUserName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,8 +48,9 @@ public class EventAnnRequestStatusPage extends AppCompatActivity {
         setContentView(R.layout.activity_event_ann_request_status_page);
 
         mUser = mAuth.getInstance().getCurrentUser();
-        rootDatabase = dbDatabase.getInstance().getReference().child("Announcement").child("EventAnn");
-        query = rootDatabase.orderByChild("club").equalTo(mUser.getEmail().toString());
+
+        rootDatabaseRef = dbDatabase.getInstance().getReference().child("Announcement").child("EventAnn");
+        queryDatabaseRef = rootDatabaseRef.orderByChild("clubEmail").equalTo(mUser.getEmail().toString());
 
         listViewStatus = (ListView) findViewById(R.id.listViewStatus);
 
@@ -61,7 +63,7 @@ public class EventAnnRequestStatusPage extends AppCompatActivity {
         calendar = Calendar.getInstance();
 
 
-        query.addListenerForSingleValueEvent(new ValueEventListener() {
+        queryDatabaseRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
@@ -162,7 +164,7 @@ public class EventAnnRequestStatusPage extends AppCompatActivity {
 
     private void DeleteEvent(String key){
 
-        rootDatabase.child(key).removeValue();
+        rootDatabaseRef.child(key).removeValue();
     }
 
 }

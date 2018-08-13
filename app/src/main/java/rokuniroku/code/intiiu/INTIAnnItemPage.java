@@ -17,6 +17,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.squareup.picasso.Picasso;
 
 import org.w3c.dom.Text;
 
@@ -79,7 +80,7 @@ public class INTIAnnItemPage extends AppCompatActivity {
         if(annObj.getBanner().equals("default")){
             if(annObj.getCategory().equals("ACO"))
                 imageViewBanner.setImageResource(R.mipmap.ic_intiann_aco);
-            else if(annObj.getCategory().equals("ADC"))
+            else if(annObj.getCategory().equals("ADCO"))
                 imageViewBanner.setImageResource(R.mipmap.ic_intiann_aro);
             else if(annObj.getCategory().equals("AFM"))
                 imageViewBanner.setImageResource(R.mipmap.ic_intiann_afmco);
@@ -127,7 +128,7 @@ public class INTIAnnItemPage extends AppCompatActivity {
             imageViewBanner.getLayoutParams().height = 400;
             layoutBanner.setBackgroundResource(0);
         }else {
-            storageRef = storageRef.child("Announcement").child("INTIAnn").child(annObj.getBanner()+".jpg");
+            storageRef = storageRef.child("Announcement").child("INTIAnn").child(annObj.getBanner());
 
             Glide.with(INTIAnnItemPage.this)
                     .using(new FirebaseImageLoader())

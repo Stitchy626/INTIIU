@@ -36,7 +36,7 @@ public class HomePage extends AppCompatActivity
     private FirebaseAuth mAuth;
     private FirebaseUser mUser;
 
-    private String emailValidation = "@student.newinti.edu.my";
+    private String userValidation = "@student.newinti.edu.my";
 
     private GoogleSignInClient mGoogleSignInClient;
 
@@ -60,20 +60,19 @@ public class HomePage extends AppCompatActivity
         mAuth = FirebaseAuth.getInstance();
         mUser = mAuth.getCurrentUser();
 
-        FirebaseUser user = mAuth.getCurrentUser();
-        String email = user.getEmail().toString();
+        String email = mUser.getEmail().toString();
         int startZ = 0;
         for (int x = 0; x < email.length(); x++) {
             if (email.charAt(x) == '@') {
                 startZ = x;
-
                 break;
             }
         }
 
         email = email.substring(startZ, email.length());
-        //navigation bar
-        if (email.equals(emailValidation)) {
+
+        //START navigation bar
+        if (email.equals(userValidation)) {
             setContentView(R.layout.activity_home_page);
             navigationView = (NavigationView) findViewById(R.id.nav_view);
             navigationView.setNavigationItemSelectedListener(this);

@@ -7,6 +7,7 @@ public class EventAnn implements Serializable{
     private String title;
     private String venue;
     private String club;
+    private String clubEmail;
     private String dateUpload;
     private String timeUpload;
     private String deleteDate;
@@ -25,10 +26,11 @@ public class EventAnn implements Serializable{
 
     }
 
-    public EventAnn(String title, String venue, String club, String dateUpload, String timeUpload, String deleteDate, String content, String url, String banner, String bannerBackground, String dateStart, String dateEnd, String timeStart, String timeEnd, String reason, String status) {
+    public EventAnn(String title, String venue, String club, String clubEmail, String dateUpload, String timeUpload, String deleteDate, String content, String url, String banner, String bannerBackground, String dateStart, String dateEnd, String timeStart, String timeEnd, String reason, String status) {
         this.title = title;
         this.venue = venue;
         this.club = club;
+        this.clubEmail = clubEmail;
         this.dateUpload = dateUpload;
         this.timeUpload = timeUpload;
         this.deleteDate = deleteDate;
@@ -54,6 +56,10 @@ public class EventAnn implements Serializable{
 
     public String getClub() {
         return club;
+    }
+
+    public String getClubEmail() {
+        return clubEmail;
     }
 
     public String getDateUpload() {

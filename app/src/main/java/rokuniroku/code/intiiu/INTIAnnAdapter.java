@@ -41,9 +41,9 @@ public class INTIAnnAdapter extends ArrayAdapter<INTIAnn>{
         textViewDateUpload.setText(ann.getDateUpload());
         textViewTimeUpload.setText(ann.getTimeUpload());
 
-        if(ann.getCategory().equals("AccomodationOffice"))
+        if(ann.getCategory().equals("ACO"))
             imageViewIcon.setImageResource(R.mipmap.ic_intiann_aco);
-        else if(ann.getCategory().equals("AdmissionsCounselling"))
+        else if(ann.getCategory().equals("ADC"))
             imageViewIcon.setImageResource(R.mipmap.ic_intiann_aro);
         else if(ann.getCategory().equals("AFM"))
             imageViewIcon.setImageResource(R.mipmap.ic_intiann_afmco);
@@ -51,7 +51,7 @@ public class INTIAnnAdapter extends ArrayAdapter<INTIAnn>{
             imageViewIcon.setImageResource(R.mipmap.ic_intiann_cae);
         else if(ann.getCategory().equals("COLAL"))
             imageViewIcon.setImageResource(R.mipmap.ic_intiann_colal);
-        else if(ann.getCategory().equals("CounsellingCentre"))
+        else if(ann.getCategory().equals("CC"))
             imageViewIcon.setImageResource(R.mipmap.ic_intiann_cc);
         else if(ann.getCategory().equals("CS"))
             imageViewIcon.setImageResource(R.mipmap.ic_intiann_cs);
@@ -65,11 +65,11 @@ public class INTIAnnAdapter extends ArrayAdapter<INTIAnn>{
             imageViewIcon.setImageResource(R.mipmap.ic_intiann_fits);
         else if(ann.getCategory().equals("FOBCAL"))
             imageViewIcon.setImageResource(R.mipmap.ic_intiann_fobcal);
-        else if(ann.getCategory().equals("FinanceScholarship"))
+        else if(ann.getCategory().equals("Finance & Scholarship"))
             imageViewIcon.setImageResource(R.mipmap.ic_intiann_fns);
         else if(ann.getCategory().equals("INSO"))
             imageViewIcon.setImageResource(R.mipmap.ic_intiann_it);
-        else if(ann.getCategory().equals("InternationalStudentSupport"))
+        else if(ann.getCategory().equals("ISS"))
             imageViewIcon.setImageResource(R.mipmap.ic_intiann_iss);
         else if(ann.getCategory().equals("Library"))
             imageViewIcon.setImageResource(R.mipmap.ic_intiann_lib);

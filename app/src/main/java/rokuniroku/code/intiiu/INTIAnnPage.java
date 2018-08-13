@@ -106,7 +106,7 @@ public class INTIAnnPage extends AppCompatActivity {
                 PopulateINTIAnn(item.getTitle().toString());
                 return true;
 
-            case R.id.action_ADC:
+            case R.id.action_ADCO:
                 if (item.isChecked())
                     item.setChecked(false);
                 else
@@ -411,7 +411,7 @@ public class INTIAnnPage extends AppCompatActivity {
         dateFormat.setTimeZone(TimeZone.getTimeZone("GMT+08"));
         timeFormat.setTimeZone(TimeZone.getTimeZone("GMT+08"));
 
-        for (int x = 1; x <= 1; x++) {
+        for (int x = 1; x <= 2; x++) {
 
             Date today = calendar.getTime();
             String id = rootDatabase.push().getKey();
@@ -419,7 +419,7 @@ public class INTIAnnPage extends AppCompatActivity {
             calendar.add(Calendar.DAY_OF_YEAR, 1);
             calendar.add(Calendar.MINUTE, 1);
 
-            INTIAnn ann = new INTIAnn("Notice Fron Security Office", "INTI", "Safety&Security", "08/07/2018", timeFormat.format(today), "23/08/2018",
+            INTIAnn ann = new INTIAnn("Notice Fron Security Office", "INTI", "Safety & Security", "08/07/2018", timeFormat.format(today), "23/08/2018",
                     "Dear Students,\n" +
                             "\n" +
                             "Please be informed that you will be denied access to enter IIU premise if you failed to provide your original Student I.D. This is for Security and Safety purpose.\n" +

@@ -37,10 +37,8 @@ public class EventAnnPage extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private FirebaseUser mUser;
     private FirebaseDatabase dbDatabase;
-    private DatabaseReference rootDatabase;
-    private FirebaseStorage dbStorage;
-    private StorageReference rootStorage;
-    private Query query;
+    private DatabaseReference rootDatabaseRef;
+    private Query queryDatabaseRef;
 
     private Toolbar myToolbar;
     private Button buttonToday, buttonUpcoming;
@@ -54,8 +52,6 @@ public class EventAnnPage extends AppCompatActivity {
 
     private String email;
 
-    private int startPoint;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,7 +61,7 @@ public class EventAnnPage extends AppCompatActivity {
         mUser = mAuth.getCurrentUser();
         email = mUser.getEmail().toString();
 
-        startPoint = 0;
+        int startPoint = 0;
 
         for (int x = 0; x < email.length(); x++) {
             if (email.charAt(x) == '@') {
@@ -76,9 +72,8 @@ public class EventAnnPage extends AppCompatActivity {
 
         email = email.substring(startPoint, email.length());
 
-        rootDatabase = dbDatabase.getInstance().getReference().child("Announcement").child("EventAnn");
-        rootStorage = dbStorage.getInstance().getReference().child("Announcement").child("EventAnn");
-        query = rootDatabase.orderByChild("status").equalTo("approved");
+        rootDatabaseRef = dbDatabase.getInstance().getReference().child("Announcement").child("EventAnn");
+        queryDatabaseRef = rootDatabaseRef.orderByChild("status").equalTo("approved");
 
         myToolbar = (Toolbar) findViewById(R.id.myToolbar);
         setSupportActionBar(myToolbar);
@@ -101,7 +96,6 @@ public class EventAnnPage extends AppCompatActivity {
         timeFormatGMT08.setTimeZone(TimeZone.getTimeZone("GMT+08"));
 
         bIsToday = true;
-
 
         ManageApproveEvent();
 
@@ -144,7 +138,6 @@ public class EventAnnPage extends AppCompatActivity {
 
     public boolean onCreateOptionsMenu(Menu menu) {
         if(email.equals(userValidation)){
-
         }else
             getMenuInflater().inflate(R.menu.menu_eventann, menu);
 
@@ -175,7 +168,7 @@ public class EventAnnPage extends AppCompatActivity {
 
          final Date today = calendar.getTime();
 
-        query.addValueEventListener(new ValueEventListener() {
+        queryDatabaseRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
@@ -347,7 +340,7 @@ public class EventAnnPage extends AppCompatActivity {
 
     private void DeleteEvent(String key){
 
-        rootDatabase.child(key).removeValue();
+        rootDatabaseRef.child(key).removeValue();
     }
 
 }

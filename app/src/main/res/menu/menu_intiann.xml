@@ -6,7 +6,6 @@
 
         <item android:id="@+id/action_All"
             android:title="ALL"
-            android:tooltipText="All"
             app:showAsAction="never"
             android:checked="true"/>
 
@@ -14,8 +13,8 @@
             android:title="ACO"
             app:showAsAction="never"/>
 
-        <item android:id="@+id/action_ADC"
-            android:title="ADC"
+        <item android:id="@+id/action_ADCO"
+            android:title="ADCO"
             app:showAsAction="never"/>
 
         <item android:id="@+id/action_AFM"
