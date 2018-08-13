@@ -68,11 +68,11 @@ public class EventAnnRequestPage extends AppCompatActivity {
     private Uri uri;
     private ProgressDialog progressDialog;
 
-    private String sDS, sDE, sTS, sTE, sUserName;
+    private String sDS, sDE, sTS, sTE, sUserName, bannerURL, id, banner, background, FB;
     private boolean bIsDateStart, bIsTimeStart, bIsLight, bIsPoint;
     private int iImageCount;
 
-    final private int GALLERY_INTENT = 123;
+    private static final int GALLERY_INTENT = 123;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -146,6 +146,11 @@ public class EventAnnRequestPage extends AppCompatActivity {
         sDE = "28/06/2018";
         sTS = "16:00";
         sTE = "15:59";
+        bannerURL = "empty";
+        id = rootDatabaseRef.push().getKey();
+        banner = id;
+        background = "light";
+        FB = "empty";
 
         bIsDateStart = true;
         bIsTimeStart = true;
@@ -517,15 +522,10 @@ public class EventAnnRequestPage extends AppCompatActivity {
             @Override
             public void run() {
                 Calendar c = Calendar.getInstance();
-                Date today = c.getTime();
+                final Date today = c.getTime();
 
                 dateFormat.setTimeZone(TimeZone.getTimeZone("GMT+08"));
                 timeFormat.setTimeZone(TimeZone.getTimeZone("GMT+08"));
-
-                String id = rootDatabaseRef.push().getKey();
-                String banner = id;
-                String background = "light";
-                String FB = "empty";
 
                 if(iImageCount == 0)
                     banner = "default";
@@ -536,30 +536,44 @@ public class EventAnnRequestPage extends AppCompatActivity {
                 if(editTextFBLink.getText().toString().trim().isEmpty() == false)
                     FB = editTextFBLink.getText().toString();
 
-                EventAnn ann = new EventAnn(editTextTitle.getText().toString(), editTextVenue.getText().toString(), sUserName, mUser.getEmail().toString(),
-                        dateFormat.format(today), timeFormat.format(today), "empty", editTextContent.getText().toString(),
-                        FB, banner, background, textViewStartDate.getText().toString(), textViewEndDate.getText().toString(),
-                        textViewStartTime.getText().toString(), textViewEndTime.getText().toString(), "empty","pending");
-
-                rootDatabaseRef.child(id).setValue(ann);
-
                 if(banner != "default") {
                     rootStorage = rootStorage.child(id);
                     rootStorage.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                         @Override
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                            handler.sendEmptyMessage(0);
-                        }
-                    }).addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            handler.sendEmptyMessage(1);
+                            rootStorage.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                @Override
+                                public void onSuccess(Uri uri) {
+                                    bannerURL = uri.toString();
+
+                                    EventAnn ann = new EventAnn(editTextTitle.getText().toString(), editTextVenue.getText().toString(), sUserName, mUser.getEmail().toString(),
+                                            dateFormat.format(today), timeFormat.format(today), "empty", editTextContent.getText().toString(),
+                                            FB, banner, bannerURL, background, textViewStartDate.getText().toString(), textViewEndDate.getText().toString(),
+                                            textViewStartTime.getText().toString(), textViewEndTime.getText().toString(), "empty","pending");
+
+                                    rootDatabaseRef.child(id).setValue(ann).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                        @Override
+                                        public void onSuccess(Void aVoid) {
+                                            handler.sendEmptyMessage(0);
+                                        }
+                                    });
+                                }
+                            });
                         }
                     });
-                }else {
-                    handler.sendEmptyMessage(0);
-                }
+                }else{
+                    EventAnn ann = new EventAnn(editTextTitle.getText().toString(), editTextVenue.getText().toString(), sUserName, mUser.getEmail().toString(),
+                            dateFormat.format(today), timeFormat.format(today), "empty", editTextContent.getText().toString(),
+                            FB, banner, bannerURL, background, textViewStartDate.getText().toString(), textViewEndDate.getText().toString(),
+                            textViewStartTime.getText().toString(), textViewEndTime.getText().toString(), "empty","pending");
 
+                    rootDatabaseRef.child(id).setValue(ann).addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            handler.sendEmptyMessage(0);
+                        }
+                    });
+                }
             }
         }).start();
     }
@@ -578,6 +592,7 @@ public class EventAnnRequestPage extends AppCompatActivity {
                     break;
             }
             startActivity(new Intent(EventAnnRequestPage.this, EventAnnRequestStatusPage.class));
+            finish();
         }
     };
 
