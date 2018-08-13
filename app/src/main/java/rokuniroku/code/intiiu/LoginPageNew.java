@@ -2,6 +2,7 @@ package rokuniroku.code.intiiu;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -22,33 +23,45 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
-public class LoginPage extends BaseActivity {
+import java.lang.ref.PhantomReference;
+import java.util.ArrayList;
+
+public class LoginPageNew extends BaseActivity {
 
     private static final String TAG = "SENPAI";
     private static final int RC_SIGN_IN = 9001;
-    private static String userValidation = "@student.newinti.edu.my", clubValidaton = "@club.newinti.edu.my";
+    private static String userValidation = "@student.newinti.edu.my";
 
     private FirebaseAuth mAuth;
+    private FirebaseDatabase dbDatabase;
+    private DatabaseReference rootDatabase;
 
-    private Button buttonSignInClub,buttonResetPassword;
-    private SignInButton buttonSignInGoogle;
-    private EditText editTextUsername,editTextPassword;
+    private SignInButton buttonSignInStudent, buttonSignInClub;
 
     private GoogleSignInClient mGoogleSignInClient;
+
+    private Boolean bIsClub, bIsClubClick;
+
+    private ArrayList<String> arrayEmail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login_page);
+        setContentView(R.layout.activity_login_page_new);
 
         mAuth = FirebaseAuth.getInstance();
 
-        buttonResetPassword=(Button) findViewById(R.id.buttonResetPassword);
-        buttonSignInClub = (Button) findViewById(R.id.buttonSignInClub);
-        buttonSignInGoogle = (SignInButton)findViewById(R.id.buttonSignInGoogle);
-        editTextUsername=(EditText) findViewById(R.id.editTextUsername);
-        editTextPassword=(EditText)findViewById(R.id.editTextPassword);
+        rootDatabase = dbDatabase.getInstance().getReference().child("Club");
+
+        buttonSignInClub = (SignInButton) findViewById(R.id.buttonSignInClub);
+        buttonSignInStudent = (SignInButton)findViewById(R.id.buttonSignInStudent);
 
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
@@ -57,27 +70,47 @@ public class LoginPage extends BaseActivity {
 
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
 
+        bIsClub = false;
+        bIsClubClick = false;
 
-        buttonResetPassword.setOnClickListener(new View.OnClickListener() {
+        arrayEmail = new ArrayList<>();
+
+        //start
+        rootDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void onClick(View v) {
-                startActivity(new Intent(LoginPage.this,ResetPasswordActivity.class));
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                for(DataSnapshot snapshot: dataSnapshot.getChildren()){
+                    arrayEmail.add(snapshot.getKey().toString());
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
             }
         });
+    }
 
-        buttonSignInGoogle.setOnClickListener(new View.OnClickListener() {
+    @Override
+    protected void onStart() {
+        super.onStart();
+        buttonSignInStudent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                UserSignIn();
+                bIsClubClick = false;
+                SignIn();
             }
         });
 
         buttonSignInClub.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                LoginClub();
+                SignIn();
+                bIsClubClick = true;
             }
         });
+
     }
 
     @Override
@@ -93,7 +126,7 @@ public class LoginPage extends BaseActivity {
                 firebaseAuthWithGoogle(account);
             } catch (ApiException e) {
                 // Google Sign In failed
-                Toast.makeText(LoginPage.this, "Google sign in failed, Please try again later", Toast.LENGTH_LONG).show();
+                Toast.makeText(LoginPageNew.this, "Google sign in failed, Please try again later", Toast.LENGTH_LONG).show();
                 Log.w(TAG, "Google sign in failed", e);
             }
         }
@@ -112,6 +145,7 @@ public class LoginPage extends BaseActivity {
                         if (task.isSuccessful()) {
 
                             FirebaseUser user = mAuth.getCurrentUser();
+                            bIsClub = false;
 
                             String email = user.getEmail().toString();
                             int startZ = 0;
@@ -123,18 +157,26 @@ public class LoginPage extends BaseActivity {
                                 }
                             }
 
-                            email = email.substring(startZ, email.length());
+                            String backEmail = email.substring(startZ, email.length());
+                            final String frontEmail = email.substring(0, startZ).trim();
 
-                            if (email.equals(userValidation)) {
-                                startActivity(new Intent(LoginPage.this, HomePage.class));
-                                Toast.makeText(LoginPage.this, "Login Successful", Toast.LENGTH_LONG).show();
+                            for(int x = 0; x < arrayEmail.size(); x++){
+                                if(frontEmail.equals(arrayEmail.get(x))){
+                                    bIsClub = true;
+                                    break;
+                                }
+                            }
+
+                            if (backEmail.equals(userValidation) && bIsClubClick == false || bIsClub == true && bIsClubClick == true) {
+                                startActivity(new Intent(LoginPageNew.this, HomePage.class));
+                                Toast.makeText(LoginPageNew.this, "Login Successful", Toast.LENGTH_LONG).show();
                                 Log.d(TAG, "signInWithCredential:success");
                                 finish();
                             }else{
                                 SignOut();
                             }
                         }else {
-                            Toast.makeText(LoginPage.this, "Failed to sign in with credential", Toast.LENGTH_LONG).show();
+                            Toast.makeText(LoginPageNew.this, "Failed to sign in with credential", Toast.LENGTH_LONG).show();
                             Log.w(TAG, "signInWithCredential:failed", task.getException());
                         }
                         hideProgressDialog();
@@ -142,7 +184,7 @@ public class LoginPage extends BaseActivity {
                 });
     }
 
-    private void UserSignIn() {
+    private void SignIn() {
         Intent signInIntent = mGoogleSignInClient.getSignInIntent();
         startActivityForResult(signInIntent, RC_SIGN_IN);
     }
@@ -156,45 +198,13 @@ public class LoginPage extends BaseActivity {
                 new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
-                        Toast.makeText(LoginPage.this, "Please sign in with INTI email", Toast.LENGTH_LONG).show();
+                        if(bIsClubClick == true) {
+                            Toast.makeText(LoginPageNew.this, "Invalid Club credential", Toast.LENGTH_LONG).show();
+                            bIsClubClick = false;
+                        }
+                        else
+                            Toast.makeText(LoginPageNew.this, "Please sign in with an INTI email", Toast.LENGTH_LONG).show();
                     }
                 });
     }
-
-    private void LoginClub(){
-        if(editTextUsername.getText().toString().equals("")&& editTextPassword.getText().toString().equals("")) {
-            Toast.makeText(LoginPage.this, "All fields has to be filled", Toast.LENGTH_SHORT).show();
-            editTextUsername.setError("Username needed");
-            editTextPassword.setError("Password needed");
-            editTextUsername.requestFocus();
-        }else if(editTextUsername.getText().toString().equals("")){
-            editTextUsername.setError("Username needed");
-            editTextUsername.requestFocus();
-        }else if(editTextPassword.getText().toString().equals("")){
-            editTextPassword.setError("Password needed");
-            editTextPassword.requestFocus();
-        }
-        else
-        {
-            showProgressDialog();
-            mAuth.signInWithEmailAndPassword(editTextUsername.getText().toString(),editTextPassword.getText().toString())
-                    .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                            if(task.isSuccessful())
-                            {
-                                Toast.makeText(LoginPage.this,"Login Successful",Toast.LENGTH_SHORT).show();
-                                startActivity(new Intent(LoginPage.this,HomePage.class));
-                                finish();
-                            }
-                            else
-                            {
-                                Toast.makeText(LoginPage.this,"Login Unsuccessful,Please try again.",Toast.LENGTH_SHORT).show();
-                            }
-                            hideProgressDialog();
-                        }
-                    });
-        }
-    }
-
 }

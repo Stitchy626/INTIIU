@@ -36,7 +36,7 @@ public class HomePage extends AppCompatActivity
     private FirebaseAuth mAuth;
     private FirebaseUser mUser;
 
-    private String emailValidation = "@student.newinti.edu.my", clubValidaton = "@club.newinti.edu.my";
+    private String emailValidation = "@student.newinti.edu.my";
 
     private GoogleSignInClient mGoogleSignInClient;
 
@@ -78,7 +78,7 @@ public class HomePage extends AppCompatActivity
             navigationView = (NavigationView) findViewById(R.id.nav_view);
             navigationView.setNavigationItemSelectedListener(this);
 
-        } else if (email.equals(clubValidaton)) {
+        } else {
             setContentView(R.layout.activity_club_home_page);
             navigationView = (NavigationView) findViewById(R.id.nav_clubview);
             navigationView.setNavigationItemSelectedListener(this);
@@ -284,7 +284,7 @@ public class HomePage extends AppCompatActivity
                 new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
-                        startActivity(new Intent(HomePage.this, LoginPage.class));
+                        startActivity(new Intent(HomePage.this, LoginPageNew.class));
                         Toast.makeText(HomePage.this, "Logout Successful", Toast.LENGTH_LONG).show();
                     }
                 });

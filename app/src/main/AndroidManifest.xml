@@ -25,6 +25,7 @@
         <activity
             android:name=".HomePage"
             android:label="INTI IU"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".INTIAnnPage"
@@ -60,7 +61,9 @@
         <activity
             android:name=".LoginPage"
             android:label="Log in"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" />
+        <activity android:name=".LoginPageNew"></activity>
     </application>
 
 </manifest>

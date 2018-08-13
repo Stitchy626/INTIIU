@@ -1,21 +1,21 @@
 {
   "project_info": {
-    "project_number": "1036624807863",
-    "firebase_url": "https://intiiu-626.firebaseio.com",
-    "project_id": "intiiu-626",
-    "storage_bucket": "intiiu-626.appspot.com"
+    "project_number": "56714154031",
+    "firebase_url": "https://intiiu-12f39.firebaseio.com",
+    "project_id": "intiiu-12f39",
+    "storage_bucket": "intiiu-12f39.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1036624807863:android:d88144e0fc0e861e",
+        "mobilesdk_app_id": "1:56714154031:android:d88144e0fc0e861e",
         "android_client_info": {
           "package_name": "rokuniroku.code.intiiu"
         }
       },
       "oauth_client": [
         {
-          "client_id": "1036624807863-cddprhudu6mo9d2l2napb5d3igvni0f0.apps.googleusercontent.com",
+          "client_id": "56714154031-8bs8otnv4u5egdvm8geotdpi90hah7cg.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "rokuniroku.code.intiiu",
@@ -23,21 +23,13 @@
           }
         },
         {
-          "client_id": "1036624807863-llmlnqqlj24hdmo77db9s9e8ntvtujem.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "rokuniroku.code.intiiu",
-            "certificate_hash": "ec4fb9b43541f5b4b38aa40d2a7b7a25f3019988"
-          }
-        },
-        {
-          "client_id": "1036624807863-vd01e2fbbm1v65r9e383hsfi5e5r5bi5.apps.googleusercontent.com",
+          "client_id": "56714154031-fj1orv8fjugkvs7cphm9j8fnrm4rprir.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCbDfUnrzbtspfIvjV9iIqPEetJTuxk-pg"
+          "current_key": "AIzaSyDwNKphn3w9VNjTHB7-Y4-gMZLEIv1UckM"
         }
       ],
       "services": {
@@ -48,7 +40,7 @@
           "status": 2,
           "other_platform_oauth_client": [
             {
-              "client_id": "1036624807863-vd01e2fbbm1v65r9e383hsfi5e5r5bi5.apps.googleusercontent.com",
+              "client_id": "56714154031-fj1orv8fjugkvs7cphm9j8fnrm4rprir.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
